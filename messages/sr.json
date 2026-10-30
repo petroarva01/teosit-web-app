@@ -37,7 +37,7 @@
     },
     "contactTitle": "Kontakt",
     "location": "Novi Sad, Srbija",
-    "legal": "© {year} TEOS IT · PIB: [PIB] · MB: [MB]",
+    "legal": "© {year} TEOS IT · PIB: {pib} · MB: {mb}",
     "privacy": "Politika privatnosti",
     "terms": "Uslovi korišćenja"
   },
@@ -133,8 +133,16 @@
     },
     "testimonials": {
       "ariaLabel": "Utisci klijenata",
-      "quote": "„[Utisak klijenta — jedna ili dve rečenice o saradnji sa TEOS IT.]”",
-      "author": "[Ime], [Pozicija], [Firma]"
+      "items": {
+        "amplitude": {
+          "quote": "„TEOS IT je našu aplikaciju od grube ideje doveo do uglađenog proizvoda u prodavnicama brže nego što smo mislili da je moguće. Nisu samo rešavali zadatke — rekli su ‚ne‘ kad je trebalo, preuzeli arhitekturu i svaki ekran tretirali kao sopstveni proizvod.”",
+          "author": "Maximilian Frederic Jacob, CEO, Amplitude Holding GmbH"
+        },
+        "checkSolar": {
+          "quote": "„Trebala nam je brza i pouzdana platforma koja komplikovanu odluku pretvara u pet minuta posla. TEOS IT je isporučio čistu i brzu web aplikaciju i sve vreme ostao pragmatičan oko obima. Jasna komunikacija, kvalitetan kod, isporučeno na vreme.”",
+          "author": "Tim Fux, CTO, Fux Marketing OÜ"
+        }
+      }
     },
     "cta": {
       "title": "Imate ideju za aplikaciju ili proizvod?",

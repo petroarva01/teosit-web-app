@@ -1,3 +1,10 @@
+import type { StaticImageData } from "next/image"
+
+import amplitudeImage from "@/assets/projects/amplitude.png"
+import bukirajImage from "@/assets/projects/bukiraj.png"
+import checkSolarImage from "@/assets/projects/checksolar.png"
+import hortiumImage from "@/assets/projects/hortium.png"
+import kellionImage from "@/assets/projects/kellion.png"
 import type { Locale } from "@/i18n/routing"
 
 type Localized<T = string> = Record<Locale, T>
@@ -17,6 +24,13 @@ export type Project = {
   url: Localized
   urlLabel: string
   hasCaseStudy: boolean
+  /** 1600×1000 composite, already on the project's tint color */
+  image: {
+    src: StaticImageData
+    alt: Localized
+    /** Phone screenshots are anchored to the top when cropped */
+    position: "top" | "center"
+  }
   /** Short label on the floating hero card */
   heroMeta?: Localized
   /** Copy for the compact card in "Selected work" on Home */
@@ -57,6 +71,11 @@ export const projects: Project[] = [
     },
     urlLabel: "App Store",
     hasCaseStudy: true,
+    image: {
+      src: amplitudeImage,
+      alt: { en: "Amplitude app dashboard", sr: "Amplitude aplikacija" },
+      position: "top",
+    },
     heroMeta: {
       en: "iOS · Fintech · Germany",
       sr: "iOS · Fintech · Nemačka",
@@ -105,6 +124,11 @@ export const projects: Project[] = [
     },
     urlLabel: "check-solar.com",
     hasCaseStudy: false,
+    image: {
+      src: checkSolarImage,
+      alt: { en: "Check Solar website", sr: "Check Solar sajt" },
+      position: "center",
+    },
     heroMeta: {
       en: "Web · Energy · Germany",
       sr: "Web · Energetika · Nemačka",
@@ -153,6 +177,11 @@ export const projects: Project[] = [
     },
     urlLabel: "bukiraj.app",
     hasCaseStudy: false,
+    image: {
+      src: bukirajImage,
+      alt: { en: "Bukiraj booking calendar", sr: "Bukiraj kalendar termina" },
+      position: "center",
+    },
     heroMeta: {
       en: "Web SaaS · Own product",
       sr: "Web SaaS · Naš proizvod",
@@ -201,6 +230,14 @@ export const projects: Project[] = [
     },
     urlLabel: "Google Play",
     hasCaseStudy: false,
+    image: {
+      src: kellionImage,
+      alt: {
+        en: "Kellion app screens: calendar, prayer, reminders",
+        sr: "Kellion: kalendar, molitva, podsetnici",
+      },
+      position: "top",
+    },
     home: {
       label: {
         en: "React Native · Android · Own product",
@@ -245,6 +282,14 @@ export const projects: Project[] = [
     },
     urlLabel: "Google Play",
     hasCaseStudy: false,
+    image: {
+      src: hortiumImage,
+      alt: {
+        en: "Hortium app screens: today, my garden, planner",
+        sr: "Hortium: danas, moja bašta, planer",
+      },
+      position: "top",
+    },
     colors: {
       bg: "#DCEFE0",
       inner: "#BFE2C7",

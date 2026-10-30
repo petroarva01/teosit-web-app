@@ -15,6 +15,7 @@ import {
 } from "@/components/site/section"
 import { Button } from "@/components/ui/button"
 import { featuredProjects, getProject, heroProjects } from "@/data/projects"
+import { site } from "@/data/site"
 import { Link } from "@/i18n/navigation"
 import { routing } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
@@ -44,6 +45,8 @@ const serviceKeys = [
 const stepKeys = ["discovery", "design", "build", "ship"] as const
 
 const founderPoints = ["direct", "ownership", "weekly", "fourth"] as const
+
+const testimonialKeys = ["amplitude", "checkSolar"] as const
 
 const container = "mx-auto w-full max-w-[1240px] px-4 sm:px-8"
 
@@ -108,11 +111,13 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           </div>
         </div>
 
-        <div className="relative grid animate-rise grid-cols-2 gap-5 py-4 [animation-delay:160ms] motion-reduce:animate-none">
+        <div className="relative grid w-full max-w-[560px] animate-rise grid-cols-2 gap-5 justify-self-center py-4 [animation-delay:160ms] motion-reduce:animate-none">
+          {/* Spins around the triangle's centroid (not the box center) and is
+              sized so the full rotation stays inside the hero section */}
           <svg
             aria-hidden="true"
             viewBox="0 0 220 191"
-            className="pointer-events-none absolute top-1/2 left-1/2 z-0 -mt-[52%] -ml-[60%] w-[120%] animate-spin-slow text-motif motion-reduce:animate-none"
+            className="pointer-events-none absolute top-1/2 left-[2%] z-0 -mt-[55.3%] w-[96%] origin-[50%_66.3%] animate-spin-slow text-motif motion-reduce:animate-none"
           >
             <path
               d="M110 4L216 188H4Z"
@@ -147,7 +152,10 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Stack marquee */}
-      <section aria-label={t("stack.ariaLabel")} className="border-y bg-card">
+      <section
+        aria-label={t("stack.ariaLabel")}
+        className="relative z-1 border-y bg-card"
+      >
         <div
           className={cn(
             container,
@@ -295,21 +303,24 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         </div>
       </Reveal>
 
-      {/* Testimonials — placeholders until real quotes are in */}
+      {/* Testimonials */}
       <section
         aria-label={t("testimonials.ariaLabel")}
-        className={cn(container, "grid gap-6 pt-[100px] pb-10 lg:grid-cols-2")}
+        className={cn(
+          container,
+          "grid gap-x-6 gap-y-14 pt-[100px] pb-10 lg:grid-cols-2"
+        )}
       >
-        {[0, 1].map((i) => (
+        {testimonialKeys.map((key) => (
           <figure
-            key={i}
+            key={key}
             className="flex flex-col gap-5 border-t-2 border-foreground pt-7"
           >
-            <blockquote className="font-heading text-[26px] leading-[1.3] font-medium tracking-[-0.015em]">
-              {t("testimonials.quote")}
+            <blockquote className="font-heading text-[22px] leading-[1.35] font-medium tracking-[-0.015em] sm:text-2xl">
+              {t(`testimonials.items.${key}.quote`)}
             </blockquote>
-            <figcaption className="text-[15px] text-muted-foreground">
-              {t("testimonials.author")}
+            <figcaption className="mt-auto text-[15px] text-muted-foreground">
+              {t(`testimonials.items.${key}.author`)}
             </figcaption>
           </figure>
         ))}
@@ -336,10 +347,10 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
               {t("cta.button")}
             </Button>
             <a
-              href="mailto:office@teosit.com"
+              href={`mailto:${site.email}`}
               className="text-base font-medium text-primary-foreground underline underline-offset-4"
             >
-              office@teosit.com
+              {site.email}
             </a>
           </div>
         </div>

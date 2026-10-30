@@ -24,7 +24,7 @@ async function Header() {
             alt="TEOS IT"
             width={856}
             height={191}
-            priority
+            preload
             unoptimized
             className="h-[30px] w-auto"
           />

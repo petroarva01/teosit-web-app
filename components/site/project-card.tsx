@@ -1,4 +1,5 @@
 import type * as React from "react"
+import Image from "next/image"
 
 import { Card } from "@/components/ui/card"
 import type { Project } from "@/data/projects"
@@ -25,22 +26,36 @@ function projectColors({ colors }: Project) {
   } as React.CSSProperties
 }
 
-/** Placeholder for app screenshots until real images are added. */
-function ScreenPlaceholder({
-  label,
+/** Project composite, cropped to the card's screen area. */
+function ProjectImage({
+  project,
+  locale,
+  sizes,
+  loading,
   className,
 }: {
-  label: string
+  project: Project
+  locale: Locale
+  sizes: string
+  loading?: "eager" | "lazy"
   className?: string
 }) {
   return (
     <div
-      className={cn(
-        "flex items-center justify-center bg-(--project-inner) px-4 text-center font-mono text-(--project-label)",
-        className
-      )}
+      className={cn("relative overflow-hidden bg-(--project-inner)", className)}
     >
-      [{label}]
+      <Image
+        src={project.image.src}
+        alt={project.image.alt[locale]}
+        fill
+        sizes={sizes}
+        loading={loading}
+        placeholder="blur"
+        className={cn(
+          "object-cover",
+          project.image.position === "top" ? "object-top" : "object-center"
+        )}
+      />
     </div>
   )
 }
@@ -64,12 +79,13 @@ function FloatingProjectCard({
         className="gap-3.5 rounded-3xl border-0 bg-(--project-bg) p-[18px] text-(--project-text) ring-0"
         style={projectColors(project)}
       >
-        <ScreenPlaceholder
-          label={`${project.name} screen`}
-          className={cn(
-            "rounded-[14px] text-xs",
-            featured ? "h-[170px]" : "h-[150px]"
-          )}
+        <ProjectImage
+          project={project}
+          locale={locale}
+          sizes="280px"
+          // Above the fold on desktop
+          loading="eager"
+          className={cn("rounded-[14px]", featured ? "h-[170px]" : "h-[150px]")}
         />
         <div className="flex flex-col gap-0.5">
           <span className="font-heading text-xl font-semibold">
@@ -101,9 +117,11 @@ function ProjectCard({
         className="h-full gap-6 rounded-[28px] border-0 bg-(--project-bg) p-8 text-(--project-text) ring-0 transition-[translate,box-shadow] duration-350 ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:-translate-y-1.5 group-hover:shadow-[0_28px_50px_-28px_rgba(27,25,54,0.4)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
         style={projectColors(project)}
       >
-        <ScreenPlaceholder
-          label={`${project.name} — ${project.categories.includes("web") ? "web" : "app"} screenshots`}
-          className="h-[300px] rounded-[18px] text-[13px]"
+        <ProjectImage
+          project={project}
+          locale={locale}
+          sizes="(min-width: 1240px) 540px, (min-width: 1024px) 45vw, 100vw"
+          className="h-[300px] rounded-[18px]"
         />
         <div className="flex flex-col gap-2.5">
           <span className="font-mono text-[13px] text-(--project-label)">

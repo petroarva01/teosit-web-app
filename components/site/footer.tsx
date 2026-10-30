@@ -2,6 +2,7 @@ import Image from "next/image"
 import { getTranslations } from "next-intl/server"
 
 import { Button } from "@/components/ui/button"
+import { site } from "@/data/site"
 import { Link } from "@/i18n/navigation"
 
 const serviceKeys = [
@@ -86,12 +87,11 @@ async function Footer() {
               ))}
             </FooterColumn>
             <FooterColumn title={t("contactTitle")}>
-              <a href="mailto:office@teosit.com" className={linkClass}>
-                office@teosit.com
+              <a href={`mailto:${site.email}`} className={linkClass}>
+                {site.email}
               </a>
-              {/* TODO: replace with the real company LinkedIn URL */}
               <a
-                href="https://www.linkedin.com/"
+                href={site.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={linkClass}
@@ -103,7 +103,13 @@ async function Footer() {
           </div>
         </div>
         <div className="flex flex-wrap justify-between gap-x-6 gap-y-3 border-t border-dark-border pt-6 text-sm text-on-dark-label">
-          <span>{t("legal", { year: new Date().getFullYear() })}</span>
+          <span>
+            {t("legal", {
+              year: new Date().getFullYear(),
+              pib: site.pib,
+              mb: site.mb,
+            })}
+          </span>
           <div className="flex gap-6">
             <Link href="/privacy" className={linkClass}>
               {t("privacy")}

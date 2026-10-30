@@ -37,7 +37,7 @@
     },
     "contactTitle": "Get in touch",
     "location": "Novi Sad, Serbia",
-    "legal": "© {year} TEOS IT · PIB: [PIB] · MB: [MB]",
+    "legal": "© {year} TEOS IT · PIB: {pib} · MB: {mb}",
     "privacy": "Privacy Policy",
     "terms": "Terms"
   },
@@ -133,8 +133,16 @@
     },
     "testimonials": {
       "ariaLabel": "Client feedback",
-      "quote": "“[Client quote — one or two sentences about working with TEOS IT.]”",
-      "author": "[Name], [Role] at [Company]"
+      "items": {
+        "amplitude": {
+          "quote": "“TEOS IT took our app from a rough concept to a polished product in the stores faster than we thought possible. They didn’t just execute tickets — they pushed back on the right things, owned the architecture and treated every screen like their own product.”",
+          "author": "Maximilian Frederic Jacob, CEO at Amplitude Holding GmbH"
+        },
+        "checkSolar": {
+          "quote": "“We needed a fast, trustworthy platform that turns a complicated decision into five minutes of work. TEOS IT delivered a clean, performant web app and stayed pragmatic about scope the whole way through. Sharp communication, solid code, shipped on time.”",
+          "author": "Tim Fux, CTO at Fux Marketing OÜ"
+        }
+      }
     },
     "cta": {
       "title": "Have an app or product in mind?",
