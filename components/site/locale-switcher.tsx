@@ -9,10 +9,18 @@ import { Link, usePathname } from "@/i18n/navigation"
 import { routing } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
 
+import type { HeaderTone } from "./nav-items"
+
 type Href = React.ComponentProps<typeof Link>["href"]
 
 /** EN / SR pill switch that keeps the visitor on the same page. */
-function LocaleSwitcher({ className }: { className?: string }) {
+function LocaleSwitcher({
+  tone = "light",
+  className,
+}: {
+  tone?: HeaderTone
+  className?: string
+}) {
   const t = useTranslations("Header")
   const locale = useLocale()
   const pathname = usePathname()
@@ -24,7 +32,8 @@ function LocaleSwitcher({ className }: { className?: string }) {
       spacing={0.5}
       aria-label={t("language")}
       className={cn(
-        "rounded-full border border-input p-[3px] font-mono text-xs",
+        "rounded-full border p-[3px] font-mono text-xs",
+        tone === "dark" ? "border-dark-input" : "border-input",
         className
       )}
     >
@@ -41,7 +50,12 @@ function LocaleSwitcher({ className }: { className?: string }) {
               aria-current={l === locale ? "true" : undefined}
             />
           }
-          className="h-auto min-w-0 rounded-full px-2.5 py-1.5 text-xs font-medium text-muted-foreground uppercase hover:bg-transparent hover:text-foreground aria-pressed:bg-foreground aria-pressed:text-on-dark data-pressed:bg-foreground data-pressed:text-on-dark"
+          className={cn(
+            "h-auto min-w-0 rounded-full px-2.5 py-1.5 text-xs font-medium uppercase hover:bg-transparent",
+            tone === "dark"
+              ? "text-on-dark-subtle hover:text-on-dark aria-pressed:bg-on-dark aria-pressed:text-foreground data-pressed:bg-on-dark data-pressed:text-foreground"
+              : "text-muted-foreground hover:text-foreground aria-pressed:bg-foreground aria-pressed:text-on-dark data-pressed:bg-foreground data-pressed:text-on-dark"
+          )}
         >
           {l}
         </ToggleGroupItem>

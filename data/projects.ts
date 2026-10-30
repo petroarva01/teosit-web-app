@@ -15,14 +15,16 @@ export type ProjectSlug =
 export type Project = {
   slug: ProjectSlug
   name: string
+  /** Heading on the Work page */
+  title: Localized
   /** Work page label, e.g. "Client · Germany · iOS" */
   meta: Localized
   /** Work page description */
   body: Localized
   tags: Localized<string[]>
-  categories: ("mobile" | "web" | "own")[]
-  url: Localized
-  urlLabel: string
+  categories: ("mobile" | "web")[]
+  /** Store / website links shown on the Work page, in display order */
+  links: { label: string; url: Localized }[]
   hasCaseStudy: boolean
   /** 1600×1000 composite, already on the project's tint color */
   image: {
@@ -52,24 +54,39 @@ export const projects: Project[] = [
   {
     slug: "amplitude",
     name: "Amplitude",
+    title: {
+      en: "Amplitude — Finance & Lifestyle",
+      sr: "Amplitude — Finance & Lifestyle",
+    },
     meta: {
-      en: "Client · Germany · iOS",
-      sr: "Klijent · Nemačka · iOS",
+      en: "Client · Germany · iOS & Android",
+      sr: "Klijent · Nemačka · iOS i Android",
     },
     body: {
-      en: "A personal finance and lifestyle app for the German market. We lead the React Native team: architecture, onboarding, code review and App Store releases.",
-      sr: "Aplikacija za lične finansije i lifestyle za nemačko tržište. Vodimo React Native tim: arhitektura, onboarding, code review i objave na App Store-u.",
+      en: "A personal finance and lifestyle app for the German market. We lead the React Native team: architecture, onboarding, code review and store releases.",
+      sr: "Aplikacija za lične finansije i lifestyle za nemačko tržište. Vodimo React Native tim: arhitektura, onboarding, code review i objave na prodavnicama.",
     },
     tags: {
-      en: ["React Native", "iOS", "Fintech", "Team lead"],
-      sr: ["React Native", "iOS", "Fintech", "Vođenje tima"],
+      en: ["React Native", "iOS", "Android", "Fintech", "Team lead"],
+      sr: ["React Native", "iOS", "Android", "Fintech", "Vođenje tima"],
     },
     categories: ["mobile"],
-    url: {
-      en: "https://apps.apple.com/de/app/amplitude-finance-lifestyle/id6762627478",
-      sr: "https://apps.apple.com/de/app/amplitude-finance-lifestyle/id6762627478",
-    },
-    urlLabel: "App Store",
+    links: [
+      {
+        label: "App Store",
+        url: {
+          en: "https://apps.apple.com/de/app/amplitude-finance-lifestyle/id6762627478",
+          sr: "https://apps.apple.com/de/app/amplitude-finance-lifestyle/id6762627478",
+        },
+      },
+      {
+        label: "Google Play",
+        url: {
+          en: "https://play.google.com/store/apps/details?id=com.amplitude.app.mobile",
+          sr: "https://play.google.com/store/apps/details?id=com.amplitude.app.mobile",
+        },
+      },
+    ],
     hasCaseStudy: true,
     image: {
       src: amplitudeImage,
@@ -77,21 +94,21 @@ export const projects: Project[] = [
       position: "top",
     },
     heroMeta: {
-      en: "iOS · Fintech · Germany",
-      sr: "iOS · Fintech · Nemačka",
+      en: "Mobile · Fintech · Germany",
+      sr: "Mobile · Fintech · Nemačka",
     },
     home: {
       label: {
-        en: "React Native · iOS · Fintech",
-        sr: "React Native · iOS · Fintech",
+        en: "React Native · iOS & Android · Fintech",
+        sr: "React Native · iOS i Android · Fintech",
       },
       title: {
         en: "Amplitude — finance & lifestyle app for Germany",
         sr: "Amplitude — aplikacija za finansije za nemačko tržište",
       },
       body: {
-        en: "We lead the mobile team behind a personal finance app live on the App Store — from onboarding to release.",
-        sr: "Vodimo mobilni tim aplikacije za lične finansije koja je živa na App Store-u — od onboardinga do objave.",
+        en: "We lead the mobile team behind a personal finance app live on the App Store and Google Play — from onboarding to release.",
+        sr: "Vodimo mobilni tim aplikacije za lične finansije koja je živa na App Store-u i Google Play-u — od onboardinga do objave.",
       },
     },
     colors: {
@@ -105,6 +122,7 @@ export const projects: Project[] = [
   {
     slug: "check-solar",
     name: "Check Solar",
+    title: { en: "Check Solar", sr: "Check Solar" },
     meta: {
       en: "Client · Germany · Web platform",
       sr: "Klijent · Nemačka · Web platforma",
@@ -118,11 +136,15 @@ export const projects: Project[] = [
       sr: ["Next.js", "Web", "Poređenje", "EN · DE"],
     },
     categories: ["web"],
-    url: {
-      en: "https://check-solar.com/en",
-      sr: "https://check-solar.com/en",
-    },
-    urlLabel: "check-solar.com",
+    links: [
+      {
+        label: "check-solar.com",
+        url: {
+          en: "https://check-solar.com/en",
+          sr: "https://check-solar.com/en",
+        },
+      },
+    ],
     hasCaseStudy: false,
     image: {
       src: checkSolarImage,
@@ -158,9 +180,10 @@ export const projects: Project[] = [
   {
     slug: "bukiraj",
     name: "Bukiraj",
+    title: { en: "Bukiraj", sr: "Bukiraj" },
     meta: {
-      en: "Our product · SaaS · Serbia",
-      sr: "Naš proizvod · SaaS · Srbija",
+      en: "Beauty & wellness · SaaS · Serbia",
+      sr: "Lepota i wellness · SaaS · Srbija",
     },
     body: {
       en: "Online booking for hair, beauty and wellness salons. Clients book 24/7 through a link or QR code; owners manage the calendar, team, services, gallery and automatic email reminders. Live, with Basic, Pro and Business plans.",
@@ -170,12 +193,16 @@ export const projects: Project[] = [
       en: ["Supabase", "SaaS", "Subscriptions", "SR · EN"],
       sr: ["Supabase", "SaaS", "Pretplate", "SR · EN"],
     },
-    categories: ["web", "own"],
-    url: {
-      en: "https://www.bukiraj.app/en",
-      sr: "https://www.bukiraj.app",
-    },
-    urlLabel: "bukiraj.app",
+    categories: ["web"],
+    links: [
+      {
+        label: "bukiraj.app",
+        url: {
+          en: "https://www.bukiraj.app/en",
+          sr: "https://www.bukiraj.app",
+        },
+      },
+    ],
     hasCaseStudy: false,
     image: {
       src: bukirajImage,
@@ -183,13 +210,13 @@ export const projects: Project[] = [
       position: "center",
     },
     heroMeta: {
-      en: "Web SaaS · Own product",
-      sr: "Web SaaS · Naš proizvod",
+      en: "Web SaaS · Beauty & wellness",
+      sr: "Web SaaS · Lepota i wellness",
     },
     home: {
       label: {
-        en: "Web · SaaS · Own product",
-        sr: "Web · SaaS · Naš proizvod",
+        en: "Web · SaaS · Beauty & wellness",
+        sr: "Web · SaaS · Lepota i wellness",
       },
       title: {
         en: "Bukiraj — online booking for salons",
@@ -211,9 +238,13 @@ export const projects: Project[] = [
   {
     slug: "kellion",
     name: "Kellion",
+    title: {
+      en: "Kellion: Orthodox Calendar",
+      sr: "Kellion: pravoslavni kalendar",
+    },
     meta: {
-      en: "Our product · Android",
-      sr: "Naš proizvod · Android",
+      en: "Faith & spirituality · Android",
+      sr: "Vera i duhovnost · Android",
     },
     body: {
       en: "A free, ad-free Orthodox calendar and prayer book. Old and new calendar, offline prayers, fasting rules, a map of nearby churches, reminders and home-screen widgets — in 6 languages.",
@@ -223,12 +254,16 @@ export const projects: Project[] = [
       en: ["React Native", "Expo", "Offline-first", "6 languages"],
       sr: ["React Native", "Expo", "Offline-first", "6 jezika"],
     },
-    categories: ["mobile", "own"],
-    url: {
-      en: "https://play.google.com/store/apps/details?id=com.teosit.agiorit",
-      sr: "https://play.google.com/store/apps/details?id=com.teosit.agiorit",
-    },
-    urlLabel: "Google Play",
+    categories: ["mobile"],
+    links: [
+      {
+        label: "Google Play",
+        url: {
+          en: "https://play.google.com/store/apps/details?id=com.teosit.agiorit",
+          sr: "https://play.google.com/store/apps/details?id=com.teosit.agiorit",
+        },
+      },
+    ],
     hasCaseStudy: false,
     image: {
       src: kellionImage,
@@ -240,8 +275,8 @@ export const projects: Project[] = [
     },
     home: {
       label: {
-        en: "React Native · Android · Own product",
-        sr: "React Native · Android · Naš proizvod",
+        en: "React Native · Android · Faith & spirituality",
+        sr: "React Native · Android · Vera i duhovnost",
       },
       title: {
         en: "Kellion — Orthodox calendar in 6 languages",
@@ -263,9 +298,10 @@ export const projects: Project[] = [
   {
     slug: "hortium",
     name: "Hortium",
+    title: { en: "Hortium: Garden Planner", sr: "Hortium: planer bašte" },
     meta: {
-      en: "Our product · Android",
-      sr: "Naš proizvod · Android",
+      en: "Gardening · Android",
+      sr: "Baštovanstvo · Android",
     },
     body: {
       en: "A garden companion for beds and balcony pots. Monthly sowing calendar tuned to local frost dates, a square-by-square bed planner and watering reminders that skip rainy days. No account, works offline.",
@@ -275,12 +311,16 @@ export const projects: Project[] = [
       en: ["React Native", "Expo", "Weather API", "7 languages"],
       sr: ["React Native", "Expo", "Vremenska prognoza", "7 jezika"],
     },
-    categories: ["mobile", "own"],
-    url: {
-      en: "https://play.google.com/store/apps/details?id=com.teosit.hortium",
-      sr: "https://play.google.com/store/apps/details?id=com.teosit.hortium",
-    },
-    urlLabel: "Google Play",
+    categories: ["mobile"],
+    links: [
+      {
+        label: "Google Play",
+        url: {
+          en: "https://play.google.com/store/apps/details?id=com.teosit.hortium",
+          sr: "https://play.google.com/store/apps/details?id=com.teosit.hortium",
+        },
+      },
+    ],
     hasCaseStudy: false,
     image: {
       src: hortiumImage,

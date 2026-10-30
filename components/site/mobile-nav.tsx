@@ -12,14 +12,21 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { Link } from "@/i18n/navigation"
+import { Link, usePathname } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 
 import { LocaleSwitcher } from "./locale-switcher"
-import { navItems } from "./nav-items"
+import { isActive, navItems, type HeaderTone } from "./nav-items"
 
-function MobileNav({ className }: { className?: string }) {
+function MobileNav({
+  tone = "light",
+  className,
+}: {
+  tone?: HeaderTone
+  className?: string
+}) {
   const t = useTranslations("Header")
+  const pathname = usePathname()
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -29,7 +36,12 @@ function MobileNav({ className }: { className?: string }) {
           <Button
             variant="outline"
             size="icon-lg"
-            className={cn("size-11 rounded-full bg-transparent", className)}
+            className={cn(
+              "size-11 rounded-full bg-transparent",
+              tone === "dark" &&
+                "border-dark-input text-on-dark hover:bg-dark-raised hover:text-on-dark",
+              className
+            )}
           />
         }
       >
@@ -43,8 +55,15 @@ function MobileNav({ className }: { className?: string }) {
             <SheetClose
               key={item.key}
               nativeButton={false}
-              render={<Link href={item.href} />}
-              className="font-heading text-2xl font-semibold tracking-tight text-foreground hover:text-primary"
+              render={
+                <Link
+                  href={item.href}
+                  aria-current={
+                    isActive(pathname, item.href) ? "page" : undefined
+                  }
+                />
+              }
+              className="font-heading text-2xl font-semibold tracking-tight text-foreground hover:text-primary aria-[current=page]:text-primary"
             >
               {t(item.key)}
             </SheetClose>

@@ -6,7 +6,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import "../globals.css"
 import { Footer } from "@/components/site/footer"
-import { Header } from "@/components/site/header"
 import { MotionProvider } from "@/components/site/motion"
 import { routing } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
@@ -16,9 +15,11 @@ const fontSans = Geist({
   variable: "--font-geist",
 })
 
+// Variable font with the optical-size axis: large headings get the tighter
+// display cut automatically, like the design (without it opsz is stuck at 14)
 const fontHeading = Bricolage_Grotesque({
   subsets: ["latin", "latin-ext"],
-  weight: ["500", "600", "700"],
+  axes: ["opsz"],
   variable: "--font-bricolage",
 })
 
@@ -67,8 +68,7 @@ export default async function LocaleLayout({
       <body className="flex min-h-screen flex-col">
         <NextIntlClientProvider>
           <MotionProvider>
-            <Header />
-            <main>{children}</main>
+            {children}
             <Footer />
           </MotionProvider>
         </NextIntlClientProvider>

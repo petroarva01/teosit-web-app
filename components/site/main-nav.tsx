@@ -11,9 +11,15 @@ import {
 import { Link, usePathname } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 
-import { navItems } from "./nav-items"
+import { isActive, navItems, type HeaderTone } from "./nav-items"
 
-function MainNav({ className }: { className?: string }) {
+function MainNav({
+  tone = "light",
+  className,
+}: {
+  tone?: HeaderTone
+  className?: string
+}) {
   const t = useTranslations("Header")
   const pathname = usePathname()
 
@@ -26,11 +32,14 @@ function MainNav({ className }: { className?: string }) {
         {navItems.map((item) => (
           <NavigationMenuItem key={item.key}>
             <NavigationMenuLink
-              active={
-                pathname === item.href || pathname.startsWith(`${item.href}/`)
-              }
+              active={isActive(pathname, item.href)}
               render={<Link href={item.href} />}
-              className="rounded-none p-0 text-[15px] font-medium text-foreground hover:bg-transparent hover:text-primary focus:bg-transparent data-active:bg-transparent data-active:hover:bg-transparent data-active:focus:bg-transparent"
+              className={cn(
+                "rounded-none p-0 text-[15px] font-medium hover:bg-transparent focus:bg-transparent data-active:bg-transparent data-active:hover:bg-transparent data-active:focus:bg-transparent",
+                tone === "dark"
+                  ? "text-on-dark hover:text-on-dark-accent data-active:text-on-dark-accent"
+                  : "text-foreground hover:text-primary data-active:text-primary"
+              )}
             >
               {t(item.key)}
             </NavigationMenuLink>

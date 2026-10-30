@@ -132,22 +132,183 @@
       "link": "More about us"
     },
     "testimonials": {
-      "ariaLabel": "Client feedback",
-      "items": {
-        "amplitude": {
-          "quote": "“TEOS IT took our app from a rough concept to a polished product in the stores faster than we thought possible. They didn’t just execute tickets — they pushed back on the right things, owned the architecture and treated every screen like their own product.”",
-          "author": "Maximilian Frederic Jacob, CEO at Amplitude Holding GmbH"
-        },
-        "checkSolar": {
-          "quote": "“We needed a fast, trustworthy platform that turns a complicated decision into five minutes of work. TEOS IT delivered a clean, performant web app and stayed pragmatic about scope the whole way through. Sharp communication, solid code, shipped on time.”",
-          "author": "Tim Fux, CTO at Fux Marketing OÜ"
-        }
-      }
+      "ariaLabel": "Client feedback"
     },
     "cta": {
       "title": "Have an app or product in mind?",
       "body": "Tell us where you are. In a free 30-minute call we'll tell you honestly what it takes — time, cost and the best stack for it.",
       "button": "Book a free call"
+    }
+  },
+  "Services": {
+    "metaTitle": "TEOS IT — Services",
+    "eyebrow": "Services",
+    "title": "From idea to the App Store — and everything in between.",
+    "lead": "Hire us for a full product, a single piece of it, or as an extension of your team. Mobile is our core; web, backend, AI and design are how we make it whole.",
+    "jumpLabel": "Jump to service",
+    "items": {
+      "mobile": {
+        "nav": "Mobile apps",
+        "label": "01 · Core service",
+        "title": "Mobile apps",
+        "body": "One React Native codebase, two native-feeling apps. We take care of the parts that usually slow teams down: payments, push notifications, offline mode, store review and release.",
+        "points": [
+          "iOS + Android with React Native and Expo",
+          "App Store and Google Play release, TestFlight builds",
+          "Payments, subscriptions and in-app purchases",
+          "Code review, testing and rescue of existing apps"
+        ],
+        "stack": "React Native · Expo · TypeScript · Reanimated"
+      },
+      "web": {
+        "nav": "Web",
+        "label": "02",
+        "title": "Web development",
+        "body": "Marketing sites, web apps and SaaS platforms that load fast and rank well — in as many languages as your market needs.",
+        "points": [
+          "Next.js websites and web applications",
+          "Admin panels and dashboards",
+          "Multilingual sites and SEO basics"
+        ],
+        "stack": "Next.js · React · Tailwind · Vercel"
+      },
+      "backend": {
+        "nav": "Backend",
+        "label": "03",
+        "title": "Backend & APIs",
+        "body": "The part users never see but always feel. We design data models, auth and APIs that stay fast and secure as you grow.",
+        "points": [
+          "REST APIs and serverless functions",
+          "Supabase: Auth, Row Level Security, Postgres",
+          "Integrations: payments, email, maps, third-party APIs"
+        ],
+        "stack": "Node.js · Supabase · PostgreSQL"
+      },
+      "ai": {
+        "nav": "AI",
+        "label": "04",
+        "title": "AI development",
+        "body": "AI that does a real job inside your product. We start with the problem, pick the right model, and measure whether it actually helps.",
+        "points": [
+          "Assistants and chat inside your app",
+          "Document search over your own data (RAG)",
+          "Automations and AI agents for internal work"
+        ],
+        "stack": "OpenAI · Anthropic Claude · pgvector"
+      },
+      "design": {
+        "nav": "UI/UX",
+        "label": "05",
+        "title": "UI/UX design",
+        "body": "Clear flows first, polish second. Designed by people who also build — so what you approve is what ships.",
+        "points": [
+          "User flows and clickable prototypes",
+          "App and web interface design",
+          "Design systems in Figma"
+        ],
+        "stack": "Figma · Prototyping · Design systems"
+      },
+      "outsourcing": {
+        "nav": "Outsourcing",
+        "label": "06",
+        "title": "Outsourcing",
+        "body": "Need more hands on an existing product? Our engineers join your team, your tools and your sprint rhythm — in your time zone or close to it.",
+        "points": [
+          "Senior React Native and web engineers",
+          "Team lead and mentoring for junior developers",
+          "Monthly engagement, cancel with notice"
+        ],
+        "stack": "CET · English · Jira · GitHub · Slack"
+      }
+    },
+    "models": {
+      "eyebrow": "Ways to work together",
+      "title": "Pick the model that fits.",
+      "items": {
+        "fixed": {
+          "title": "Fixed-scope project",
+          "body": "A clear scope, timeline and price. Best for an MVP or a new app.",
+          "price": "From €25,000"
+        },
+        "team": {
+          "title": "Dedicated team",
+          "body": "Engineers working on your product every month. Best for ongoing development.",
+          "price": "From €8,000 / month"
+        },
+        "consulting": {
+          "title": "Consulting & audit",
+          "body": "Code review, architecture advice or a rescue plan for an app that's stuck.",
+          "price": "€60 / hour"
+        }
+      }
+    },
+    "faq": {
+      "title": "Common questions",
+      "items": {
+        "reactNative": {
+          "q": "Why React Native instead of two native apps?",
+          "a": "One codebase means roughly half the build and maintenance work, while the app still feels native on both platforms."
+        },
+        "mvp": {
+          "q": "How long does an MVP take?",
+          "a": "Usually 10–14 weeks from kickoff to the store release, depending on scope. After a short discovery phase you get an exact timeline and a fixed price."
+        },
+        "ownership": {
+          "q": "Who owns the code?",
+          "a": "You do. Code, designs and accounts are yours from day one — no lock-in."
+        },
+        "takeover": {
+          "q": "Can you take over an existing app?",
+          "a": "Yes. We start with a short code audit, then fix what's urgent and plan the rest."
+        }
+      }
+    },
+    "cta": {
+      "title": "Not sure which one you need?",
+      "button": "Book a free 30-min call"
+    }
+  },
+  "Work": {
+    "metaTitle": "TEOS IT — Case studies",
+    "eyebrow": "Case studies",
+    "title": "Apps people download, use and come back to.",
+    "lead": "Fintech, energy, booking and lifestyle apps for clients in Germany, Switzerland and Serbia — built, shipped and maintained by the same team.",
+    "filterLabel": "Filter projects",
+    "filters": {
+      "all": "All work",
+      "mobile": "Mobile",
+      "web": "Web"
+    },
+    "readCaseStudy": "Read case study",
+    "cta": {
+      "title": "Your app could be the next one here.",
+      "button": "Start a project"
+    }
+  },
+  "CaseStudy": {
+    "metaTitle": "Case study — {name}",
+    "allCaseStudies": "All case studies",
+    "factsLabel": "Project facts",
+    "facts": {
+      "client": "Client",
+      "platform": "Platform",
+      "role": "Our role",
+      "timeline": "Timeline"
+    },
+    "challenge": "The challenge",
+    "whatWeDid": "What we did",
+    "screensLabel": "Screens",
+    "results": "Results",
+    "next": "Next case study"
+  },
+  "Testimonials": {
+    "amplitude": {
+      "quote": "“TEOS IT took our app from a rough concept to a polished product in the stores faster than we thought possible. They didn’t just execute tickets — they pushed back on the right things, owned the architecture and treated every screen like their own product.”",
+      "author": "Maximilian Frederic Jacob, CEO at Amplitude Holding GmbH"
+    },
+    "checkSolar": {
+      "quote": "“We needed a fast, trustworthy platform that turns a complicated decision into five minutes of work. TEOS IT delivered a clean, performant web app and stayed pragmatic about scope the whole way through. Sharp communication, solid code, shipped on time.”",
+      "author": "Tim Fux, CTO at Fux Marketing OÜ"
     }
   }
 }

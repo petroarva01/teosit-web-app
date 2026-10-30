@@ -9,6 +9,9 @@ import {
   ProjectCard,
 } from "@/components/site/project-card"
 import {
+  ArrowLink,
+  container,
+  CtaBand,
   Eyebrow,
   SectionHeading,
   TriangleIcon,
@@ -16,22 +19,10 @@ import {
 import { Button } from "@/components/ui/button"
 import { featuredProjects, getProject, heroProjects } from "@/data/projects"
 import { site } from "@/data/site"
+import { stack } from "@/data/stack"
 import { Link } from "@/i18n/navigation"
 import { routing } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
-
-const stack = [
-  "React Native",
-  "Expo",
-  "TypeScript",
-  "Next.js",
-  "React",
-  "Node.js",
-  "Supabase",
-  "PostgreSQL",
-  "OpenAI · Claude APIs",
-  "Figma",
-]
 
 const serviceKeys = [
   "mobile",
@@ -48,27 +39,6 @@ const founderPoints = ["direct", "ownership", "weekly", "fourth"] as const
 
 const testimonialKeys = ["amplitude", "checkSolar"] as const
 
-const container = "mx-auto w-full max-w-[1240px] px-4 sm:px-8"
-
-/** "All services →" style text link. */
-function ArrowLink({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof Link>) {
-  return (
-    <Link
-      className={cn(
-        "inline-flex items-center gap-2 text-base font-semibold text-foreground transition-colors hover:text-primary",
-        className
-      )}
-      {...props}
-    >
-      {children} <span aria-hidden="true">→</span>
-    </Link>
-  )
-}
-
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params
   if (!hasLocale(routing.locales, locale)) {
@@ -77,6 +47,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   setRequestLocale(locale)
 
   const t = await getTranslations("Home")
+  const tTestimonials = await getTranslations("Testimonials")
   const [heroTop, heroLeft, heroRight] = heroProjects.map(getProject)
 
   return (
@@ -166,7 +137,15 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             {t("stack.label")}
           </span>
           <div className="min-w-0 flex-auto overflow-hidden mask-[linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
-            <div className="flex w-max animate-marquee gap-9 pr-9 whitespace-nowrap motion-reduce:animate-none">
+            <div
+              // ~4s per item keeps the design's scroll speed as the list grows
+              style={
+                {
+                  "--marquee-duration": `${stack.length * 4}s`,
+                } as React.CSSProperties
+              }
+              className="flex w-max animate-marquee gap-9 pr-9 whitespace-nowrap motion-reduce:animate-none"
+            >
               {stack.map((item) => (
                 <span key={item}>{item}</span>
               ))}
@@ -317,44 +296,29 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             className="flex flex-col gap-5 border-t-2 border-foreground pt-7"
           >
             <blockquote className="font-heading text-[22px] leading-[1.35] font-medium tracking-[-0.015em] sm:text-2xl">
-              {t(`testimonials.items.${key}.quote`)}
+              {tTestimonials(`${key}.quote`)}
             </blockquote>
             <figcaption className="mt-auto text-[15px] text-muted-foreground">
-              {t(`testimonials.items.${key}.author`)}
+              {tTestimonials(`${key}.author`)}
             </figcaption>
           </figure>
         ))}
       </section>
 
-      {/* CTA band */}
-      <section className={cn(container, "py-[120px]")}>
-        <div className="flex flex-wrap items-end justify-between gap-8 rounded-[32px] bg-primary p-[clamp(40px,6vw,80px)] text-primary-foreground">
-          <div className="flex max-w-[660px] flex-col gap-4">
-            <h2 className="text-[clamp(36px,4.6vw,60px)] leading-[1.02] font-bold tracking-[-0.035em]">
-              {t("cta.title")}
-            </h2>
-            <p className="text-lg leading-[1.55] text-on-primary-muted">
-              {t("cta.body")}
-            </p>
-          </div>
-          <div className="flex flex-col items-start gap-3.5">
-            <Button
-              nativeButton={false}
-              variant="inverse"
-              size="pill-lg"
-              render={<Link href="/contact" />}
-            >
-              {t("cta.button")}
-            </Button>
-            <a
-              href={`mailto:${site.email}`}
-              className="text-base font-medium text-primary-foreground underline underline-offset-4"
-            >
-              {site.email}
-            </a>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title={t("cta.title")}
+        body={t("cta.body")}
+        button={t("cta.button")}
+        className="pt-[120px]"
+        aside={
+          <a
+            href={`mailto:${site.email}`}
+            className="text-base font-medium text-primary-foreground underline underline-offset-4"
+          >
+            {site.email}
+          </a>
+        }
+      />
     </>
   )
 }

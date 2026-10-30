@@ -1,6 +1,7 @@
 import type * as React from "react"
 import Image from "next/image"
 
+import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
 import type { Project } from "@/data/projects"
 import { Link } from "@/i18n/navigation"
@@ -32,12 +33,14 @@ function ProjectImage({
   locale,
   sizes,
   loading,
+  position = project.image.position,
   className,
 }: {
   project: Project
   locale: Locale
   sizes: string
   loading?: "eager" | "lazy"
+  position?: Project["image"]["position"]
   className?: string
 }) {
   return (
@@ -53,7 +56,7 @@ function ProjectImage({
         placeholder="blur"
         className={cn(
           "object-cover",
-          project.image.position === "top" ? "object-top" : "object-center"
+          position === "top" ? "object-top" : "object-center"
         )}
       />
     </div>
@@ -139,4 +142,79 @@ function ProjectCard({
   )
 }
 
-export { FloatingProjectCard, ProjectCard }
+/** Large card on the Work page: image left, details right. */
+function WorkProjectCard({
+  project,
+  locale,
+  readCaseStudy,
+}: {
+  project: Project
+  locale: Locale
+  readCaseStudy: string
+}) {
+  const linkClass =
+    "underline underline-offset-4 transition-opacity hover:opacity-70"
+
+  return (
+    <Card
+      className="grid items-stretch gap-10 rounded-[32px] border-0 bg-(--project-bg) p-[clamp(24px,3vw,40px)] text-(--project-text) ring-0 lg:grid-cols-2"
+      style={projectColors(project)}
+    >
+      <ProjectImage
+        project={project}
+        locale={locale}
+        position="top"
+        sizes="(min-width: 1240px) 560px, (min-width: 1024px) 45vw, 100vw"
+        className="aspect-16/10 self-center rounded-[20px]"
+      />
+      <div className="flex flex-col justify-center gap-[18px]">
+        <span className="font-mono text-[13px] text-(--project-label)">
+          {project.meta[locale]}
+        </span>
+        <h2 className="text-[clamp(30px,3.2vw,44px)] leading-[1.05] font-bold tracking-[-0.03em]">
+          {project.title[locale]}
+        </h2>
+        <p className="text-[17px] leading-[1.6] text-(--project-body)">
+          {project.body[locale]}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {project.tags[locale].map((tag) => (
+            <Badge
+              key={tag}
+              variant="tag"
+              className="bg-(--project-inner) text-(--project-text)"
+            >
+              {tag}
+            </Badge>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-x-6 gap-y-3 pt-1.5 text-base font-semibold">
+          {project.hasCaseStudy && (
+            <Link href={projectHref(project)} className={linkClass}>
+              {readCaseStudy} →
+            </Link>
+          )}
+          {project.links.map((link) => (
+            <a
+              key={link.label}
+              href={link.url[locale]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkClass}
+            >
+              {link.label} ↗
+            </a>
+          ))}
+        </div>
+      </div>
+    </Card>
+  )
+}
+
+export {
+  projectColors,
+  projectHref,
+  FloatingProjectCard,
+  ProjectCard,
+  WorkProjectCard,
+}
