@@ -1,0 +1,145 @@
+{
+  "Metadata": {
+    "title": "TEOS IT — Studio za mobilni, web i AI razvoj",
+    "description": "TEOS IT dizajnira, razvija i objavljuje React Native aplikacije, web platforme i AI funkcionalnosti — od prve skice do App Store-a."
+  },
+  "Header": {
+    "mainNav": "Glavna navigacija",
+    "homeLabel": "TEOS IT početna",
+    "services": "Usluge",
+    "work": "Projekti",
+    "about": "O nama",
+    "blog": "Blog",
+    "contact": "Kontakt",
+    "bookCall": "Zakaži poziv",
+    "language": "Jezik",
+    "openMenu": "Otvori meni",
+    "menu": "Meni"
+  },
+  "Footer": {
+    "tagline": "Studio za mobilni, web i AI razvoj iz Novog Sada.",
+    "bookCall": "Zakaži besplatan poziv",
+    "servicesTitle": "Usluge",
+    "services": {
+      "mobile": "Mobilne aplikacije",
+      "web": "Web razvoj",
+      "backend": "Backend i API",
+      "ai": "AI razvoj",
+      "design": "UI/UX dizajn",
+      "outsourcing": "Outsourcing"
+    },
+    "companyTitle": "Firma",
+    "company": {
+      "work": "Projekti",
+      "about": "O nama",
+      "blog": "Blog",
+      "contact": "Kontakt"
+    },
+    "contactTitle": "Kontakt",
+    "location": "Novi Sad, Srbija",
+    "legal": "© {year} TEOS IT · PIB: [PIB] · MB: [MB]",
+    "privacy": "Politika privatnosti",
+    "terms": "Uslovi korišćenja"
+  },
+  "Home": {
+    "hero": {
+      "eyebrow": "Softverski studio · Novi Sad",
+      "title": "Mobilne aplikacije i web proizvodi — pravi ih onaj s kim pričate.",
+      "lead": "TEOS IT dizajnira, razvija i objavljuje React Native aplikacije, web platforme i AI funkcionalnosti — od prve skice do App Store-a. Bez posrednika i prepričavanja.",
+      "primary": "Besplatan poziv od 30 min",
+      "secondary": "Pogledajte projekte"
+    },
+    "stack": {
+      "label": "Tehnologije",
+      "ariaLabel": "Tehnologije"
+    },
+    "services": {
+      "eyebrow": "01 — Usluge",
+      "title": "Jedan tim za aplikaciju, sajt i sve iza njih.",
+      "link": "Sve usluge",
+      "items": {
+        "mobile": {
+          "label": "Mobile",
+          "title": "Mobilne aplikacije",
+          "body": "iOS i Android iz jednog React Native koda. Objava na prodavnicama, plaćanja i notifikacije su uključeni."
+        },
+        "web": {
+          "label": "Web",
+          "title": "Web razvoj",
+          "body": "Brzi sajtovi, dashboard-i i SaaS platforme na Next.js-u i React-u — spremni za Google i za rast."
+        },
+        "backend": {
+          "label": "Backend",
+          "title": "Backend i API",
+          "body": "Baze, autentifikacija i API na Node.js-u, Supabase-u i Postgres-u. Bezbedno i spremno za pravi saobraćaj."
+        },
+        "ai": {
+          "label": "AI",
+          "title": "AI razvoj",
+          "body": "LLM funkcionalnosti, asistenti i automatizacije u vašem proizvodu — korisne i merljive, ne samo demo."
+        },
+        "design": {
+          "label": "Dizajn",
+          "title": "UI/UX dizajn",
+          "body": "Tokovi, ekrani i dizajn sistemi u Figmi, provereni pre nego što krene programiranje."
+        },
+        "outsourcing": {
+          "label": "Tim",
+          "title": "Outsourcing",
+          "body": "Iskusni React Native i web inženjeri koji ulaze u vaš tim, vaše sastanke i vaš način rada."
+        }
+      }
+    },
+    "work": {
+      "eyebrow": "02 — Izdvojeni projekti",
+      "title": "Objavljeno, živo i u upotrebi.",
+      "link": "Svi projekti"
+    },
+    "process": {
+      "eyebrow": "03 — Kako radimo",
+      "title": "Napredak vidite svake nedelje.",
+      "step": "Korak {number}",
+      "steps": {
+        "discovery": {
+          "title": "Upoznavanje",
+          "body": "Razumemo ciljeve, korisnike i ograničenja, pa se dogovorimo oko obima i budžeta."
+        },
+        "design": {
+          "title": "Dizajn",
+          "body": "Tokovi i ekrani u Figmi, koje sa vama proverimo pre razvoja."
+        },
+        "build": {
+          "title": "Razvoj",
+          "body": "Kratki ciklusi i nova verzija za testiranje svake nedelje."
+        },
+        "ship": {
+          "title": "Objava",
+          "body": "Objava na prodavnicama, lansiranje, praćenje — i ostajemo za sledeći korak."
+        }
+      }
+    },
+    "founder": {
+      "eyebrow": "04 — S kim radite",
+      "title": "„Pričate sa osobom koja piše vaš kod.”",
+      "body": "Ja sam Petro, osnivač TEOS IT. Poslednjih godina vodim React Native timove i objavljujem aplikacije za klijente iz Nemačke i Švajcarske. Na svakom projektu sam lično — od prvog poziva do objave.",
+      "photoAlt": "Petro Arva, osnivač TEOS IT",
+      "points": {
+        "direct": "Direktna komunikacija",
+        "ownership": "Kod i dizajn su vaši",
+        "weekly": "Nova verzija svake nedelje",
+        "fourth": "Jasne cene, bez iznenađenja"
+      },
+      "link": "Više o nama"
+    },
+    "testimonials": {
+      "ariaLabel": "Utisci klijenata",
+      "quote": "„[Utisak klijenta — jedna ili dve rečenice o saradnji sa TEOS IT.]”",
+      "author": "[Ime], [Pozicija], [Firma]"
+    },
+    "cta": {
+      "title": "Imate ideju za aplikaciju ili proizvod?",
+      "body": "Recite nam gde ste sada. Na besplatnom pozivu od 30 minuta iskreno ćemo vam reći koliko traje, koliko košta i koja tehnologija ima smisla.",
+      "button": "Zakaži besplatan poziv"
+    }
+  }
+}

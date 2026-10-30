@@ -1,0 +1,145 @@
+{
+  "Metadata": {
+    "title": "TEOS IT — Mobile, web and AI development studio",
+    "description": "TEOS IT designs, builds and launches React Native apps, web platforms and AI features — from the first sketch to the App Store."
+  },
+  "Header": {
+    "mainNav": "Main",
+    "homeLabel": "TEOS IT home",
+    "services": "Services",
+    "work": "Work",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "bookCall": "Book a call",
+    "language": "Language",
+    "openMenu": "Open menu",
+    "menu": "Menu"
+  },
+  "Footer": {
+    "tagline": "Mobile, web and AI development studio from Novi Sad, Serbia.",
+    "bookCall": "Book a free call",
+    "servicesTitle": "Services",
+    "services": {
+      "mobile": "Mobile apps",
+      "web": "Web development",
+      "backend": "Backend & APIs",
+      "ai": "AI development",
+      "design": "UI/UX design",
+      "outsourcing": "Outsourcing"
+    },
+    "companyTitle": "Company",
+    "company": {
+      "work": "Case studies",
+      "about": "About",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "contactTitle": "Get in touch",
+    "location": "Novi Sad, Serbia",
+    "legal": "© {year} TEOS IT · PIB: [PIB] · MB: [MB]",
+    "privacy": "Privacy Policy",
+    "terms": "Terms"
+  },
+  "Home": {
+    "hero": {
+      "eyebrow": "Software studio · Novi Sad, Serbia",
+      "title": "Mobile apps and web products, built by the people you talk to.",
+      "lead": "TEOS IT designs, builds and launches React Native apps, web platforms and AI features — from the first sketch to the App Store. No account managers, no hand-offs.",
+      "primary": "Book a free 30-min call",
+      "secondary": "See our work"
+    },
+    "stack": {
+      "label": "Our stack",
+      "ariaLabel": "What we work with"
+    },
+    "services": {
+      "eyebrow": "01 — Services",
+      "title": "One team for the app, the web and everything behind them.",
+      "link": "All services",
+      "items": {
+        "mobile": {
+          "label": "Mobile",
+          "title": "Mobile apps",
+          "body": "iOS and Android from one React Native codebase. We handle the store release, payments and push notifications too."
+        },
+        "web": {
+          "label": "Web",
+          "title": "Web development",
+          "body": "Fast websites, dashboards and SaaS platforms on Next.js and React — built to rank and easy to grow."
+        },
+        "backend": {
+          "label": "Backend",
+          "title": "Backend & APIs",
+          "body": "Databases, auth and APIs on Node.js, Supabase and Postgres. Secure by default, ready for real traffic."
+        },
+        "ai": {
+          "label": "AI",
+          "title": "AI development",
+          "body": "LLM features, assistants and automations built into your product — useful, measurable, not a demo."
+        },
+        "design": {
+          "label": "Design",
+          "title": "UI/UX design",
+          "body": "User flows, interfaces and design systems in Figma, tested before a line of code is written."
+        },
+        "outsourcing": {
+          "label": "Team",
+          "title": "Outsourcing",
+          "body": "Senior React Native and web engineers who join your team, your stand-ups and your workflow."
+        }
+      }
+    },
+    "work": {
+      "eyebrow": "02 — Selected work",
+      "title": "Shipped, live and used.",
+      "link": "All case studies"
+    },
+    "process": {
+      "eyebrow": "03 — How we work",
+      "title": "You see progress every week.",
+      "step": "Step {number}",
+      "steps": {
+        "discovery": {
+          "title": "Discovery",
+          "body": "We map your goals, users and constraints, then agree on scope and budget."
+        },
+        "design": {
+          "title": "Design",
+          "body": "Flows and screens in Figma, validated with you before we build."
+        },
+        "build": {
+          "title": "Build",
+          "body": "Short cycles with a working preview build every week."
+        },
+        "ship": {
+          "title": "Ship",
+          "body": "Store release, launch, monitoring — and we stay for what comes next."
+        }
+      }
+    },
+    "founder": {
+      "eyebrow": "04 — Who you work with",
+      "title": "“You talk to the person who writes your code.”",
+      "body": "I'm Petro, founder of TEOS IT. I've spent the last years leading React Native teams and shipping apps for clients in Germany and Switzerland. I'm on every project — from the first call to the store release.",
+      "photoAlt": "Petro Arva, founder of TEOS IT",
+      "points": {
+        "direct": "Direct access, no middlemen",
+        "ownership": "You own all code and designs",
+        "weekly": "Weekly preview builds",
+        "fourth": "CET time zone, fluent English"
+      },
+      "link": "More about us"
+    },
+    "testimonials": {
+      "ariaLabel": "Client feedback",
+      "quote": "“[Client quote — one or two sentences about working with TEOS IT.]”",
+      "author": "[Name], [Role] at [Company]"
+    },
+    "cta": {
+      "title": "Have an app or product in mind?",
+      "body": "Tell us where you are. In a free 30-minute call we'll tell you honestly what it takes — time, cost and the best stack for it.",
+      "button": "Book a free call"
+    }
+  }
+}

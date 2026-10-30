@@ -1,0 +1,349 @@
+import Image from "next/image"
+import { notFound } from "next/navigation"
+import { hasLocale } from "next-intl"
+import { getTranslations, setRequestLocale } from "next-intl/server"
+
+import { Float, Reveal, RevealItem } from "@/components/site/motion"
+import {
+  FloatingProjectCard,
+  ProjectCard,
+} from "@/components/site/project-card"
+import {
+  Eyebrow,
+  SectionHeading,
+  TriangleIcon,
+} from "@/components/site/section"
+import { Button } from "@/components/ui/button"
+import { featuredProjects, getProject, heroProjects } from "@/data/projects"
+import { Link } from "@/i18n/navigation"
+import { routing } from "@/i18n/routing"
+import { cn } from "@/lib/utils"
+
+const stack = [
+  "React Native",
+  "Expo",
+  "TypeScript",
+  "Next.js",
+  "React",
+  "Node.js",
+  "Supabase",
+  "PostgreSQL",
+  "OpenAI · Claude APIs",
+  "Figma",
+]
+
+const serviceKeys = [
+  "mobile",
+  "web",
+  "backend",
+  "ai",
+  "design",
+  "outsourcing",
+] as const
+
+const stepKeys = ["discovery", "design", "build", "ship"] as const
+
+const founderPoints = ["direct", "ownership", "weekly", "fourth"] as const
+
+const container = "mx-auto w-full max-w-[1240px] px-4 sm:px-8"
+
+/** "All services →" style text link. */
+function ArrowLink({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof Link>) {
+  return (
+    <Link
+      className={cn(
+        "inline-flex items-center gap-2 text-base font-semibold text-foreground transition-colors hover:text-primary",
+        className
+      )}
+      {...props}
+    >
+      {children} <span aria-hidden="true">→</span>
+    </Link>
+  )
+}
+
+export default async function HomePage({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+  setRequestLocale(locale)
+
+  const t = await getTranslations("Home")
+  const [heroTop, heroLeft, heroRight] = heroProjects.map(getProject)
+
+  return (
+    <>
+      {/* Hero */}
+      <section
+        className={cn(
+          container,
+          "grid items-center gap-16 overflow-x-clip pt-14 pb-24 sm:pt-[88px] lg:grid-cols-2"
+        )}
+      >
+        <div className="flex flex-col gap-7">
+          <div className="flex animate-rise items-center gap-2.5 font-mono text-[13px] tracking-[0.04em] text-muted-foreground uppercase motion-reduce:animate-none">
+            <TriangleIcon className="h-3 w-3.5" />
+            <span>{t("hero.eyebrow")}</span>
+          </div>
+          <h1 className="animate-rise text-[clamp(44px,6vw,76px)] leading-[1.02] font-bold tracking-[-0.035em] [animation-delay:80ms] motion-reduce:animate-none">
+            {t("hero.title")}
+          </h1>
+          <p className="max-w-[34em] animate-rise text-[19px] leading-[1.55] text-muted-foreground [animation-delay:160ms] motion-reduce:animate-none">
+            {t("hero.lead")}
+          </p>
+          <div className="flex animate-rise flex-wrap items-center gap-x-6 gap-y-3 pt-1 [animation-delay:240ms] motion-reduce:animate-none">
+            <Button
+              nativeButton={false}
+              size="pill-lg"
+              render={<Link href="/contact" />}
+            >
+              {t("hero.primary")}
+            </Button>
+            <ArrowLink href="/work">{t("hero.secondary")}</ArrowLink>
+          </div>
+        </div>
+
+        <div className="relative grid animate-rise grid-cols-2 gap-5 py-4 [animation-delay:160ms] motion-reduce:animate-none">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 220 191"
+            className="pointer-events-none absolute top-1/2 left-1/2 z-0 -mt-[52%] -ml-[60%] w-[120%] animate-spin-slow text-motif motion-reduce:animate-none"
+          >
+            <path
+              d="M110 4L216 188H4Z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.8"
+            />
+          </svg>
+          <Float
+            duration={6}
+            className="relative z-1 col-span-2 w-[calc(50%-8px)] justify-self-center rounded-3xl shadow-[0_30px_60px_-30px_rgba(27,25,54,0.45)]"
+          >
+            <FloatingProjectCard project={heroTop} locale={locale} featured />
+          </Float>
+          <Float
+            duration={7}
+            delay={-2.5}
+            tilt={-2}
+            className="relative z-1 rounded-3xl shadow-[0_30px_60px_-30px_rgba(27,25,54,0.3)]"
+          >
+            <FloatingProjectCard project={heroLeft} locale={locale} />
+          </Float>
+          <Float
+            duration={6.5}
+            delay={-4}
+            tilt={2}
+            className="relative z-1 rounded-3xl shadow-[0_30px_60px_-30px_rgba(27,25,54,0.3)]"
+          >
+            <FloatingProjectCard project={heroRight} locale={locale} />
+          </Float>
+        </div>
+      </section>
+
+      {/* Stack marquee */}
+      <section aria-label={t("stack.ariaLabel")} className="border-y bg-card">
+        <div
+          className={cn(
+            container,
+            "flex items-center gap-9 py-[26px] font-mono text-sm text-muted-foreground"
+          )}
+        >
+          <span className="flex-none font-medium text-foreground">
+            {t("stack.label")}
+          </span>
+          <div className="min-w-0 flex-auto overflow-hidden mask-[linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+            <div className="flex w-max animate-marquee gap-9 pr-9 whitespace-nowrap motion-reduce:animate-none">
+              {stack.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+              {stack.map((item) => (
+                <span key={`dup-${item}`} aria-hidden="true">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 01 — Services */}
+      <Reveal
+        id="services"
+        className={cn(container, "flex flex-col gap-12 pt-[120px] pb-10")}
+      >
+        <SectionHeading
+          eyebrow={t("services.eyebrow")}
+          title={t("services.title")}
+          action={<ArrowLink href="/services">{t("services.link")}</ArrowLink>}
+        />
+        <div className="grid gap-px overflow-hidden rounded-3xl border bg-border md:grid-cols-2 lg:grid-cols-3">
+          {serviceKeys.map((key) => (
+            <RevealItem
+              key={key}
+              className="flex min-h-[220px] flex-col gap-3.5 bg-card p-9"
+            >
+              <span className="font-mono text-[13px] text-primary">
+                {t(`services.items.${key}.label`)}
+              </span>
+              <h3 className="text-[26px] font-semibold tracking-[-0.02em]">
+                {t(`services.items.${key}.title`)}
+              </h3>
+              <p className="text-base leading-[1.55] text-muted-foreground">
+                {t(`services.items.${key}.body`)}
+              </p>
+            </RevealItem>
+          ))}
+        </div>
+      </Reveal>
+
+      {/* 02 — Selected work */}
+      <Reveal
+        id="work"
+        className={cn(container, "flex flex-col gap-12 pt-[100px] pb-10")}
+      >
+        <SectionHeading
+          eyebrow={t("work.eyebrow")}
+          title={t("work.title")}
+          action={<ArrowLink href="/work">{t("work.link")}</ArrowLink>}
+        />
+        <div className="grid gap-6 lg:grid-cols-2">
+          {featuredProjects.map(getProject).map((project) => (
+            <RevealItem key={project.slug}>
+              <ProjectCard project={project} locale={locale} />
+            </RevealItem>
+          ))}
+        </div>
+      </Reveal>
+
+      {/* 03 — How we work */}
+      <Reveal
+        id="process"
+        className={cn(container, "flex flex-col gap-12 pt-[100px] pb-10")}
+      >
+        <SectionHeading
+          eyebrow={t("process.eyebrow")}
+          title={t("process.title")}
+        />
+        <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {stepKeys.map((key, i) => {
+            const last = i === stepKeys.length - 1
+            return (
+              <li
+                key={key}
+                className={cn(
+                  "flex flex-col gap-3 border-t-2 pt-5",
+                  last ? "border-primary" : "border-foreground"
+                )}
+              >
+                <span
+                  className={cn(
+                    "font-mono text-[13px]",
+                    last ? "text-primary" : "text-muted-foreground"
+                  )}
+                >
+                  {t("process.step", { number: i + 1 })}
+                </span>
+                <h3 className="text-2xl font-semibold">
+                  {t(`process.steps.${key}.title`)}
+                </h3>
+                <p className="text-base leading-[1.55] text-muted-foreground">
+                  {t(`process.steps.${key}.body`)}
+                </p>
+              </li>
+            )
+          })}
+        </ol>
+      </Reveal>
+
+      {/* 04 — Founder */}
+      <Reveal id="founder" className={cn(container, "pt-[100px] pb-10")}>
+        <div className="grid items-center gap-12 rounded-[32px] border bg-card p-6 sm:p-12 lg:grid-cols-2">
+          <Image
+            src="/images/petro.jpg"
+            alt={t("founder.photoAlt")}
+            width={1200}
+            height={1023}
+            sizes="(min-width: 1024px) 560px, 100vw"
+            className="aspect-square w-full rounded-3xl object-cover object-[center_30%]"
+          />
+          <div className="flex flex-col gap-[22px]">
+            <Eyebrow>{t("founder.eyebrow")}</Eyebrow>
+            <h2 className="text-[clamp(30px,3.4vw,44px)] leading-[1.08] font-bold tracking-[-0.03em]">
+              {t("founder.title")}
+            </h2>
+            <p className="text-[17px] leading-[1.6] text-muted-foreground">
+              {t("founder.body")}
+            </p>
+            <ul className="grid gap-x-6 gap-y-3.5 text-base sm:grid-cols-2">
+              {founderPoints.map((key) => (
+                <li key={key} className="flex items-baseline gap-2.5">
+                  <TriangleIcon filled className="h-2.5 w-3" />
+                  <span>{t(`founder.points.${key}`)}</span>
+                </li>
+              ))}
+            </ul>
+            <ArrowLink href="/about" className="self-start">
+              {t("founder.link")}
+            </ArrowLink>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Testimonials — placeholders until real quotes are in */}
+      <section
+        aria-label={t("testimonials.ariaLabel")}
+        className={cn(container, "grid gap-6 pt-[100px] pb-10 lg:grid-cols-2")}
+      >
+        {[0, 1].map((i) => (
+          <figure
+            key={i}
+            className="flex flex-col gap-5 border-t-2 border-foreground pt-7"
+          >
+            <blockquote className="font-heading text-[26px] leading-[1.3] font-medium tracking-[-0.015em]">
+              {t("testimonials.quote")}
+            </blockquote>
+            <figcaption className="text-[15px] text-muted-foreground">
+              {t("testimonials.author")}
+            </figcaption>
+          </figure>
+        ))}
+      </section>
+
+      {/* CTA band */}
+      <section className={cn(container, "py-[120px]")}>
+        <div className="flex flex-wrap items-end justify-between gap-8 rounded-[32px] bg-primary p-[clamp(40px,6vw,80px)] text-primary-foreground">
+          <div className="flex max-w-[660px] flex-col gap-4">
+            <h2 className="text-[clamp(36px,4.6vw,60px)] leading-[1.02] font-bold tracking-[-0.035em]">
+              {t("cta.title")}
+            </h2>
+            <p className="text-lg leading-[1.55] text-on-primary-muted">
+              {t("cta.body")}
+            </p>
+          </div>
+          <div className="flex flex-col items-start gap-3.5">
+            <Button
+              nativeButton={false}
+              variant="inverse"
+              size="pill-lg"
+              render={<Link href="/contact" />}
+            >
+              {t("cta.button")}
+            </Button>
+            <a
+              href="mailto:office@teosit.com"
+              className="text-base font-medium text-primary-foreground underline underline-offset-4"
+            >
+              office@teosit.com
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
