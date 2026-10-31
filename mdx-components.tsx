@@ -82,6 +82,33 @@ const components: MDXComponents = {
   hr: ({ className, ...props }) => (
     <hr className={cn("my-4 border-border", className)} {...props} />
   ),
+  // Wide tables scroll sideways instead of stretching the page on phones
+  table: ({ className, ...props }) => (
+    <div className="-mx-4 overflow-x-auto px-4">
+      <table
+        className={cn("w-full min-w-[560px] text-left text-base", className)}
+        {...props}
+      />
+    </div>
+  ),
+  th: ({ className, ...props }) => (
+    <th
+      className={cn(
+        "border-b-2 border-foreground py-2.5 pr-4 font-mono text-xs font-normal tracking-[0.05em] text-muted-foreground uppercase",
+        className
+      )}
+      {...props}
+    />
+  ),
+  td: ({ className, ...props }) => (
+    <td
+      className={cn(
+        "border-b border-border py-3 pr-4 align-top text-foreground-soft",
+        className
+      )}
+      {...props}
+    />
+  ),
 }
 
 export function useMDXComponents(): MDXComponents {

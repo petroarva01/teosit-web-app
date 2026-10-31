@@ -39,7 +39,8 @@
     "location": "Novi Sad, Serbia",
     "legal": "© {year} TEOS IT · PIB: {pib} · MB: {mb}",
     "privacy": "Privacy Policy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "cookieSettings": "Cookie settings"
   },
   "Home": {
     "hero": {
@@ -441,6 +442,59 @@
       "title": "Thanks — message sent.",
       "body": "We'll reply within 1–2 business days. Can't wait? Book a call and we'll talk this week.",
       "again": "Send another message"
+    }
+  },
+  "NotFound": {
+    "metaTitle": "TEOS IT — Page not found",
+    "eyebrow": "Error 404",
+    "title": "This page went missing.",
+    "lead": "The link may be old or mistyped, or the page has moved. Here are a few places to pick up from.",
+    "home": "Back to home",
+    "contact": "Contact us",
+    "linksTitle": "Popular pages",
+    "links": {
+      "services": "Services",
+      "work": "Case studies",
+      "about": "About",
+      "blog": "Blog"
+    }
+  },
+  "Consent": {
+    "label": "Cookie consent",
+    "title": "Cookies, briefly",
+    "body": "With your permission we use Google Analytics to see which pages are useful, and the LinkedIn Insight Tag to measure our LinkedIn ads. Nothing runs until you choose. <link>Privacy Policy</link>",
+    "acceptAll": "Accept all",
+    "necessaryOnly": "Necessary only",
+    "customize": "Customize",
+    "save": "Save choices",
+    "alwaysOn": "Always on",
+    "categories": {
+      "necessary": {
+        "title": "Necessary",
+        "body": "Remembers your cookie choice. The site can't work properly without it."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "body": "Google Analytics: which pages are visited and how people find the site. No ads."
+      },
+      "marketing": {
+        "title": "Marketing",
+        "body": "LinkedIn Insight Tag: measures our LinkedIn ads and lets us show them to past visitors."
+      }
+    }
+  },
+  "Legal": {
+    "eyebrow": "Legal",
+    "updated": "Last updated:",
+    "privacy": {
+      "metaTitle": "TEOS IT — Privacy Policy",
+      "title": "Privacy Policy",
+      "lead": "What personal data we collect through this website, why, who helps us process it and what your rights are."
+    },
+    "terms": {
+      "metaTitle": "TEOS IT — Terms of Use",
+      "title": "Terms of Use",
+      "lead": "The rules for using teosit.com. Work for clients is always covered by a separate written agreement."
     }
   },
   "Testimonials": {

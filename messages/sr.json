@@ -39,7 +39,8 @@
     "location": "Novi Sad, Srbija",
     "legal": "© {year} TEOS IT · PIB: {pib} · MB: {mb}",
     "privacy": "Politika privatnosti",
-    "terms": "Uslovi korišćenja"
+    "terms": "Uslovi korišćenja",
+    "cookieSettings": "Podešavanja kolačića"
   },
   "Home": {
     "hero": {
@@ -441,6 +442,59 @@
       "title": "Hvala — poruka je poslata.",
       "body": "Javićemo se u roku od 1–2 radna dana. Ne možete da čekate? Zakažite poziv i čujemo se ove nedelje.",
       "again": "Pošalji novu poruku"
+    }
+  },
+  "NotFound": {
+    "metaTitle": "TEOS IT — Stranica nije pronađena",
+    "eyebrow": "Greška 404",
+    "title": "Ova stranica je nestala.",
+    "lead": "Link je možda star ili pogrešno ukucan, ili je stranica premeštena. Evo nekoliko mesta odakle možete da nastavite.",
+    "home": "Nazad na početnu",
+    "contact": "Kontaktirajte nas",
+    "linksTitle": "Popularne stranice",
+    "links": {
+      "services": "Usluge",
+      "work": "Projekti",
+      "about": "O nama",
+      "blog": "Blog"
+    }
+  },
+  "Consent": {
+    "label": "Saglasnost za kolačiće",
+    "title": "Ukratko o kolačićima",
+    "body": "Uz vašu dozvolu koristimo Google Analytics da vidimo koje stranice su korisne i LinkedIn Insight Tag da merimo naše LinkedIn reklame. Ništa se ne pokreće dok ne izaberete. <link>Politika privatnosti</link>",
+    "acceptAll": "Prihvati sve",
+    "necessaryOnly": "Samo neophodni",
+    "customize": "Podesi",
+    "save": "Sačuvaj izbor",
+    "alwaysOn": "Uvek uključeno",
+    "categories": {
+      "necessary": {
+        "title": "Neophodni",
+        "body": "Pamte vaš izbor kolačića. Bez njih sajt ne radi kako treba."
+      },
+      "analytics": {
+        "title": "Analitika",
+        "body": "Google Analytics: koje stranice se posećuju i kako ljudi pronalaze sajt. Bez reklama."
+      },
+      "marketing": {
+        "title": "Marketing",
+        "body": "LinkedIn Insight Tag: meri naše LinkedIn reklame i omogućava da ih prikažemo ranijim posetiocima."
+      }
+    }
+  },
+  "Legal": {
+    "eyebrow": "Pravne informacije",
+    "updated": "Poslednja izmena:",
+    "privacy": {
+      "metaTitle": "TEOS IT — Politika privatnosti",
+      "title": "Politika privatnosti",
+      "lead": "Koje podatke o ličnosti prikupljamo preko ovog sajta, zašto, ko nam pomaže u obradi i koja su vaša prava."
+    },
+    "terms": {
+      "metaTitle": "TEOS IT — Uslovi korišćenja",
+      "title": "Uslovi korišćenja",
+      "lead": "Pravila za korišćenje sajta teosit.com. Rad za klijente uvek je uređen posebnim pisanim ugovorom."
     }
   },
   "Testimonials": {

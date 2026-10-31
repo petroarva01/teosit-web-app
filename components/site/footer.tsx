@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { getTranslations } from "next-intl/server"
 
+import { CookieSettingsButton } from "@/components/site/consent"
 import { Button } from "@/components/ui/button"
 import { site } from "@/data/site"
 import { Link } from "@/i18n/navigation"
@@ -110,13 +111,16 @@ async function Footer() {
               mb: site.mb,
             })}
           </span>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link href="/privacy" className={linkClass}>
               {t("privacy")}
             </Link>
             <Link href="/terms" className={linkClass}>
               {t("terms")}
             </Link>
+            <CookieSettingsButton className={linkClass}>
+              {t("cookieSettings")}
+            </CookieSettingsButton>
           </div>
         </div>
       </div>

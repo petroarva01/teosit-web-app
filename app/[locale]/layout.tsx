@@ -5,6 +5,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import "../globals.css"
+import { Analytics, CookieBanner } from "@/components/site/consent"
 import { Footer } from "@/components/site/footer"
 import { MotionProvider } from "@/components/site/motion"
 import { routing } from "@/i18n/routing"
@@ -70,7 +71,9 @@ export default async function LocaleLayout({
           <MotionProvider>
             {children}
             <Footer />
+            <CookieBanner />
           </MotionProvider>
+          <Analytics />
         </NextIntlClientProvider>
       </body>
     </html>
