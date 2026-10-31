@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { hasLocale } from "next-intl"
@@ -22,6 +23,7 @@ import { site } from "@/data/site"
 import { stack } from "@/data/stack"
 import { Link } from "@/i18n/navigation"
 import { routing } from "@/i18n/routing"
+import { ogImage, pageMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 const serviceKeys = [
@@ -38,6 +40,21 @@ const stepKeys = ["discovery", "design", "build", "ship"] as const
 const founderPoints = ["direct", "ownership", "weekly", "fourth"] as const
 
 const testimonialKeys = ["amplitude", "checkSolar"] as const
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/[locale]">): Promise<Metadata> {
+  const { locale } = await params
+  if (!hasLocale(routing.locales, locale)) return {}
+  const t = await getTranslations({ locale, namespace: "Metadata" })
+  return pageMetadata({
+    locale,
+    href: "/",
+    title: t("title"),
+    description: t("description"),
+    image: ogImage.page(locale, "home"),
+  })
+}
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params

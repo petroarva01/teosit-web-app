@@ -1,7 +1,8 @@
 {
   "Metadata": {
-    "title": "TEOS IT — Studio za mobilni, web i AI razvoj",
-    "description": "TEOS IT dizajnira, razvija i objavljuje React Native aplikacije, web platforme i AI funkcionalnosti — od prve skice do App Store-a."
+    "title": "Razvoj softvera i mobilnih aplikacija u Novom Sadu | TEOS IT",
+    "description": "TEOS IT je softverski studio iz Novog Sada. Programiranje i izrada mobilnih aplikacija (React Native), web sajtova i platformi, backend-a i AI rešenja za firme iz Srbije i Evrope.",
+    "home": "Početna"
   },
   "Header": {
     "mainNav": "Glavna navigacija",
@@ -142,7 +143,8 @@
     }
   },
   "Services": {
-    "metaTitle": "TEOS IT — Usluge",
+    "metaTitle": "Izrada mobilnih aplikacija, web sajtova i AI rešenja | TEOS IT",
+    "metaDescription": "Izrada mobilnih aplikacija u React Native-u, izrada web sajtova i platformi u Next.js-u, backend i API, AI funkcionalnosti, UI/UX dizajn i programeri za vaš tim — softverski studio iz Novog Sada.",
     "eyebrow": "Usluge",
     "title": "Od ideje do App Store-a — i sve između.",
     "lead": "Angažujte nas za ceo proizvod, jedan njegov deo ili kao pojačanje vašem timu. Mobilne aplikacije su naša osnova; web, backend, AI i dizajn ih zaokružuju.",
@@ -270,7 +272,8 @@
     }
   },
   "Work": {
-    "metaTitle": "TEOS IT — Projekti",
+    "metaTitle": "Projekti: mobilne i web aplikacije koje smo napravili | TEOS IT",
+    "metaDescription": "Aplikacije za fintech, energetiku, zakazivanje i svakodnevni život koje je dizajnirao, razvio i objavio TEOS IT, firma za razvoj softvera iz Novog Sada.",
     "eyebrow": "Projekti",
     "title": "Aplikacije koje ljudi skidaju, koriste i vraćaju im se.",
     "lead": "Aplikacije za fintech, energetiku, zakazivanje i svakodnevni život — napravio ih je, objavio i održava isti tim.",
@@ -287,7 +290,7 @@
     }
   },
   "CaseStudy": {
-    "metaTitle": "Studija slučaja — {name}",
+    "metaTitle": "Studija slučaja: {name} | TEOS IT",
     "allCaseStudies": "Svi projekti",
     "factsLabel": "Podaci o projektu",
     "facts": {
@@ -304,7 +307,8 @@
     "next": "Sledeća studija slučaja"
   },
   "About": {
-    "metaTitle": "TEOS IT — O nama",
+    "metaTitle": "O nama — programeri i razvoj softvera iz Novog Sada | TEOS IT",
+    "metaDescription": "TEOS IT je mali tim za razvoj softvera iz Novog Sada koji vodi Petro Arva. Iskusni programeri, direktna komunikacija i klijenti širom Evrope.",
     "eyebrow": "O TEOS IT",
     "title": "Mali studio, namerno.",
     "lead": "Tim držimo malim da bi ljudi koji planiraju vaš proizvod bili isti oni koji ga prave. Manje sastanaka, manje prepričavanja, bolji softver.",
@@ -367,7 +371,8 @@
     }
   },
   "Blog": {
-    "metaTitle": "TEOS IT — Blog",
+    "metaTitle": "Blog o razvoju aplikacija, React Native-u i AI-ju | TEOS IT",
+    "metaDescription": "Praktični tekstovi o izradi mobilnih aplikacija, React Native-u, ceni MVP-a, App Store review-u i AI funkcionalnostima, iz softverskog studija u Novom Sadu.",
     "postMetaTitle": "{title} — TEOS IT Blog",
     "eyebrow": "Blog",
     "title": "Beleške iz razvoja aplikacija.",
@@ -387,8 +392,8 @@
     }
   },
   "Contact": {
-    "metaTitle": "TEOS IT — Kontakt",
-    "metaDescription": "Recite nam šta pravite. Pošaljite par rečenica ili zakažite besplatan poziv od 30 minuta.",
+    "metaTitle": "Kontakt — razvoj softvera i aplikacija, Novi Sad | TEOS IT",
+    "metaDescription": "Recite nam šta pravite. Pošaljite par rečenica ili zakažite besplatan poziv od 30 minuta sa softverskim studijom iz Novog Sada.",
     "eyebrow": "Kontakt",
     "title": "Recite nam šta pravite.",
     "lead": "Pošaljite par rečenica ili odmah zakažite poziv. Odgovoriće vam Petro, ne prodajni tim.",

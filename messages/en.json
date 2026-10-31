@@ -1,7 +1,8 @@
 {
   "Metadata": {
-    "title": "TEOS IT — Mobile, web and AI development studio",
-    "description": "TEOS IT designs, builds and launches React Native apps, web platforms and AI features — from the first sketch to the App Store."
+    "title": "Software Development Company in Novi Sad, Serbia | TEOS IT",
+    "description": "TEOS IT is a software development studio in Novi Sad, Serbia. We build React Native mobile apps, web platforms, backends and AI features for startups and companies across Europe.",
+    "home": "Home"
   },
   "Header": {
     "mainNav": "Main",
@@ -142,7 +143,8 @@
     }
   },
   "Services": {
-    "metaTitle": "TEOS IT — Services",
+    "metaTitle": "Mobile App, Web & AI Development Services | TEOS IT",
+    "metaDescription": "Mobile app development with React Native, web development with Next.js, backend and APIs, AI features, UI/UX design and dedicated developers — from a software studio in Novi Sad, Serbia.",
     "eyebrow": "Services",
     "title": "From idea to the App Store — and everything in between.",
     "lead": "Hire us for a full product, a single piece of it, or as an extension of your team. Mobile is our core; web, backend, AI and design are how we make it whole.",
@@ -270,7 +272,8 @@
     }
   },
   "Work": {
-    "metaTitle": "TEOS IT — Case studies",
+    "metaTitle": "Case Studies: Mobile & Web Apps We Built | TEOS IT",
+    "metaDescription": "Fintech, energy, booking and lifestyle apps designed, built and shipped by TEOS IT, a software development company from Novi Sad, Serbia.",
     "eyebrow": "Case studies",
     "title": "Apps people download, use and come back to.",
     "lead": "Fintech, energy, booking and lifestyle apps — built, shipped and maintained by the same team.",
@@ -287,7 +290,7 @@
     }
   },
   "CaseStudy": {
-    "metaTitle": "Case study — {name}",
+    "metaTitle": "Case study: {name} | TEOS IT",
     "allCaseStudies": "All case studies",
     "factsLabel": "Project facts",
     "facts": {
@@ -304,7 +307,8 @@
     "next": "Next case study"
   },
   "About": {
-    "metaTitle": "TEOS IT — About",
+    "metaTitle": "About TEOS IT — Software Engineers in Novi Sad, Serbia",
+    "metaDescription": "TEOS IT is a small software development team from Novi Sad, Serbia, led by Petro Arva. Senior engineers, direct communication and clients across Europe.",
     "eyebrow": "About TEOS IT",
     "title": "A small studio, on purpose.",
     "lead": "We keep the team small so the people who plan your product are the same people who build it. Fewer meetings, fewer hand-offs, better software.",
@@ -367,7 +371,8 @@
     }
   },
   "Blog": {
-    "metaTitle": "TEOS IT — Blog",
+    "metaTitle": "Blog: App Development, React Native & AI | TEOS IT",
+    "metaDescription": "Practical articles on mobile app development, React Native, MVP costs, App Store review and AI features, from a software studio in Novi Sad, Serbia.",
     "postMetaTitle": "{title} — TEOS IT Blog",
     "eyebrow": "Blog",
     "title": "Notes from building apps.",
@@ -387,8 +392,8 @@
     }
   },
   "Contact": {
-    "metaTitle": "TEOS IT — Contact",
-    "metaDescription": "Tell us what you're building. Send a few lines or book a free 30-minute call.",
+    "metaTitle": "Contact TEOS IT — Software Development in Novi Sad, Serbia",
+    "metaDescription": "Tell us what you're building. Send a few lines or book a free 30-minute call with a software development studio in Novi Sad, Serbia.",
     "eyebrow": "Contact",
     "title": "Tell us what you're building.",
     "lead": "Send a few lines or book a call directly. You'll hear back from Petro, not a sales team.",

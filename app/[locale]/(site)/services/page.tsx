@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { hasLocale } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
+import { JsonLd } from "@/components/site/json-ld"
 import { Reveal, RevealItem } from "@/components/site/motion"
 import {
   container,
@@ -19,6 +20,7 @@ import {
 } from "@/components/ui/accordion"
 import { Card } from "@/components/ui/card"
 import { routing } from "@/i18n/routing"
+import { ogImage, pageMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 // Keys double as the #anchors the footer links to
@@ -41,7 +43,13 @@ export async function generateMetadata({
   const { locale } = await params
   if (!hasLocale(routing.locales, locale)) return {}
   const t = await getTranslations({ locale, namespace: "Services" })
-  return { title: t("metaTitle") }
+  return pageMetadata({
+    locale,
+    href: "/services",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    image: ogImage.page(locale, "services"),
+  })
 }
 
 export default async function ServicesPage({
@@ -57,6 +65,20 @@ export default async function ServicesPage({
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqKeys.map((key) => ({
+            "@type": "Question",
+            name: t(`faq.items.${key}.q`),
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: t(`faq.items.${key}.a`),
+            },
+          })),
+        }}
+      />
       <PageIntro
         eyebrow={t("eyebrow")}
         title={t("title")}

@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 
 import { container, Eyebrow } from "@/components/site/section"
 import type { Locale } from "@/i18n/routing"
+import { pageMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 export type LegalDoc = "privacy" | "terms"
@@ -21,7 +22,12 @@ export async function legalMetadata(
   locale: Locale
 ): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "Legal" })
-  return { title: t(`${doc}.metaTitle`), description: t(`${doc}.lead`) }
+  return pageMetadata({
+    locale,
+    href: `/${doc}`,
+    title: t(`${doc}.metaTitle`),
+    description: t(`${doc}.lead`),
+  })
 }
 
 /** Shared shell for the privacy policy and terms, written in content/legal. */

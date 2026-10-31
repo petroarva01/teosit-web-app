@@ -3,11 +3,18 @@ import { notFound } from "next/navigation"
 import { hasLocale } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
-import { PostCover } from "@/components/site/post-card"
+import {
+  breadcrumbs,
+  founderId,
+  JsonLd,
+  organizationId,
+} from "@/components/site/json-ld"
+import { PostCover, postHref } from "@/components/site/post-card"
 import { container, CtaBand, Eyebrow } from "@/components/site/section"
 import { formatPostDate, getPost, posts } from "@/data/blog"
 import { Link } from "@/i18n/navigation"
 import { routing } from "@/i18n/routing"
+import { absoluteUrl, ogImage, pageMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 // Only slugs listed in data/blog.ts exist; everything else 404s
@@ -24,10 +31,14 @@ export async function generateMetadata({
   const post = getPost(slug)
   if (!hasLocale(routing.locales, locale) || !post) return {}
   const t = await getTranslations({ locale, namespace: "Blog" })
-  return {
+  return pageMetadata({
+    locale,
+    href: postHref(post),
     title: t("postMetaTitle", { title: post.title[locale] }),
     description: post.excerpt[locale],
-  }
+    image: ogImage.post(locale, post.slug),
+    openGraph: { type: "article", publishedTime: post.date },
+  })
 }
 
 export default async function BlogPostPage({
@@ -46,8 +57,35 @@ export default async function BlogPostPage({
     `@/content/blog/${post.slug}/${locale}.mdx`
   )
 
+  const tMeta = await getTranslations("Metadata")
+  const tHeader = await getTranslations("Header")
+  const url = absoluteUrl(locale, postHref(post))
+
   return (
     <>
+      <JsonLd
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "@id": `${url}#article`,
+            headline: post.title[locale],
+            description: post.excerpt[locale],
+            datePublished: post.date,
+            dateModified: post.date,
+            inLanguage: locale,
+            url,
+            mainEntityOfPage: url,
+            author: { "@id": founderId },
+            publisher: { "@id": organizationId },
+          },
+          breadcrumbs(locale, [
+            { name: tMeta("home"), href: "/" },
+            { name: tHeader("blog"), href: "/blog" },
+            { name: post.title[locale], href: postHref(post) },
+          ]),
+        ]}
+      />
       <article>
         <header
           className={cn(

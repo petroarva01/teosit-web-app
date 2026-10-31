@@ -7,6 +7,7 @@ import { ContactForm } from "@/components/site/contact-form"
 import { container, Eyebrow } from "@/components/site/section"
 import { site } from "@/data/site"
 import { routing } from "@/i18n/routing"
+import { ogImage, pageMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 const linkClass =
@@ -18,7 +19,13 @@ export async function generateMetadata({
   const { locale } = await params
   if (!hasLocale(routing.locales, locale)) return {}
   const t = await getTranslations({ locale, namespace: "Contact" })
-  return { title: t("metaTitle"), description: t("metaDescription") }
+  return pageMetadata({
+    locale,
+    href: "/contact",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    image: ogImage.page(locale, "contact"),
+  })
 }
 
 export default async function ContactPage({

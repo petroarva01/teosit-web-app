@@ -8,6 +8,7 @@ import { FeaturedPostCard, PostCard } from "@/components/site/post-card"
 import { CtaBand, Eyebrow } from "@/components/site/section"
 import { formatPostDate, postCategories, posts } from "@/data/blog"
 import { routing } from "@/i18n/routing"
+import { ogImage, pageMetadata } from "@/lib/seo"
 
 export async function generateMetadata({
   params,
@@ -15,7 +16,13 @@ export async function generateMetadata({
   const { locale } = await params
   if (!hasLocale(routing.locales, locale)) return {}
   const t = await getTranslations({ locale, namespace: "Blog" })
-  return { title: t("metaTitle"), description: t("lead") }
+  return pageMetadata({
+    locale,
+    href: "/blog",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    image: ogImage.page(locale, "blog"),
+  })
 }
 
 export default async function BlogPage({

@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import { CaseStudyScreens } from "@/components/site/case-study-screens"
 import { Header } from "@/components/site/header"
+import { breadcrumbs, JsonLd } from "@/components/site/json-ld"
 import { projectColors, projectHref } from "@/components/site/project-card"
 import { container } from "@/components/site/section"
 import { Badge } from "@/components/ui/badge"
@@ -13,6 +14,7 @@ import { caseStudies, getCaseStudy } from "@/data/case-studies"
 import { getProject, projects } from "@/data/projects"
 import { Link } from "@/i18n/navigation"
 import { routing } from "@/i18n/routing"
+import { ogImage, pageMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 const factKeys = ["client", "domain", "platform", "role", "timeline"] as const
@@ -31,10 +33,13 @@ export async function generateMetadata({
   const study = getCaseStudy(slug)
   if (!hasLocale(routing.locales, locale) || !study) return {}
   const t = await getTranslations({ locale, namespace: "CaseStudy" })
-  return {
+  return pageMetadata({
+    locale,
+    href: { pathname: "/work/[slug]", params: { slug: study.slug } },
     title: t("metaTitle", { name: getProject(study.slug).name }),
     description: study.lead[locale],
-  }
+    image: ogImage.caseStudy(locale, study.slug),
+  })
 }
 
 export default async function CaseStudyPage({
@@ -55,8 +60,22 @@ export default async function CaseStudyPage({
   const index = withStudies.findIndex((p) => p.slug === study.slug)
   const next = withStudies[(index + 1) % withStudies.length]
 
+  const tMeta = await getTranslations("Metadata")
+  const tHeader = await getTranslations("Header")
+  const project = getProject(study.slug)
+
   return (
     <>
+      <JsonLd
+        data={breadcrumbs(locale, [
+          { name: tMeta("home"), href: "/" },
+          { name: tHeader("work"), href: "/work" },
+          {
+            name: project.name,
+            href: { pathname: "/work/[slug]", params: { slug: study.slug } },
+          },
+        ])}
+      />
       <div className="bg-foreground text-on-dark">
         <Header tone="dark" />
         <section className={cn(container, "flex flex-col gap-7 pt-[72px]")}>

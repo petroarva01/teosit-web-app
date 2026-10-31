@@ -7,6 +7,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import "../globals.css"
 import { Analytics, CookieBanner } from "@/components/site/consent"
 import { Footer } from "@/components/site/footer"
+import { JsonLd, siteGraph } from "@/components/site/json-ld"
+import { site } from "@/data/site"
 import { MotionProvider } from "@/components/site/motion"
 import { routing } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
@@ -41,8 +43,13 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "Metadata" })
 
   return {
+    // Resolves relative URLs in metadata (Open Graph images, canonicals)
+    metadataBase: new URL(site.url),
     title: t("title"),
     description: t("description"),
+    applicationName: "TEOS IT",
+    authors: [{ name: site.founder.name, url: site.founder.linkedin }],
+    formatDetection: { telephone: false, address: false, email: false },
   }
 }
 
@@ -55,6 +62,7 @@ export default async function LocaleLayout({
     notFound()
   }
   setRequestLocale(locale)
+  const t = await getTranslations("Metadata")
 
   return (
     <html
@@ -67,6 +75,7 @@ export default async function LocaleLayout({
       )}
     >
       <body className="flex min-h-screen flex-col">
+        <JsonLd data={siteGraph(locale, t("description"))} />
         <NextIntlClientProvider>
           <MotionProvider>
             {children}

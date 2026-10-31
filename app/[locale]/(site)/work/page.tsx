@@ -8,6 +8,7 @@ import { CtaBand, PageIntro } from "@/components/site/section"
 import { WorkFilter } from "@/components/site/work-filter"
 import { projects } from "@/data/projects"
 import { routing } from "@/i18n/routing"
+import { ogImage, pageMetadata } from "@/lib/seo"
 
 export async function generateMetadata({
   params,
@@ -15,7 +16,13 @@ export async function generateMetadata({
   const { locale } = await params
   if (!hasLocale(routing.locales, locale)) return {}
   const t = await getTranslations({ locale, namespace: "Work" })
-  return { title: t("metaTitle") }
+  return pageMetadata({
+    locale,
+    href: "/work",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    image: ogImage.page(locale, "work"),
+  })
 }
 
 export default async function WorkPage({

@@ -16,6 +16,7 @@ import {
 import { Card } from "@/components/ui/card"
 import { site } from "@/data/site"
 import { routing } from "@/i18n/routing"
+import { ogImage, pageMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 const valueKeys = ["access", "lockIn", "weekly", "estimates"] as const
@@ -28,7 +29,13 @@ export async function generateMetadata({
   const { locale } = await params
   if (!hasLocale(routing.locales, locale)) return {}
   const t = await getTranslations({ locale, namespace: "About" })
-  return { title: t("metaTitle") }
+  return pageMetadata({
+    locale,
+    href: "/about",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    image: ogImage.page(locale, "about"),
+  })
 }
 
 export default async function AboutPage({

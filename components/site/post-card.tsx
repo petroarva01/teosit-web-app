@@ -94,4 +94,4 @@ function PostCard({
   )
 }
 
-export { PostCover, FeaturedPostCard, PostCard }
+export { PostCover, FeaturedPostCard, PostCard, postHref }
