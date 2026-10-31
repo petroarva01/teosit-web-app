@@ -33,6 +33,7 @@ function ProjectImage({
   locale,
   sizes,
   loading,
+  priority = false,
   position = project.image.position,
   className,
 }: {
@@ -40,6 +41,8 @@ function ProjectImage({
   locale: Locale
   sizes: string
   loading?: "eager" | "lazy"
+  /** The page's LCP image: load right away, ahead of scripts */
+  priority?: boolean
   position?: Project["image"]["position"]
   className?: string
 }) {
@@ -52,7 +55,8 @@ function ProjectImage({
         alt={project.image.alt[locale]}
         fill
         sizes={sizes}
-        loading={loading}
+        loading={priority ? "eager" : loading}
+        fetchPriority={priority ? "high" : undefined}
         placeholder="blur"
         className={cn(
           "object-cover",
@@ -147,10 +151,12 @@ function WorkProjectCard({
   project,
   locale,
   readCaseStudy,
+  priority,
 }: {
   project: Project
   locale: Locale
   readCaseStudy: string
+  priority?: boolean
 }) {
   const linkClass =
     "underline underline-offset-4 transition-opacity hover:opacity-70"
@@ -164,6 +170,7 @@ function WorkProjectCard({
         project={project}
         locale={locale}
         position="top"
+        priority={priority}
         sizes="(min-width: 1240px) 560px, (min-width: 1024px) 45vw, 100vw"
         className="aspect-16/10 self-center rounded-[20px]"
       />

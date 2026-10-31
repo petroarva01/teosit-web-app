@@ -113,7 +113,8 @@ export default async function CaseStudyPage({
               src={study.hero.src}
               alt={study.hero.alt[locale]}
               fill
-              preload
+              loading="eager"
+              fetchPriority="high"
               placeholder="blur"
               sizes="(min-width: 1240px) 1176px, 100vw"
               className="object-cover"

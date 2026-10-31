@@ -1,5 +1,6 @@
 export const site = {
-  url: "https://teosit.com",
+  /** Override with NEXT_PUBLIC_SITE_URL to test canonical URLs locally */
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://teosit.com",
   email: "office@teosit.com",
   linkedin: "https://www.linkedin.com/company/teos-it/",
   /** Free 30-min intro call */

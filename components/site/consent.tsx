@@ -8,13 +8,13 @@ import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Link } from "@/i18n/navigation"
+import { consentStorageKey as storageKey } from "@/lib/consent-script"
 import { cn } from "@/lib/utils"
 
 type Category = "analytics" | "marketing"
 type Consent = Record<Category, boolean>
 
 const categories: Category[] = ["analytics", "marketing"]
-const storageKey = "teosit-consent"
 const changeEvent = "teosit:consent-change"
 const openEvent = "teosit:consent-open"
 const gaId = process.env.NEXT_PUBLIC_GA_ID
@@ -136,33 +136,43 @@ function CookieBanner() {
     return () => window.removeEventListener(openEvent, open)
   }, [])
 
-  if (consent === "pending" || (consent !== null && !reopened)) return null
+  // Rendered on the server too ("pending"), so it paints with the page;
+  // the inline head script hides it for visitors who already chose
+  const decided = consent !== null && consent !== "pending"
+  if (decided && !reopened) return null
+  const saved = decided ? consent : null
 
   const choose = (next: Consent) => {
     setReopened(false)
     setCustomizing(false)
-    saveConsent(next, consent)
+    saveConsent(next, saved)
   }
 
   // Start the switches from the saved choice
   const openCustomize = () => {
-    if (consent) setDraft(consent)
+    if (saved) setDraft(saved)
     setCustomizing(true)
   }
 
   return (
     <section
       aria-label={t("label")}
+      data-cookie-banner={consent === "pending" ? "pending" : "open"}
       className={cn(
         "fixed inset-x-4 bottom-4 z-50 mx-auto flex max-h-[calc(100dvh-2rem)] max-w-[880px] flex-col gap-5 overflow-y-auto rounded-3xl border border-border bg-card p-6 text-card-foreground shadow-[0_24px_60px_-20px_rgb(27_25_54/0.35)] sm:bottom-6 md:px-8",
-        "animate-in duration-500 fade-in slide-in-from-bottom-4 motion-reduce:animate-none"
+        // Slide only, no fade: a banner that starts transparent paints late
+        // and becomes the page's Largest Contentful Paint
+        "animate-in duration-500 slide-in-from-bottom-4 motion-reduce:animate-none"
       )}
     >
       <div className="flex flex-col gap-1.5">
         <h2 className="font-heading text-xl font-semibold tracking-[-0.02em]">
           {t("title")}
         </h2>
-        <p className="text-[15px] leading-[1.55] text-muted-foreground">
+        {/* System font: it's ready at first paint, so the text doesn't
+            re-wrap when the web font arrives and shift the bottom-anchored
+            banner (counted as layout shift) */}
+        <p className="font-system text-[15px] leading-[1.55] text-muted-foreground">
           {t.rich("body", {
             link: (chunks) => (
               <Link

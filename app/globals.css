@@ -9,6 +9,7 @@
     var(--font-bricolage), var(--font-geist), system-ui, sans-serif;
   --font-sans: var(--font-geist), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-system: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --color-primary-hover: var(--primary-hover);
   --color-on-dark: #fff0fb;
   --color-on-dark-muted: #d9d6ec;
@@ -100,9 +101,11 @@
   --sidebar-ring: #6d3fe0;
 }
 
+/* Starts at 0.01, not 0: Chrome skips fully transparent paints when it
+   measures Largest Contentful Paint, so the hero heading would never count */
 @keyframes rise {
   from {
-    opacity: 0;
+    opacity: 0.01;
     transform: translateY(18px);
   }
   to {
@@ -142,4 +145,10 @@
   p {
     @apply text-pretty;
   }
+}
+
+/* Visitors who already chose: keep the server-rendered banner hidden until
+   React confirms the saved choice (see lib/consent-script.ts) */
+html[data-consent="set"] [data-cookie-banner="pending"] {
+  display: none;
 }

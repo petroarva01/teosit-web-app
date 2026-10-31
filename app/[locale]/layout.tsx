@@ -11,25 +11,34 @@ import { JsonLd, siteGraph } from "@/components/site/json-ld"
 import { site } from "@/data/site"
 import { MotionProvider } from "@/components/site/motion"
 import { routing } from "@/i18n/routing"
+import { consentScript } from "@/lib/consent-script"
 import { cn } from "@/lib/utils"
 
+// `subsets` only picks what gets preloaded; latin-ext (č, ć, š, ž, đ) is
+// still served on demand through unicode-range
 const fontSans = Geist({
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   variable: "--font-geist",
 })
 
 // Variable font with the optical-size axis: large headings get the tighter
 // display cut automatically, like the design (without it opsz is stuck at 14)
 const fontHeading = Bricolage_Grotesque({
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   axes: ["opsz"],
   variable: "--font-bricolage",
 })
 
+// Preloaded too: the hero eyebrow is set in it, and a late swap re-wraps it
+// and pushes the hero down (layout shift)
 const fontMono = Geist_Mono({
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   variable: "--font-geist-mono",
 })
+
+// Only "en" and "sr" exist; anything else (e.g. /wp-login.php) is a 404
+// instead of an attempt to render it as a locale
+export const dynamicParams = false
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -67,6 +76,8 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
+      // The consent script below sets data-consent before React hydrates
+      suppressHydrationWarning
       className={cn(
         "antialiased",
         fontSans.variable,
@@ -74,6 +85,9 @@ export default async function LocaleLayout({
         fontMono.variable
       )}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: consentScript }} />
+      </head>
       <body className="flex min-h-screen flex-col">
         <JsonLd data={siteGraph(locale, t("description"))} />
         <NextIntlClientProvider>

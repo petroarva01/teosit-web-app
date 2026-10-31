@@ -72,7 +72,8 @@ export default async function AboutPage({
             alt={t("founder.photoAlt")}
             sizes="(min-width: 1024px) 560px, 100vw"
             placeholder="blur"
-            preload
+            loading="eager"
+            fetchPriority="high"
             className="aspect-4/5 w-full rounded-[28px] object-cover object-[center_25%]"
           />
           <figcaption className="flex justify-between gap-3 text-[15px]">

@@ -52,7 +52,7 @@ export default async function WorkPage({
           mobile: t("filters.mobile"),
           web: t("filters.web"),
         }}
-        items={projects.map((project) => ({
+        items={projects.map((project, index) => ({
           key: project.slug,
           categories: project.categories,
           card: (
@@ -60,6 +60,7 @@ export default async function WorkPage({
               project={project}
               locale={locale}
               readCaseStudy={t("readCaseStudy")}
+              priority={index === 0}
             />
           ),
         }))}
