@@ -1,0 +1,70 @@
+Kellion je naša pravoslavna hrišćanska aplikacija: crkveni kalendar sa svetiteljima i postovima, dnevna čitanja, molitve, podsetnici i mapa crkava i manastira. Od prvog commita pravljena je za šest jezika — srpski, engleski, ruski, grčki, bugarski i rumunski — a srpski i na latinici i na ćirilici.
+
+Prevođenje dugmića se pokazalo kao lakši deo. Teški delovi su bili datumi, pisma, sadržaj koji ne postoji na svakom jeziku, i činjenica da „ista aplikacija“ znači malo drugačiji kalendar u zavisnosti od toga ko je otvori. Evo šta smo naučili.
+
+## Izaberite izvorni jezik i neka ga tipovi štite
+
+Svaki tekst u interfejsu nalazi se u JSON katalogu za svaki jezik i čita se preko `react-i18next`. Jedan katalog je referentni — za Kellion je to srpska latinica — i TypeScript tipovi za ključeve prevoda generišu se iz njega. To nam daje dve garancije:
+
+- `t("calendar.title")` se kompajlira samo ako ključ postoji, pa greške u kucanju i obrisani ključevi ruše build umesto da korisnici vide sirove ključeve.
+- Unit test prolazi kroz sve kataloge i proverava da imaju **tačno** iste ključeve kao referentni. Rumunski tekst koji nedostaje je crveni test, a ne mejl korisničkoj podršci.
+
+Pravilo koje ide uz to je jednostavno: novi ključ se dodaje u svih šest kataloga u istoj izmeni, ili se ne dodaje uopšte. Zvuči strogo, ali to je jedini način koji smo našli da šest jezika ne počne da se razilazi posle nekoliko meseci razvoja.
+
+## Za računar je srpski dva jezika
+
+Srpski se piše i ćirilicom i latinicom, a ljudi imaju jasne preferencije. Ručno održavanje dva srpska kataloga bi udvostručilo posao i garantovalo da se vremenom raziđu.
+
+Zato ćirilični katalog uopšte ne postoji. Aplikacija ga pri pokretanju generiše iz latiničnog pomoću male funkcije za transliteraciju. Srpski se između dva pisma preslikava čisto, slovo po slovo (`lj` → `љ`, `dž` → `џ`), pa je ovo pouzdano — dokle god je latinični tekst napisan tako da se čisto preslikava. Šabloni za datume su izuzeti iz transliteracije, jer tokeni poput `MMMM` moraju ostati netaknuti.
+
+Sadržaj ide u suprotnom smeru. Imena svetitelja i molitve dolaze iz ćiriličnih izvora, pa build skripta u bazu upisuje obe verzije svakog srpskog teksta: original i transliteraciju. Promena pisma u aplikaciji je samo drugačiji upit.
+
+## Datumi su mesto gde lokalizacija stvarno puca
+
+Biblioteke znaju nazive meseci. Gramatiku ne znaju uvek. Nekoliko primera iz Kelliona:
+
+- **Grčki** posle broja dana koristi genitiv meseca: „Σεπτέμβριος 2026“, ali „12 Σεπτεμβρίου“. Prepoznajemo šablone u kojima mesec ide posle dana i prebacujemo se na listu u genitivu.
+- **Srpski i rumunski** pišu nazive meseci malim slovom, a podrazumevani podaci ih pišu velikim.
+- **Skraćeni dani u nedelji na srpskom** su dolazili sa tačkom na kraju, što je u kalendaru izgledalo pogrešno.
+- **Ruski i bugarski** menjaju mesec po padežu posle dana („12 сентября“) — biblioteka to radi, ali i dalje testiramo.
+
+Sve ove ispravke su u jednom fajlu koji dopunjuje `dayjs` lokalizacije, i svaka ima test sa pravim datumom. Prevode se i _šabloni_ datuma — „12. septembar 2026.“ i „12 September 2026“ nisu samo različite reči, nego i različiti formati — a ekrani datume formatiraju isključivo preko zajedničkog helpera, nikada ručnim spajanjem stringova.
+
+## Jezik nije samo jezik: to je i crkva
+
+Ovaj deo nismo u potpunosti očekivali. U Kellionu jezik koji izaberete predlaže i vašu crkvu: Srpska i Ruska crkva prate julijanski kalendar, dok Grčka, Bugarska i Rumunska prate novojulijanski. Pravila posta se razlikuju, neki svetitelji se slave drugih dana, a crkvenoslovenske molitve se čitaju sa srpskim ili ruskim izgovorom, u zavisnosti od tradicije.
+
+To modelujemo eksplicitno:
+
+- Svaki jezik ima **podrazumevanu crkvu**, koja se pri prvom pokretanju bira automatski prema jeziku uređaja. Engleski je nema, pa korisnici na engleskom biraju sami.
+- Svaka crkva ima svoj **stil kalendara**, **praksu posta** i **tradiciju čitanja**.
+- Dani koje neka crkva drugačije praznuje čuvaju se kao izuzeci samo za tu crkvu.
+
+Pouka za svaki višejezični proizvod: proverite da li vaši jezici zapravo zamenjuju nešto drugo — zemlju, valutu, pravni sistem, tradiciju. Ako je tako, modelujte to posebno, da bi korisnici mogli slobodno da ih kombinuju.
+
+## Ne postoji svaki sadržaj na svakom jeziku
+
+Tekstovi interfejsa mogu se prevesti za dan. Stotine molitvi i čitanja ne mogu. Neki tekstovi jednostavno još ne postoje na nekim jezicima.
+
+Sadržaj je u unapred napravljenoj SQLite bazi koja se isporučuje uz aplikaciju, sa jednim redom po tekstu po jeziku. Upiti istovremeno traže jezik korisnika i rezervni jezik, pa za svaku stavku zadržavaju najbolje poklapanje. Ako čitanje još nije dostupno na bugarskom, korisnik vidi srpsku verziju umesto praznog ekrana.
+
+Da bi ta baza ostala ispravna, build skripta je stroga. Imena svetitelja na svakom jeziku navode se istim redosledom kao izvorna lista, i build pada kada se liste ne poklapaju. Svaki izvor je zabeležen i naveden u aplikaciji.
+
+## Ne zaboravite delove van vašeg koda
+
+Neki tekst uopšte ne iscrtava React:
+
+- **Dozvole.** iOS upit za lokaciju je sistemski dijalog. Njegov tekst se podešava po jeziku preko Expo `locales` konfiguracije, da korisnika na grčkom ne bi pitali za lokaciju na engleskom.
+- **Stranice u prodavnicama.** Screenshotovi, opisi i ključne reči moraju se uraditi za svaki jezik, u obe prodavnice. Planirajte vreme za ovo; to je pravi posao.
+- **Widgeti i notifikacije.** Widgeti na početnom ekranu i podsetnici prikazuju tekst kada aplikacija nije otvorena. Trebaju im isti prevodi i isto formatiranje datuma kao u samoj aplikaciji.
+
+## Šta bismo rekli timu koji počinje višejezičnu aplikaciju
+
+1. **Odlučite o jezicima pre pisanja interfejsa.** Naknadno uvođenje i18n u hardkodovane tekstove je mnogo skuplje nego početi sa njim.
+2. **Jedan referentni katalog, tipizirani ključevi i test koji poredi sve kataloge.** Samo ovo sprečava većinu grešaka u prevodima.
+3. **Datume i množinu tretirajte kao funkciju sa testovima**, ne kao podešavanje biblioteke.
+4. **Odvojite tekst interfejsa od sadržaja.** Dugmići idu u kataloge; dugačak sadržaj ide u bazu sa strategijom za rezervni jezik.
+5. **Zapitajte se šta još vaš izbor jezika podrazumeva** — i modelujte to posebno.
+6. **Neka izvorni govornici koriste aplikaciju**, a ne samo da čitaju tabelu sa tekstovima. Gramatičke greške se kriju u kontekstu.
+
+Kellion danas pokriva šest jezika i dva pisma sa jednim kodom i jednim malim timom. To je izvodljivo samo zato što alati hvataju greške pre korisnika.

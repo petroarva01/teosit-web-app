@@ -1,0 +1,92 @@
+Završili ste aplikaciju, otpremili build i pritisnuli „Submit for Review“. Dan kasnije: **Rejected.** Za prvu aplikaciju ovo je veoma često, i može da vas košta nedelju ili više prepiske baš kada želite da lansirate.
+
+Dobra vest je da većina odbijanja dolazi sa iste kratke liste problema, i skoro svi mogu da se uhvate pre slanja. Ovo je lista koju prolazimo za svaku aplikaciju koju objavimo.
+
+## Kako review zapravo funkcioniše
+
+Svaku prijavu na App Store pregleda osoba u Apple-u prema [App Review smernicama](https://developer.apple.com/app-store/review/guidelines/). Mnogi pregledi se završe za dan-dva, ali vreme varira. Ako nešto nije u redu, dobijate poruku u App Store Connect-u sa brojem smernice, često i sa screenshotom. Ispravite, odgovorite ili otpremite novi build, i aplikacija se vraća u red.
+
+Dve stvari koje je dobro znati unapred:
+
+- **Pregledaju se i ažuriranja**, pa ova pravila važe tokom celog života aplikacije, ne samo za prvo izdanje.
+- **Eksterni TestFlight buildovi se pregledaju**, mada blaže od izdanja u prodavnici. Internim testerima pregled nije potreban.
+
+## Najčešći razlozi za odbijanje
+
+### 1. Recenzent ne može da uđe (smernica 2.1)
+
+Ako vaša aplikacija ima prijavu, recenzentu treba način da uđe. Bez toga, aplikacija se odbija kao nedovršena.
+
+- Dodajte **demo nalog** sa korisničkim imenom i lozinkom u napomene za review, sa realnim podacima već unetim.
+- Ako se prijava radi jednokratnim kodom preko SMS-a ili mejla, obezbedite zaobilaznicu za demo nalog.
+- Proverite da je vaš **backend dostupan** i spolja, tokom celog pregleda. Staging server koji se noću gasi je klasičan razlog za odbijanje.
+
+### 2. Padovi, neispravni linkovi i placeholderi (2.1)
+
+Recenzent će klikati svuda. Sve što pada, vodi na prazan ekran, prikazuje „Lorem ipsum“ ili dugme „uskoro“ je odbijanje.
+
+- Testirajte tačno onaj build koji šaljete na pravom uređaju, ne samo u simulatoru.
+- Testirajte na **najnovijoj verziji iOS-a** i na **iPadu** ako ga aplikacija podržava — recenzenti ga često koriste.
+- Uklonite ili sakrijte funkcije koje nisu završene.
+
+### 3. Aplikacija ne radi dovoljno (4.2)
+
+Apple odbija aplikacije koje se „ne razlikuju dovoljno od pregledanja weba na telefonu“ — na primer, sajt u web view-u, ili aplikaciju sa jednim ekranom i malo funkcija. MVP može biti mali, ali mora biti prava aplikacija koja je korisna sama po sebi.
+
+### 4. Opis ne odgovara aplikaciji (2.3)
+
+- Screenshotovi moraju prikazivati stvarnu aplikaciju, ne samo marketinške grafike.
+- Ne pominjite druge platforme („dostupno i na Androidu“) niti cene koje se razlikuju od onih u aplikaciji.
+- Opis ne sme obećavati funkcije koje aplikacija nema.
+- Ključne reči ne bi trebalo da sadrže imena konkurenata.
+
+### 5. Problemi sa privatnošću (5.1)
+
+Ovo je oblast na kojoj pada najviše aplikacija pri prvom slanju:
+
+- **Politika privatnosti.** Treba vam link ka politici privatnosti u App Store Connect-u, i treba da bude dostupna i iz same aplikacije.
+- **App Privacy podaci.** „Nutritivna deklaracija“ u App Store Connect-u mora odgovarati onome što aplikacija i njeni SDK-ovi trećih strana zaista prikupljaju — analitika, praćenje grešaka i reklamni SDK-ovi se računaju.
+- **Tekstovi za dozvole.** Svaki upit za dozvolu (kamera, lokacija, fotografije, kontakti) mora jasno i konkretno da objasni zašto je aplikaciji potrebna. „Potreban je pristup kameri“ će često biti odbijeno; „Fotografišite račun da biste ga dodali u troškove“ neće.
+- **Tražite tek kada treba.** Tražite dozvolu u trenutku kada se funkcija koristi, ne sve odjednom pri pokretanju.
+- **Brisanje naloga.** Ako korisnici mogu da naprave nalog u aplikaciji, moraju moći i da ga obrišu iz aplikacije, ne samo slanjem mejla podršci.
+- **Praćenje.** Ako pratite korisnike kroz druge aplikacije ili sajtove, morate pre toga prikazati App Tracking Transparency upit.
+
+### 6. Opcije za prijavu (4.8)
+
+Ako aplikacija nudi prijavu preko servisa treće strane poput Google-a ili Facebook-a, Apple zahteva i odgovarajuću opciju usmerenu na privatnost — u praksi, obično **Sign in with Apple**. Aplikacijama koje koriste samo sopstvenu prijavu emailom i lozinkom to nije potrebno.
+
+### 7. Plaćanje digitalnog sadržaja (3.1.1)
+
+Digitalni sadržaj i funkcije koje se koriste u aplikaciji — pretplate, premium funkcije, dodatni sadržaj — moraju se prodavati kroz **in-app kupovinu**. Za njih ne možete linkovati sopstvenu stranicu za plaćanje. Fizička roba i usluge koje se koriste van aplikacije (dostava hrane, zakazivanje šišanja, taksi) mogu koristiti obične servise za plaćanje.
+
+Ako koristite in-app kupovine, recenzent će ih testirati u sandboxu. Proverite da su proizvodi odobreni i povezani sa buildom, da se cene učitavaju i da postoji dugme „Vrati kupovine“.
+
+## Pre nego što pritisnete Submit: lista
+
+1. Demo nalog u napomenama za review, sa podacima.
+2. Backend dostupan, bez ograničenja po IP adresi.
+3. Testiran tačno taj build na pravom iPhone-u (i iPadu, ako je podržan) sa najnovijim iOS-om.
+4. Nema padova, placeholdera, mrtvih dugmića ni „uskoro“.
+5. Screenshotovi i opis odgovaraju trenutnoj aplikaciji.
+6. Link ka politici privatnosti u prodavnici i u aplikaciji.
+7. App Privacy odgovori odgovaraju aplikaciji i svakom SDK-u u njoj.
+8. Jasni tekstovi za dozvole, traženi u kontekstu.
+9. Brisanje naloga u aplikaciji, ako aplikacija ima naloge.
+10. Sign in with Apple, ako nudite druge prijave preko društvenih mreža.
+11. In-app kupovine odobrene, mogu se testirati i vratiti.
+12. Napomene za review koje objašnjavaju sve što nije očigledno: hardver koji aplikaciji treba, gde se nalazi neka funkcija, zašto se koristi neka dozvola.
+
+## Ako vas ipak odbiju
+
+- **Pažljivo pročitajte poruku.** Broj smernice vam tačno kaže o kom pravilu se radi.
+- **Ispravite ili objasnite.** Ponekad je recenzent prosto nešto propustio. Ljubazan, konkretan odgovor u Resolution Center-u — sa koracima ili kratkim snimkom ekrana — često reši stvar bez novog builda.
+- **Ne raspravljajte se u krug.** Ako se i posle odgovora ne slažete, možete se žaliti App Review Board-u.
+- **Zatražite ubrzan pregled** ako vas blokira nešto hitno, na primer ispravka kritične greške. Koristite to retko.
+
+## Napomena o Google Play-u
+
+Pregled na Google Play-u je uglavnom automatizovan i obično brži, ali ima svoje zahteve. Popunite formular **Data safety** i upitnik za ocenu sadržaja, ciljajte noviji Android API nivo i, ako objavljujete sa novog ličnog developer naloga, očekujte zatvoreno testiranje sa pravim testerima pre nego što možete da objavite u produkciji — u trenutku pisanja, najmanje 12 testera tokom 14 dana. Uračunajte to vreme u datum lansiranja.
+
+## Ukratko
+
+Većina odbijanja nije zbog vaše ideje — nego zbog detalja koji nedostaju: demo nalog, odgovor o privatnosti, tekst za dozvolu, zaboravljen placeholder. Prođite kroz listu, napišite jasne napomene za review i ostavite sebi nekoliko dana rezerve pre datuma lansiranja. Vaše prvo slanje može biti i jedino.

@@ -1,7 +1,11 @@
+import createMDX from "@next/mdx"
 import type { NextConfig } from "next"
 import createNextIntlPlugin from "next-intl/plugin"
 
 const withNextIntl = createNextIntlPlugin()
+
+// Blog posts live in content/blog as .mdx and are imported by the post page
+const withMDX = createMDX()
 
 const nextConfig: NextConfig = {
   images: {
@@ -10,4 +14,4 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withNextIntl(nextConfig)
+export default withNextIntl(withMDX(nextConfig))

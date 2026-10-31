@@ -1,0 +1,88 @@
+„Koliko košta aplikacija?“ je kao pitanje koliko košta kuća. Iskren odgovor je „zavisi“ — ali to ne pomaže kada planirate budžet. Zato umesto jednog broja, evo kako se cena MVP-a zapravo gradi, gde odlazi novac i koje odluke najviše utiču na njega.
+
+## Prvo, šta je MVP (a šta nije)
+
+Minimalni održivi proizvod je najmanja verzija vašeg proizvoda koju pravi korisnici mogu da koriste da reše pravi problem — dovoljno mala da se brzo napravi, dovoljno kompletna da bi je ljudi zaista koristili.
+
+To **nije** prototip na koji se klikće, i **nije** verzija 1.0 sa svime sa liste želja. Najčešći razlog zašto budžet za MVP eksplodira je to što „minimum“ tiho raste: admin panel, tri korisničke uloge, čet, prijava preko četiri društvene mreže, dashboard sa grafikonima. Svaka stavka deluje mala. Zajedno udvostruče projekat.
+
+Koristan test za svaku funkciju: _ako bismo lansirali bez ovoga, da li bi korisnici i dalje dobili glavnu vrednost?_ Ako je odgovor da, ide na listu za kasnije.
+
+## Formula iza svake ponude
+
+Ispod svake procene je ista jednostavna formula:
+
+**cena = obim × složenost × cena tima**
+
+Na prva dva utičete mnogo više nego na treće. Jeftiniji tim retko čini projekat jeftinijim ako obim nije jasan — obično ga samo produži. Jasan obim je mesto gde su prave uštede.
+
+## Gde odlazi novac
+
+Evo grube slike kako se budžet tipičnog mobilnog MVP-a deli po fazama:
+
+- **Analiza i planiranje — oko 5–10%.** Pretvaranje ideje u listu ekrana i funkcija, dogovor šta ulazi a šta ne, izbor tehnologije. Ovo je najjeftinija faza i ona koja kasnije uštedi najviše novca.
+- **UI/UX dizajn — oko 10–15%.** Tokovi korisnika, skice, vizuelni dizajn svakog ekrana i prototip na koji se klikće, da se testira pre pisanja koda.
+- **Razvoj — oko 55–65%.** Sama aplikacija, backend i baza, admin alati, integracije poput plaćanja i notifikacija.
+- **Testiranje i ispravke — oko 10–15%.** Na pravim uređajima, obe platforme, različite veličine ekrana, spora mreža, granični slučajevi.
+- **Lansiranje — oko 5%.** Stranice u prodavnicama, screenshotovi, formulari o privatnosti, review, produkciono okruženje i praćenje grešaka.
+
+Ako ponuda nema skoro ništa za analizu, dizajn ili testiranje, novac nije nestao — biće potrošen kasnije, obično na prepravke.
+
+## Šta MVP čini skupljim
+
+Neke funkcije koštaju mnogo više nego što izgledaju. Ovo su one o kojima prvo pitamo:
+
+- **Nalozi i uloge.** Registracija, prijava, resetovanje lozinke i brisanje naloga su mali projekat sami za sebe. Više tipova korisnika (kupac, pružalac usluge, admin) množi ekrane i dozvole.
+- **Plaćanja.** Pretplate ili kupovine u aplikaciji, povraćaj novca, fakture, pravila prodavnica za digitalnu robu. Plaćanja uvek traže dodatnu pažnju i testiranje.
+- **Funkcije u realnom vremenu.** Čet, praćenje uživo, zajedničko uređivanje. Traže drugačiju vrstu backenda i teško se testiraju.
+- **Integracije.** Svaki spoljni sistem — CRM, servis za zakazivanje, API banke — dodaje posao, a njegova dokumentacija retko je dobra koliko obećava.
+- **Admin panel.** Neko mora da upravlja korisnicima i sadržajem. Često može da počne kao jednostavan interni alat umesto uglađenog proizvoda.
+- **Rad bez interneta i sinhronizacija.** Da podaci rade bez veze i kasnije se ispravno spoje — to je pravi inženjerski posao.
+- **Više jezika.** Svaki jezik dodaje prevod, testiranje i stranice u prodavnicama.
+- **Nejasni zahtevi.** Najskuplja stavka od svih. Promena pravca usred razvoja košta više od bilo koje funkcije.
+
+## Šta ga čini jeftinijim
+
+- **Jedan kod za iOS i Android.** Sa React Native-om obe aplikacije nastaju iz istog koda — jedan tim, jedan skup funkcija.
+- **Gotovi backend servisi.** Alati poput Supabase-a ili Firebase-a daju bazu, autentifikaciju i skladište fajlova odmah, umesto da se prave od nule.
+- **Gotove komponente gde su dovoljno dobre.** Ne treba svakom ekranu poseban dizajn. Uložite dizajn tamo gde ga korisnici osete.
+- **Prvo jedna platforma, ako odgovara.** Ako su svi vaši prvi korisnici na jednoj platformi ili na webu, lansiranje prvo tamo može biti dobar kompromis.
+- **Nemilosrdna lista funkcija.** Svaka funkcija „za kasnije“ je novac koji zadržavate dok ne saznate da je korisnici žele.
+
+## Troškovi posle lansiranja
+
+Razvoj nije ceo budžet. Planirajte i ovo:
+
+- **Developer nalozi.** Apple naplaćuje 99 dolara godišnje; Google Play ima jednokratnu naknadu od 25 dolara.
+- **Hosting i servisi.** Baza, skladište fajlova, email, mape, analitika, praćenje grešaka. Mnogi počinju besplatno i rastu sa brojem korisnika.
+- **Održavanje.** iOS i Android svake godine izbacuju nove verzije, biblioteke se ažuriraju, prodavnice menjaju pravila. Planirajte redovna ažuriranja — često pravilo je oko 15–20% cene razvoja godišnje.
+- **Unapređenja.** Kada stignu pravi korisnici, saznaćete šta dalje da pravite. To je i poenta MVP-a, pa ostavite prostor za to.
+
+## Fiksna cena ili plaćanje po vremenu?
+
+Postoje dva uobičajena načina plaćanja MVP-a:
+
+- **Fiksna cena** radi kada je obim jasan i zapisan. Ukupan iznos znate unapred, a izmene se rešavaju kao posebne, dogovorene dopune.
+- **Plaćanje po vremenu** (posvećen tim ili po satu) radi kada proizvod još dobija oblik. Plaćate urađen posao i možete slobodno da menjate pravac.
+
+Mnogi projekti koriste oba: analiza i dizajn po fiksnoj ceni, koji daju jasan obim, a zatim razvoj po fiksnoj ceni ili sa posvećenim timom.
+
+## Znaci za uzbunu u ponudi
+
+- Jedan broj bez razrade po funkcijama ili fazama.
+- Nema vremena za dizajn, testiranje ili lansiranje.
+- „Neograničene izmene“ ili obećanje da je sve uključeno.
+- Nigde ne piše ko poseduje kod, dizajn i naloge u prodavnicama. (Odgovor treba da bude: vi, od prvog dana.)
+- Cena daleko ispod ostalih, bez objašnjenja šta je drugačije.
+
+## Kako dobiti ponudu kojoj možete verovati
+
+Pre nego što tražite cenu, zapišite:
+
+1. **Ko su korisnici** i koji jedan problem aplikacija rešava za njih.
+2. **Tri do pet stvari koje korisnik mora moći da uradi** u prvoj verziji.
+3. **Platforme:** iOS, Android, web ili kombinacija.
+4. **Sve što dodiruje novac, druge sisteme ili osetljive podatke.**
+5. **Vaš rok i raspon budžeta koji vam odgovara.**
+
+Sa tim, dobar tim može da vam kaže šta se uklapa, šta ne i gde biste dobili najviše vrednosti — i da vam da broj koji se neće menjati na pola puta. Ako želite da to uradimo za vašu ideju, za to služi besplatan poziv od 30 minuta.

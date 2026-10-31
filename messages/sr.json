@@ -365,6 +365,26 @@
       "button": "Besplatan poziv od 30 min"
     }
   },
+  "Blog": {
+    "metaTitle": "TEOS IT — Blog",
+    "postMetaTitle": "{title} — TEOS IT Blog",
+    "eyebrow": "Blog",
+    "title": "Beleške iz razvoja aplikacija.",
+    "lead": "Šta učimo dok pravimo React Native, web i AI proizvode — za osnivače i programere.",
+    "filterLabel": "Filter po temi",
+    "categories": {
+      "all": "Sve",
+      "reactNative": "React Native",
+      "founders": "Za osnivače",
+      "ai": "AI"
+    },
+    "readingTime": "{minutes} min čitanja",
+    "allPosts": "Svi tekstovi",
+    "cta": {
+      "title": "Imate projekat na umu?",
+      "button": "Besplatan poziv od 30 min"
+    }
+  },
   "Testimonials": {
     "amplitude": {
       "quote": "„TEOS IT je našu aplikaciju od grube ideje doveo do uglađenog proizvoda u prodavnicama brže nego što smo mislili da je moguće. Nisu samo rešavali zadatke — rekli su ‚ne‘ kad je trebalo, preuzeli arhitekturu i svaki ekran tretirali kao sopstveni proizvod.”",

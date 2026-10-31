@@ -1,0 +1,88 @@
+Hortium is our app for people with a vegetable garden: today's tasks and weather, a sowing and harvest calendar for your location, details for 150 plants, your beds and plantings, a visual bed planner, widgets and reminders.
+
+It has no account, no sign-up screen and no tracking. You open it, pick your town, and it works — in the garden, where the signal is often weakest. That wasn't a shortcut; it was the main design decision, and it shaped the whole architecture. Here's how it works.
+
+## Why no account?
+
+Most apps add an account by default, then build everything around a server. For Hortium we asked what an account would actually give the user. The honest answer was: not much. Your garden is personal, it lives on one phone, and nobody else needs to see it.
+
+Dropping the account removed a lot of work and a lot of risk:
+
+- no backend to build, host, secure and pay for every month,
+- no passwords, password resets or "delete my account" flow,
+- no personal data on a server, so much less to worry about in privacy reviews,
+- and no sign-up screen between the user and the first useful thing they see.
+
+The trade-off is that the app has to bring everything it needs with it — and the user's data lives only on their device. Both problems have good solutions.
+
+## Two kinds of data, two kinds of storage
+
+The key idea is to split data by who owns it:
+
+1. **Content we own** — plants, sowing windows, companion plants, places, sources. It's the same for everyone and changes only when we release an update.
+2. **Data the user owns** — their garden location, beds, plantings, tasks and settings. It's small, personal and changes all the time.
+
+Each gets the storage that fits it.
+
+### Content: a prebuilt SQLite database
+
+Plant data is written as JSON files in the repository, one file per plant group, with translations in separate files. A build script validates everything — required fields, allowed values, companion relations in both directions, unknown sources — and fails loudly on any mistake. Then it builds a single SQLite file that ships inside the app.
+
+That file holds 150 plants in seven languages and about 70,000 towns from GeoNames with their search terms — around 10 MB in total. On first launch, the app copies it from the bundle into place with `expo-sqlite`:
+
+- it copies to a temporary `.partial` file first,
+- checks that the size matches what the build recorded,
+- then moves it into place in one step, so a half-copied file never gets opened,
+- and deletes old versions of the database left over from previous releases.
+
+The file name includes a hash of its content. When we ship new plant data, the name changes, the app copies the new file and removes the old one. There are no migrations on the device: the content database is read-only and simply replaced.
+
+Queries are typed with Drizzle and run synchronously, so screens can read plant data instantly without loading spinners.
+
+### User data: small persisted stores
+
+User state lives in a few Zustand stores — garden, planner, tasks, settings — persisted to AsyncStorage. Each store saves only data, not functions, and has a version number with a migration, so an update can change the shape of the data without breaking existing gardens.
+
+The splash screen stays up until every store has loaded from disk and the content database is ready. The user never sees an empty garden for a split second before their data appears.
+
+## Location without a server
+
+To build a sowing calendar, Hortium needs to know roughly where your garden is. City search runs entirely on the device: it searches the bundled list of towns by prefix, ranks results by population, and falls back to typo-tolerant matching. What you type never leaves your phone. Only if the bundled list has no match does the app fall back to the device's own geocoder.
+
+From the location, the app estimates your **last spring frost** and **first autumn frost** using latitude and altitude. These dates are shown as approximate, and every sowing window is stored relative to them — "6 to 8 weeks before the last frost" rather than "March". That's why the same plant data works for a garden in Serbia, Portugal or the southern hemisphere.
+
+## The one thing that needs the internet
+
+Weather is the only feature that can't work offline. Hortium fetches a short forecast from Open-Meteo, a free weather API that needs no key or account. To keep this respectful and robust:
+
+- coordinates are rounded to two decimals before the request, so the exact garden location is never sent,
+- the forecast is cached and refreshed at most once an hour,
+- if the request fails, the app keeps the last forecast or simply hides the weather card — nothing else depends on it.
+
+Offline-first doesn't mean "never online". It means the network is an extra, not a requirement.
+
+## "What if I lose my phone?"
+
+Without an account there's no cloud sync, so we added a simple backup instead. One button writes all of the user's stores into a single JSON file and opens the system share sheet — save it to Files, Google Drive, email it to yourself. Restoring reads the file back, checks its format and version, and refuses anything that doesn't look like a Hortium backup.
+
+It's not as seamless as sync, but it's transparent: the user can see exactly what's in their backup, and it's theirs.
+
+## Widgets and notifications, still offline
+
+The home screen widgets on iOS and Android show today's tasks and weather. The app prepares their content — already translated and formatted — and shares it with the widget. On iOS the widget is a small SwiftUI extension; on Android it's written in JSX. Neither needs the network.
+
+The daily garden summary and frost alerts are **local** notifications, scheduled on the device from the garden data. No push server, no device tokens.
+
+## What we'd recommend
+
+If you're planning an app, ask early whether it really needs an account. If the data is personal and lives on one device, offline-first with no account is often simpler, cheaper to run and more private — and users notice that the app just works.
+
+If you go this way:
+
+1. **Separate the content you own from the data users own**, and store them differently.
+2. **Ship content as a prebuilt, validated database** and replace it with each release instead of migrating it.
+3. **Version every persisted store from day one.**
+4. **Treat the network as optional** — cache, degrade gracefully, and send as little as possible.
+5. **Give users a way to take their data with them.**
+
+That's how Hortium works in the middle of a field with no signal — and why it never asks you to sign up.

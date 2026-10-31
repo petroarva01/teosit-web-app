@@ -1,0 +1,47 @@
+To je prvo pitanje koje nam postavi skoro svaki osnivač: da li aplikaciju praviti u React Native-u ili nativno — Swift za iOS i Kotlin za Android? Naš iskren odgovor je da je za većinu proizvoda u 2026. React Native bolji izbor. Ali ne za sve, a razlozi su važniji od same presude.
+
+## Šta vas zapravo košta „native“
+
+Native aplikacija znači dva koda. Dva puta pravite iste funkcije, dva puta popravljate greške, i obično imate dva programera koji oba moraju da razumeju vaš proizvod. Svaka izmena — novi korak u onboardingu, promena cena, ispravka u plaćanju — radi se dva puta i testira dva puta.
+
+Za veliku kompaniju sa posebnim iOS i Android timovima to je u redu. Za startap ili malu firmu to otprilike udvostručuje cenu svake funkcije i usporava ono što je na početku najvažnije: da učite od pravih korisnika i brzo menjate proizvod.
+
+## Zašto je React Native naš podrazumevani izbor
+
+Sa React Native-om pišete jedan kod u TypeScript-u i objavljujete ga u obe prodavnice. Interfejs se iscrtava pravim native komponentama, pa aplikacija izgleda i ponaša se kao da pripada telefonu — a ne kao sajt u omotu.
+
+Šta to praktično znači za vas:
+
+- **Jedan tim, jedan kod.** Nove funkcije stižu na iOS i Android u isto vreme.
+- **Brže izmene.** Uz Expo i over-the-air ažuriranja, manje ispravke stižu do korisnika bez čekanja na novu verziju u prodavnici.
+- **Deljeni kod sa webom.** Ako vam treba i web aplikacija ili admin panel u React-u, poslovna logika i tipovi mogu da se dele.
+- **Veliki izbor programera.** React i TypeScript su među najčešćim veštinama na tržištu, pa niste vezani za jednog retkog stručnjaka.
+
+Stari argumenti protiv React Native-a — spore performanse, nezgrapne animacije, loš pristup funkcijama uređaja — uglavnom više ne važe. Nova arhitektura, Hermes i biblioteke poput Reanimated-a znače da je dobro napravljena React Native aplikacija dovoljno brza za ogromnu većinu proizvoda: finansije, zakazivanje, e-commerce, fitness, sadržaj i interne alate.
+
+## Kada bismo vam rekli da idete na native
+
+I dalje postoje slučajevi kada preporučujemo native razvoj, i reći ćemo vam to na prvom pozivu:
+
+- **Zahtevna grafika u realnom vremenu ili igre.** 3D, složena obrada videa ili bilo šta što opterećuje GPU u svakom frejmu.
+- **Funkcije platforme kao srž proizvoda.** Aplikacije zasnovane na widgetima, aplikacijama za sat, CarPlay-u, naprednom Bluetooth-u ili obradi zvuka u pozadini — gde je većina posla ionako vezana za platformu.
+- **Postojeći native tim.** Ako već imate jake iOS i Android programere, uvođenje druge tehnologije se retko isplati.
+
+Čak i tada to često nije „sve ili ništa“. React Native može da koristi native module napisane u Swift-u ili Kotlin-u, pa jedan zahtevan ekran može biti native, a ostatak aplikacije ostaje zajednički.
+
+## Kako odlučujemo na pravom projektu
+
+Pre nego što bilo šta preporučimo, prođemo kroz kratak spisak pitanja:
+
+1. Koje su dve-tri funkcije bez kojih aplikacija ne može?
+2. Da li nekoj od njih treba hardver ili funkcija platforme van uobičajenog — kamera, lokacija, push notifikacije, plaćanje?
+3. Ko će održavati aplikaciju za dve godine i šta ta osoba zna?
+4. Koliko brzo posle lansiranja treba da učite od korisnika?
+
+Za većinu proizvoda koje vidimo, odgovori jasno vode ka React Native-u. Kada ne vode, radije ćemo vam to reći na vreme nego napraviti pogrešnu stvar.
+
+## Ukratko
+
+Ako je vaša aplikacija proizvod u kom ljudi nešto zakazuju, kupuju, prate, uče ili vode, React Native će vas brže i jeftinije dovesti u obe prodavnice, a korisnici neće primetiti razliku. Ako je vaša aplikacija _sama_ funkcija platforme — grafika, hardver, widget — idite na native.
+
+Niste sigurni na kojoj strani je vaša ideja? Upravo za to služi besplatan poziv od 30 minuta.

@@ -365,6 +365,26 @@
       "button": "Book a free 30-min call"
     }
   },
+  "Blog": {
+    "metaTitle": "TEOS IT — Blog",
+    "postMetaTitle": "{title} — TEOS IT Blog",
+    "eyebrow": "Blog",
+    "title": "Notes from building apps.",
+    "lead": "What we learn shipping React Native, web and AI products — written for founders and developers.",
+    "filterLabel": "Filter by topic",
+    "categories": {
+      "all": "All",
+      "reactNative": "React Native",
+      "founders": "For founders",
+      "ai": "AI"
+    },
+    "readingTime": "{minutes} min read",
+    "allPosts": "All posts",
+    "cta": {
+      "title": "Have a project in mind?",
+      "button": "Book a free 30-min call"
+    }
+  },
   "Testimonials": {
     "amplitude": {
       "quote": "“TEOS IT took our app from a rough concept to a polished product in the stores faster than we thought possible. They didn’t just execute tickets — they pushed back on the right things, owned the architecture and treated every screen like their own product.”",

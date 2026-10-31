@@ -1,0 +1,70 @@
+Kellion is our Orthodox Christian app: a church calendar with saints and fasts, daily readings, prayers, reminders and a map of churches and monasteries. From the first commit it was built for six languages — Serbian, English, Russian, Greek, Bulgarian and Romanian — and Serbian in both Latin and Cyrillic script.
+
+Translating the buttons turned out to be the easy part. The hard parts were dates, scripts, content that doesn't exist in every language, and the fact that "the same app" means a slightly different calendar depending on who opens it. Here's what we learned.
+
+## Pick a source language and make the type system enforce it
+
+Every piece of UI text lives in a JSON catalog per language, read with `react-i18next`. One catalog is the reference — for Kellion that's Serbian Latin — and the TypeScript types for translation keys are generated from it. That gives us two guarantees:
+
+- `t("calendar.title")` only compiles if the key exists, so typos and deleted keys fail the build instead of showing raw keys to users.
+- A unit test walks every catalog and checks that it has **exactly** the same keys as the reference. A missing Romanian string is a red test, not a support email.
+
+The rule that goes with it is simple: a new key is added to all six catalogs in the same change, or it isn't added at all. It sounds strict, but it's the only way we've found to keep six languages from drifting apart over months of development.
+
+## Serbian is two languages for a computer
+
+Serbian is written in both Cyrillic and Latin, and people have strong preferences. Maintaining two Serbian catalogs by hand would double the work and guarantee they slowly go out of sync.
+
+So there is no Cyrillic catalog at all. At startup the app generates it from the Latin one with a small transliteration function. Serbian maps cleanly between the two scripts letter by letter (`lj` → `љ`, `dž` → `џ`), which makes this reliable — as long as the Latin text is written to transliterate cleanly. Date patterns are excluded from transliteration, because format tokens like `MMMM` must stay untouched.
+
+Content goes the other way. Saints' names and prayers come from Cyrillic sources, so the build script stores both versions of every Serbian text in the database: the original and its transliteration. Switching script in the app is just a different query.
+
+## Dates are where localization really breaks
+
+Libraries know month names. They don't always know grammar. A few examples from Kellion:
+
+- **Greek** uses the genitive form of the month after a day number: "Σεπτέμβριος 2026", but "12 Σεπτεμβρίου". We detect patterns where the month follows a day and switch to the genitive list.
+- **Serbian and Romanian** write month names in lowercase, but the default locale data capitalizes them.
+- **Serbian short weekdays** came with trailing dots that looked wrong in a calendar grid.
+- **Russian and Bulgarian** decline months after a day ("12 сентября") — the library handles this, but we still test it.
+
+All of these fixes live in one file that patches the `dayjs` locales, and each one has a test with a real date. Date _patterns_ are translated too — "12. septembar 2026." and "12 September 2026" aren't just different words, they're different formats — and screens format dates only through a shared helper, never by building strings by hand.
+
+## Language isn't just language: it's also a church
+
+This is the part we didn't fully expect. In Kellion, the language you choose also suggests your church: Serbian and Russian follow the Julian calendar, while the Greek, Bulgarian and Romanian churches follow the Revised Julian calendar. Fasting rules differ, some saints are commemorated on different days, and Church Slavonic prayers are read with Serbian or Russian pronunciation depending on the tradition.
+
+We model this explicitly:
+
+- Each language has a **default church**, picked automatically from the device language on first launch. English has none, so English speakers choose.
+- Each church has its own **calendar style**, **fasting practice** and **reading tradition**.
+- Days a church commemorates differently are stored as overrides for that church only.
+
+The lesson for any multilingual product: check whether your languages are standing in for something else — a country, a currency, a legal system, a tradition. If they are, model that thing separately, so users can combine them freely.
+
+## Not every piece of content exists in every language
+
+UI strings can be translated in a day. Hundreds of prayers and readings can't. Some texts simply don't exist in some languages yet.
+
+Content lives in a prebuilt SQLite database shipped with the app, with one row per text per language. Queries ask for the user's language and the fallback language at once, then keep the best match for each item. If a reading isn't available in Bulgarian yet, the user sees the Serbian version instead of an empty screen.
+
+To keep that database honest, the build script is strict. Saint names in each language are listed in the same order as the source list, and the build fails when the lists don't line up. Every source is recorded and credited in the app.
+
+## Don't forget the parts outside your code
+
+Some text isn't rendered by React at all:
+
+- **Permission prompts.** The iOS location prompt is a system dialog. Its text is set per language through Expo's `locales` config, so a Greek user isn't asked for location in English.
+- **Store listings.** Screenshots, descriptions and keywords have to be done for every language, in both stores. Plan time for this; it's real work.
+- **Widgets and notifications.** Home screen widgets and reminder notifications show text when the app isn't open. They need the same translations and the same date formatting as the app itself.
+
+## What we'd tell a team starting a multilingual app
+
+1. **Decide your languages before writing UI.** Retrofitting i18n onto hardcoded strings is far more expensive than starting with it.
+2. **One reference catalog, typed keys and a test that compares all catalogs.** This alone prevents most translation bugs.
+3. **Treat dates and plural forms as a feature with tests**, not a library setting.
+4. **Separate UI text from content.** Buttons go in catalogs; long content goes in a database with a fallback strategy.
+5. **Ask what else your language choice implies** — and model it separately.
+6. **Get native speakers to use the app**, not just read a spreadsheet of strings. Grammar mistakes hide in context.
+
+Kellion now covers six languages and two scripts with a single codebase and one small team. That's only manageable because the tooling catches mistakes before users do.

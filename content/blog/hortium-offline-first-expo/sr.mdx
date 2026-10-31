@@ -1,0 +1,88 @@
+Hortium je naša aplikacija za ljude koji imaju povrtnjak: današnji zadaci i vreme, kalendar setve i berbe za vašu lokaciju, detalji za 150 biljaka, vaše gredice i zasadi, vizuelni planer gredica, widgeti i podsetnici.
+
+Nema naloga, nema ekrana za registraciju i nema praćenja. Otvorite je, izaberete mesto i radi — u bašti, gde je signal često najslabiji. To nije bila prečica; to je bila glavna odluka u dizajnu i oblikovala je celu arhitekturu. Evo kako radi.
+
+## Zašto bez naloga?
+
+Većina aplikacija podrazumevano dodaje nalog, a onda sve gradi oko servera. Za Hortium smo se zapitali šta bi nalog zapravo dao korisniku. Iskren odgovor je bio: ne mnogo. Vaša bašta je lična, živi na jednom telefonu i niko drugi ne mora da je vidi.
+
+Izbacivanje naloga uklonilo je mnogo posla i mnogo rizika:
+
+- nema backenda koji treba napraviti, hostovati, obezbediti i plaćati svakog meseca,
+- nema lozinki, resetovanja lozinke ni procesa „obriši moj nalog“,
+- nema ličnih podataka na serveru, pa je mnogo manje briga oko privatnosti,
+- i nema ekrana za registraciju između korisnika i prve korisne stvari koju vidi.
+
+Cena je to što aplikacija mora sa sobom da donese sve što joj treba — a podaci korisnika žive samo na njegovom uređaju. Oba problema imaju dobra rešenja.
+
+## Dve vrste podataka, dve vrste skladišta
+
+Ključna ideja je da se podaci podele prema tome ko ih poseduje:
+
+1. **Sadržaj koji je naš** — biljke, periodi setve, biljke koje se slažu, mesta, izvori. Isti je za sve i menja se samo kada objavimo ažuriranje.
+2. **Podaci koje poseduje korisnik** — lokacija bašte, gredice, zasadi, zadaci i podešavanja. Mali su, lični i stalno se menjaju.
+
+Svaka vrsta dobija skladište koje joj odgovara.
+
+### Sadržaj: unapred napravljena SQLite baza
+
+Podaci o biljkama pišu se kao JSON fajlovi u repozitorijumu, jedan fajl po grupi biljaka, sa prevodima u posebnim fajlovima. Build skripta sve proverava — obavezna polja, dozvoljene vrednosti, odnose između biljaka u oba smera, nepoznate izvore — i glasno pada na svaku grešku. Zatim pravi jedan SQLite fajl koji se isporučuje unutar aplikacije.
+
+Taj fajl sadrži 150 biljaka na sedam jezika i oko 70.000 mesta iz GeoNames baze sa terminima za pretragu — ukupno oko 10 MB. Pri prvom pokretanju aplikacija ga preko `expo-sqlite` kopira na pravo mesto:
+
+- prvo ga kopira u privremeni `.partial` fajl,
+- proverava da li veličina odgovara onoj koju je build zabeležio,
+- zatim ga premešta na mesto u jednom koraku, pa se poluiskopiran fajl nikada ne otvara,
+- i briše stare verzije baze iz prethodnih izdanja.
+
+Ime fajla sadrži hash njegovog sadržaja. Kada objavimo nove podatke o biljkama, ime se promeni, aplikacija kopira novi fajl i briše stari. Na uređaju nema migracija: baza sa sadržajem je samo za čitanje i jednostavno se zamenjuje.
+
+Upiti su tipizirani preko Drizzle-a i izvršavaju se sinhrono, pa ekrani čitaju podatke o biljkama trenutno, bez indikatora učitavanja.
+
+### Podaci korisnika: mali sačuvani storeovi
+
+Stanje korisnika je u nekoliko Zustand storeova — bašta, planer, zadaci, podešavanja — sačuvanih u AsyncStorage. Svaki store čuva samo podatke, ne funkcije, i ima broj verzije sa migracijom, pa ažuriranje može da promeni oblik podataka bez kvarenja postojećih bašti.
+
+Splash ekran ostaje dok se svi storeovi ne učitaju sa diska i dok baza sa sadržajem ne bude spremna. Korisnik nikada ne vidi praznu baštu na delić sekunde pre nego što se pojave njegovi podaci.
+
+## Lokacija bez servera
+
+Da bi napravio kalendar setve, Hortium mora otprilike da zna gde je vaša bašta. Pretraga mesta radi u potpunosti na uređaju: pretražuje ugrađenu listu mesta po početku naziva, rangira rezultate po broju stanovnika i, ako treba, prelazi na pretragu otpornu na greške u kucanju. Ono što ukucate nikada ne napušta telefon. Tek ako ugrađena lista nema rezultat, aplikacija koristi geokoder samog uređaja.
+
+Na osnovu lokacije aplikacija procenjuje **poslednji prolećni mraz** i **prvi jesenji mraz** prema geografskoj širini i nadmorskoj visini. Ti datumi se prikazuju kao približni, a svaki period setve čuva se u odnosu na njih — „6 do 8 nedelja pre poslednjeg mraza“, a ne „mart“. Zato isti podaci o biljkama rade i za baštu u Srbiji, i u Portugalu, i na južnoj hemisferi.
+
+## Jedina stvar kojoj treba internet
+
+Vremenska prognoza je jedina funkcija koja ne može da radi bez interneta. Hortium preuzima kratku prognozu sa Open-Meteo, besplatnog API-ja za vreme kojem ne trebaju ključ ni nalog. Da bi to bilo obzirno i pouzdano:
+
+- koordinate se pre zahteva zaokružuju na dve decimale, pa se tačna lokacija bašte nikada ne šalje,
+- prognoza se kešira i osvežava najviše jednom na sat,
+- ako zahtev ne uspe, aplikacija zadržava poslednju prognozu ili jednostavno sakrije karticu sa vremenom — ništa drugo ne zavisi od nje.
+
+Offline-first ne znači „nikad online“. Znači da je mreža dodatak, a ne uslov.
+
+## „Šta ako izgubim telefon?“
+
+Bez naloga nema sinhronizacije u oblaku, pa smo umesto toga dodali jednostavan backup. Jedno dugme upisuje sve korisnikove storeove u jedan JSON fajl i otvara sistemski meni za deljenje — sačuvajte ga u Files, na Google Drive, pošaljite sebi mejlom. Vraćanje čita fajl, proverava format i verziju i odbija sve što ne liči na Hortium backup.
+
+Nije glatko kao sinhronizacija, ali je transparentno: korisnik tačno vidi šta je u backupu, i backup je njegov.
+
+## Widgeti i notifikacije, i dalje bez interneta
+
+Widgeti na početnom ekranu na iOS-u i Androidu prikazuju današnje zadatke i vreme. Aplikacija priprema njihov sadržaj — već preveden i formatiran — i deli ga sa widgetom. Na iOS-u je widget mala SwiftUI ekstenzija; na Androidu je napisan u JSX-u. Nijednom ne treba mreža.
+
+Dnevni pregled bašte i upozorenja na mraz su **lokalne** notifikacije, zakazane na uređaju na osnovu podataka o bašti. Nema push servera, nema tokena uređaja.
+
+## Šta preporučujemo
+
+Ako planirate aplikaciju, rano se zapitajte da li joj zaista treba nalog. Ako su podaci lični i žive na jednom uređaju, offline-first bez naloga je često jednostavniji, jeftiniji za održavanje i privatniji — a korisnici primete da aplikacija prosto radi.
+
+Ako idete ovim putem:
+
+1. **Odvojite sadržaj koji je vaš od podataka koje poseduju korisnici** i čuvajte ih različito.
+2. **Isporučujte sadržaj kao unapred napravljenu, proverenu bazu** i zamenite je sa svakim izdanjem umesto da je migrirate.
+3. **Verzionišite svaki sačuvani store od prvog dana.**
+4. **Tretirajte mrežu kao opcionu** — keširajte, degradirajte dostojanstveno i šaljite što manje.
+5. **Dajte korisnicima način da ponesu svoje podatke.**
+
+Tako Hortium radi usred njive bez signala — i zato vas nikada ne traži da se registrujete.

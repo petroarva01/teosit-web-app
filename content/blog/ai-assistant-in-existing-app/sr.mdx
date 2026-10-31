@@ -1,0 +1,48 @@
+Mnogi timovi sa kojima razgovaramo žele „AI u aplikaciji“, ali nisu sigurni odakle da počnu. Dobra vest: ne morate da pravite proizvod iz početka. AI funkcija je obično novi ekran ili dugme preko onoga što već imate, plus jedan novi endpoint na backendu. Evo kako mi radimo.
+
+## 1. Izaberite jedan uzak zadatak
+
+„AI asistent“ je previše neodređeno da bi se napravilo ili izmerilo. Počnite od jednog zadatka koji vaši korisnici već rade i koji im je naporan. Na primer:
+
+- sažimanje duge istorije u tri rečenice,
+- pretvaranje slobodne beleške u strukturisan unos,
+- odgovaranje na pitanja o vašoj dokumentaciji ili katalogu proizvoda,
+- predlog odgovora koji korisnik može da izmeni pre slanja.
+
+Uzak zadatak je lakše testirati, jeftiniji je i mnogo ga je lakše objasniti korisnicima. Uvek ga kasnije možete proširiti.
+
+## 2. Držite model iza sopstvenog API-ja
+
+Nikada ne pozivajte AI servis direktno iz mobilne aplikacije ili browsera. Napravite mali endpoint na backendu koji:
+
+- čuva API ključ, da se nikada ne nađe u aplikaciji,
+- proverava ko je korisnik i koje podatke sme da vidi,
+- dodaje kontekst koji modelu treba — podatke korisnika, vašu dokumentaciju, vaša pravila,
+- ograničava koliko često svaki korisnik može da ga pozove, da troškovi ostanu predvidivi.
+
+To takođe znači da kasnije možete promeniti model ili servis bez objavljivanja nove verzije aplikacije.
+
+## 3. Dajte modelu pravi kontekst
+
+Najveći deo kvaliteta dolazi od onoga što šaljete modelu, a ne od toga koji model izaberete. Šaljite samo podatke potrebne za zadatak, napišite jasna uputstva o tonu i formatu, i tražite strukturisan izlaz (na primer JSON) kada rezultat ide direktno u interfejs.
+
+Ako asistent treba da odgovara na pitanja o velikoj količini sadržaja — dokumentaciji, proizvodima, starim tiketima — koristite pretragu: sačuvajte sadržaj kao embeddinge (na primer uz pgvector u Postgres-u ili Supabase-u) i uz svako pitanje šaljite samo najrelevantnije delove.
+
+## 4. Projektujte za „skoro tačno“
+
+AI će ponekad pogrešiti. Napravite funkciju tako da to ne bude problem:
+
+- prikažite rezultate kao **predloge** koje korisnik može da izmeni ili odbaci,
+- strimujte odgovor da ekran nikada ne deluje zamrznuto,
+- jasno označite šta je generisano,
+- ostavite i stari, ručni način da se zadatak uradi.
+
+## 5. Merite pre nego što proširite
+
+Pre nego što dodate nove AI funkcije, proverite da li prva radi. Pratite koliko je ljudi koristi, koliko često prihvate predlog bez izmena i koliko košta svaki zahtev. Čuvajte mali skup pravih primera i ponovo ih pokrenite svaki put kada promenite prompt ili model, da biste primetili pad kvaliteta pre korisnika.
+
+## Koliko to obično traje
+
+Za aplikaciju koja već ima backend, prva fokusirana AI funkcija je obično posao od nekoliko nedelja, ne meseci: jedan endpoint, jedan ili dva ekrana i krug testiranja sa pravim podacima. Najduže retko traje sam AI deo — najduže traje odluka šta tačno funkcija treba da radi.
+
+Ako imate aplikaciju i ideju gde bi AI mogao da pomogne, rado ćemo je pogledati sa vama.

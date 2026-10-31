@@ -1,0 +1,92 @@
+You've finished the app, uploaded the build and pressed "Submit for Review". A day later: **Rejected.** For a first app this is very common, and it can cost a week or more of back-and-forth right when you want to launch.
+
+The good news is that most rejections come from the same short list of problems, and almost all of them can be caught before you submit. This is the checklist we go through for every app we ship.
+
+## How review actually works
+
+Every App Store submission is checked by a person at Apple against the [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/). Many reviews finish within a day or two, but timing varies. If something is wrong, you get a message in App Store Connect quoting the guideline number, often with a screenshot. You fix it, reply or upload a new build, and the app goes back into the queue.
+
+Two things worth knowing up front:
+
+- **Updates are reviewed too**, so these rules apply for the life of the app, not just the first release.
+- **External TestFlight builds are reviewed**, though lighter than store releases. Internal testers don't need review.
+
+## The most common reasons apps get rejected
+
+### 1. The reviewer can't get in (Guideline 2.1)
+
+If your app has a login, the reviewer needs a way in. Without one, the app is rejected as incomplete.
+
+- Add a **demo account** with username and password in the review notes, with realistic data already in it.
+- If login uses a one-time code by SMS or email, provide a way around it for the demo account.
+- Make sure your **backend is live** and reachable from outside your network during review. A staging server that's turned off at night is a classic rejection.
+
+### 2. Crashes, broken links and placeholders (2.1)
+
+The reviewer will tap around. Anything that crashes, leads to an empty screen, shows "Lorem ipsum" or a "coming soon" button is a rejection.
+
+- Test the exact build you submit on a real device, not just the simulator.
+- Test on the **latest iOS version** and on an **iPad** if your app supports it — reviewers often use one.
+- Remove or hide features that aren't finished.
+
+### 3. The app doesn't do enough (4.2)
+
+Apple rejects apps that are "not sufficiently different from a mobile browsing experience" — for example, a website in a web view, or an app with one screen and little functionality. An MVP can be small, but it must be a real app that's useful on its own.
+
+### 4. Metadata doesn't match the app (2.3)
+
+- Screenshots must show the actual app, not just marketing graphics.
+- Don't mention other platforms ("also on Android") or prices that differ from what's in the app.
+- The description must not promise features the app doesn't have.
+- Keywords shouldn't include competitors' names.
+
+### 5. Privacy problems (5.1)
+
+This is the area that catches the most first-time apps:
+
+- **Privacy policy.** You need a link to a privacy policy in App Store Connect, and it should be reachable from inside the app too.
+- **App Privacy details.** The "nutrition label" in App Store Connect must match what the app and its third-party SDKs actually collect — analytics, crash reporting and ads SDKs count.
+- **Permission texts.** Every permission prompt (camera, location, photos, contacts) needs a clear, specific explanation of why the app needs it. "Needs access to your camera" will often be rejected; "Take a photo of your receipt to add it to an expense" won't.
+- **Only ask when needed.** Ask for permission at the moment the feature is used, not all at once on launch.
+- **Account deletion.** If users can create an account in the app, they must be able to delete it from inside the app, not only by emailing support.
+- **Tracking.** If you track users across other apps or websites, you need the App Tracking Transparency prompt before you do.
+
+### 6. Login options (4.8)
+
+If your app offers sign-in through a third-party service like Google or Facebook, Apple requires an equivalent privacy-focused option as well — in practice, usually **Sign in with Apple**. Apps that only use their own email and password login don't need it.
+
+### 7. Payments for digital content (3.1.1)
+
+Digital content and features used inside the app — subscriptions, premium features, extra content — must be sold through **in-app purchase**. You can't link to your own payment page for them. Physical goods and services used outside the app (food delivery, a haircut booking, a taxi) can use regular payment providers.
+
+If you use in-app purchases, the reviewer will test them in the sandbox. Make sure products are approved and attached to the build, prices load, and there's a "Restore purchases" button.
+
+## Before you press Submit: a checklist
+
+1. Demo account in the review notes, with data.
+2. Backend live, with no IP restrictions.
+3. Tested the exact build on a real iPhone (and iPad, if supported) with the latest iOS.
+4. No crashes, placeholders, dead buttons or "coming soon".
+5. Screenshots and description match the current app.
+6. Privacy policy link in the store listing and in the app.
+7. App Privacy answers match the app and every SDK in it.
+8. Clear permission texts, asked in context.
+9. In-app account deletion, if the app has accounts.
+10. Sign in with Apple, if you offer other social logins.
+11. In-app purchases approved, testable and restorable.
+12. Review notes that explain anything non-obvious: hardware the app needs, where a feature lives, why a permission is used.
+
+## If you're rejected anyway
+
+- **Read the message carefully.** The guideline number tells you exactly which rule it's about.
+- **Fix it, or explain.** Sometimes the reviewer simply missed something. A polite, specific reply in the Resolution Center — with steps or a short screen recording — often resolves it without a new build.
+- **Don't argue in circles.** If you disagree after a reply, you can appeal to the App Review Board.
+- **Ask for an expedited review** if you're blocked on something urgent, like a critical bug fix. Use it sparingly.
+
+## A note on Google Play
+
+Google Play review is mostly automated and usually faster, but it has its own requirements. Fill in the **Data safety** form and the content rating questionnaire, target a recent Android API level, and, if you're publishing from a new personal developer account, expect a closed test with real testers before you can release to production — at the time of writing, at least 12 testers for 14 days. Plan for that time in your launch date.
+
+## The short version
+
+Most rejections aren't about your idea — they're about missing details: a demo account, a privacy answer, a permission text, a forgotten placeholder. Go through the checklist, write clear review notes, and give yourself a few days of buffer before your launch date. Your first submission can be your only one.

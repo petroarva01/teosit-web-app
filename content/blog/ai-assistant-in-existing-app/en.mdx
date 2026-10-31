@@ -1,0 +1,48 @@
+Many teams we talk to want "AI in the app" but aren't sure where to start. The good news: you don't need to rebuild your product. An AI feature is usually a new screen or button on top of what you already have, plus one new endpoint on your backend. Here's the process we follow.
+
+## 1. Pick one narrow job
+
+"An AI assistant" is too vague to build or to measure. Start with a single task your users already do and find tedious. For example:
+
+- summarizing a long history into three sentences,
+- turning a free-text note into a structured entry,
+- answering questions about your own help docs or product catalog,
+- drafting a reply the user can edit before sending.
+
+A narrow job is easier to test, cheaper to run and much easier to explain to users. You can always widen it later.
+
+## 2. Keep the model behind your own API
+
+Never call an AI provider directly from the mobile app or the browser. Put a small endpoint on your backend that:
+
+- holds the API key, so it never ships inside the app,
+- checks who the user is and what data they're allowed to see,
+- adds the context the model needs — the user's records, your docs, your rules,
+- limits how often each user can call it, so costs stay predictable.
+
+This also means you can switch models or providers later without releasing a new version of the app.
+
+## 3. Give the model the right context
+
+Most of the quality comes from what you send to the model, not from which model you pick. Include only the data needed for the task, write clear instructions about tone and format, and ask for structured output (like JSON) when the result feeds into your UI.
+
+If the assistant should answer questions about a lot of content — documentation, products, past tickets — use retrieval: store the content as embeddings (for example with pgvector in Postgres or Supabase) and send only the most relevant pieces with each question.
+
+## 4. Design for "almost right"
+
+AI output will sometimes be wrong. Build the feature so that's not a problem:
+
+- show results as **suggestions** the user can edit or reject,
+- stream the response so the screen never feels frozen,
+- show clearly which parts were generated,
+- keep the old, manual way of doing the task available.
+
+## 5. Measure before you expand
+
+Before adding more AI features, check whether the first one works. Track how often people use it, how often they accept the suggestion without changes, and what each request costs. Keep a small set of real examples and run them again whenever you change the prompt or the model, so you notice regressions before your users do.
+
+## What it usually takes
+
+For an app with a working backend, a focused first AI feature is typically a matter of weeks, not months: one endpoint, one or two screens, and a round of testing with real data. The work that takes longest is rarely the AI part — it's deciding exactly what the feature should do.
+
+If you have an app and an idea for where AI could help, we're happy to look at it with you.
