@@ -154,11 +154,11 @@
         "body": "Jedan React Native kod, dve aplikacije koje deluju nativno. Preuzimamo delove koji obično usporavaju timove: plaćanja, notifikacije, rad bez interneta, review i objavu na prodavnicama.",
         "points": [
           "iOS + Android uz React Native i Expo",
-          "Objava na App Store i Google Play, TestFlight verzije",
+          "Objava na App Store-u i Google Play-u, TestFlight verzije",
           "Plaćanja, pretplate i kupovine u aplikaciji",
           "Code review, testiranje i spašavanje postojećih aplikacija"
         ],
-        "stack": "React Native · Expo · TypeScript · Reanimated"
+        "stack": "React Native · Expo · Flutter · Ionic · TypeScript · Reanimated"
       },
       "web": {
         "nav": "Web",
@@ -170,7 +170,7 @@
           "Admin paneli i dashboard-i",
           "Višejezični sajtovi i osnove SEO-a"
         ],
-        "stack": "Next.js · React · Tailwind · Vercel"
+        "stack": "Next.js · React · Vue.js · Svelte · Tailwind CSS · Vercel"
       },
       "backend": {
         "nav": "Backend",
@@ -182,7 +182,7 @@
           "Supabase: Auth, Row Level Security, Postgres",
           "Integracije: plaćanja, email, mape, eksterni API-ji"
         ],
-        "stack": "Node.js · Supabase · PostgreSQL"
+        "stack": "Node.js · NestJS · Supabase · Firebase · PostgreSQL · MongoDB · Docker"
       },
       "ai": {
         "nav": "AI",
@@ -212,13 +212,13 @@
         "nav": "Outsourcing",
         "label": "06",
         "title": "Outsourcing",
-        "body": "Treba vam više ljudi na postojećem proizvodu? Naši inženjeri ulaze u vaš tim, vaše alate i vaš ritam sprintova.",
+        "body": "Treba vam više ljudi na postojećem proizvodu? Naši inženjeri ulaze u vaš tim, vaše alate i vaš ritam sprintova — u vašoj vremenskoj zoni ili blizu nje.",
         "points": [
           "Iskusni React Native i web inženjeri",
           "Vođenje tima i mentorstvo za mlađe programere",
           "Mesečni angažman, otkaz uz najavu"
         ],
-        "stack": "CET · engleski · Jira · GitHub · Slack"
+        "stack": "CET · engleski · Scrum · Jira · GitHub · Slack · Microsoft Teams"
       }
     },
     "models": {
@@ -228,17 +228,17 @@
         "fixed": {
           "title": "Projekat sa fiksnim obimom",
           "body": "Jasan obim, rok i cena. Najbolje za MVP ili novu aplikaciju.",
-          "price": "Od 25.000 €"
+          "price": "Od 10.000 €"
         },
         "team": {
           "title": "Posvećeni tim",
           "body": "Inženjeri koji svakog meseca rade na vašem proizvodu. Najbolje za kontinuirani razvoj.",
-          "price": "Od 8.000 € / mesečno"
+          "price": "Od 35 € / sat"
         },
         "consulting": {
           "title": "Konsultacije i audit",
           "body": "Code review, saveti za arhitekturu ili plan za aplikaciju koja je zapela.",
-          "price": "60 € / sat"
+          "price": "45 € / sat"
         }
       }
     },
@@ -251,7 +251,7 @@
         },
         "mvp": {
           "q": "Koliko traje izrada MVP-a?",
-          "a": "Obično 10–14 nedelja od početka rada do objave na prodavnicama, u zavisnosti od obima. Posle kratke faze upoznavanja dobijate tačan rok i fiksnu cenu."
+          "a": "Obično 6–10 nedelja od početka rada do objave na prodavnicama, u zavisnosti od obima. Posle kratke faze upoznavanja dobijate tačan rok i fiksnu cenu."
         },
         "ownership": {
           "q": "Čiji je kod?",
@@ -272,7 +272,7 @@
     "metaTitle": "TEOS IT — Projekti",
     "eyebrow": "Projekti",
     "title": "Aplikacije koje ljudi skidaju, koriste i vraćaju im se.",
-    "lead": "Aplikacije za fintech, energetiku, zakazivanje i svakodnevni život, za klijente iz Nemačke, Švajcarske i Srbije — napravljene, objavljene i održavane od strane istog tima.",
+    "lead": "Aplikacije za fintech, energetiku, zakazivanje i svakodnevni život — napravio ih je, objavio i održava isti tim.",
     "filterLabel": "Filter projekata",
     "filters": {
       "all": "Svi projekti",
@@ -291,6 +291,7 @@
     "factsLabel": "Podaci o projektu",
     "facts": {
       "client": "Klijent",
+      "domain": "Oblast",
       "platform": "Platforma",
       "role": "Naša uloga",
       "timeline": "Period"

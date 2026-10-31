@@ -203,7 +203,7 @@ export const projects: Project[] = [
         },
       },
     ],
-    hasCaseStudy: false,
+    hasCaseStudy: true,
     image: {
       src: bukirajImage,
       alt: { en: "Bukiraj booking calendar", sr: "Bukiraj kalendar termina" },
@@ -264,7 +264,7 @@ export const projects: Project[] = [
         },
       },
     ],
-    hasCaseStudy: false,
+    hasCaseStudy: true,
     image: {
       src: kellionImage,
       alt: {
@@ -321,7 +321,7 @@ export const projects: Project[] = [
         },
       },
     ],
-    hasCaseStudy: false,
+    hasCaseStudy: true,
     image: {
       src: hortiumImage,
       alt: {

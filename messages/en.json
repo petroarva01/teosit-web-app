@@ -121,7 +121,7 @@
     "founder": {
       "eyebrow": "04 — Who you work with",
       "title": "“You talk to the person who writes your code.”",
-      "body": "I'm Petro, founder of TEOS IT. I've spent the last years leading React Native teams and shipping apps for clients in Germany and Switzerland. I'm on every project — from the first call to the store release.",
+      "body": "I’m Petro, founder of TEOS IT. I’ve spent the last years leading React Native teams and shipping apps for clients in Germany and Switzerland. I’m on every project — from the first call to the store release.",
       "photoAlt": "Petro Arva, founder of TEOS IT",
       "points": {
         "direct": "Direct access, no middlemen",
@@ -136,7 +136,7 @@
     },
     "cta": {
       "title": "Have an app or product in mind?",
-      "body": "Tell us where you are. In a free 30-minute call we'll tell you honestly what it takes — time, cost and the best stack for it.",
+      "body": "Tell us where you are. In a free 30-minute call we’ll tell you honestly what it takes — time, cost and the best stack for it.",
       "button": "Book a free call"
     }
   },
@@ -158,7 +158,7 @@
           "Payments, subscriptions and in-app purchases",
           "Code review, testing and rescue of existing apps"
         ],
-        "stack": "React Native · Expo · TypeScript · Reanimated"
+        "stack": "React Native · Expo · Flutter · Ionic · TypeScript · Reanimated"
       },
       "web": {
         "nav": "Web",
@@ -170,7 +170,7 @@
           "Admin panels and dashboards",
           "Multilingual sites and SEO basics"
         ],
-        "stack": "Next.js · React · Tailwind · Vercel"
+        "stack": "Next.js · React · Vue.js · Svelte · Tailwind CSS · Vercel"
       },
       "backend": {
         "nav": "Backend",
@@ -182,7 +182,7 @@
           "Supabase: Auth, Row Level Security, Postgres",
           "Integrations: payments, email, maps, third-party APIs"
         ],
-        "stack": "Node.js · Supabase · PostgreSQL"
+        "stack": "Node.js · NestJS · Supabase · Firebase · PostgreSQL · MongoDB · Docker"
       },
       "ai": {
         "nav": "AI",
@@ -218,7 +218,7 @@
           "Team lead and mentoring for junior developers",
           "Monthly engagement, cancel with notice"
         ],
-        "stack": "CET · English · Jira · GitHub · Slack"
+        "stack": "CET · English · Scrum · Jira · GitHub · Slack · Microsoft Teams"
       }
     },
     "models": {
@@ -228,17 +228,17 @@
         "fixed": {
           "title": "Fixed-scope project",
           "body": "A clear scope, timeline and price. Best for an MVP or a new app.",
-          "price": "From €25,000"
+          "price": "From €10,000"
         },
         "team": {
           "title": "Dedicated team",
           "body": "Engineers working on your product every month. Best for ongoing development.",
-          "price": "From €8,000 / month"
+          "price": "From €35 / hour"
         },
         "consulting": {
           "title": "Consulting & audit",
-          "body": "Code review, architecture advice or a rescue plan for an app that's stuck.",
-          "price": "€60 / hour"
+          "body": "Code review, architecture advice or a rescue plan for an app that’s stuck.",
+          "price": "€45 / hour"
         }
       }
     },
@@ -251,7 +251,7 @@
         },
         "mvp": {
           "q": "How long does an MVP take?",
-          "a": "Usually 10–14 weeks from kickoff to the store release, depending on scope. After a short discovery phase you get an exact timeline and a fixed price."
+          "a": "Usually 6–10 weeks from kickoff to the store release, depending on scope. After a short discovery phase you get an exact timeline and a fixed price."
         },
         "ownership": {
           "q": "Who owns the code?",
@@ -259,7 +259,7 @@
         },
         "takeover": {
           "q": "Can you take over an existing app?",
-          "a": "Yes. We start with a short code audit, then fix what's urgent and plan the rest."
+          "a": "Yes. We start with a short code audit, then fix what’s urgent and plan the rest."
         }
       }
     },
@@ -272,7 +272,7 @@
     "metaTitle": "TEOS IT — Case studies",
     "eyebrow": "Case studies",
     "title": "Apps people download, use and come back to.",
-    "lead": "Fintech, energy, booking and lifestyle apps for clients in Germany, Switzerland and Serbia — built, shipped and maintained by the same team.",
+    "lead": "Fintech, energy, booking and lifestyle apps — built, shipped and maintained by the same team.",
     "filterLabel": "Filter projects",
     "filters": {
       "all": "All work",
@@ -291,6 +291,7 @@
     "factsLabel": "Project facts",
     "facts": {
       "client": "Client",
+      "domain": "Domain",
       "platform": "Platform",
       "role": "Our role",
       "timeline": "Timeline"

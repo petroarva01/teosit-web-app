@@ -4,8 +4,8 @@ import { notFound } from "next/navigation"
 import { hasLocale } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
+import { CaseStudyScreens } from "@/components/site/case-study-screens"
 import { Header } from "@/components/site/header"
-import { Reveal, RevealItem } from "@/components/site/motion"
 import { projectColors, projectHref } from "@/components/site/project-card"
 import { container } from "@/components/site/section"
 import { Badge } from "@/components/ui/badge"
@@ -15,7 +15,7 @@ import { Link } from "@/i18n/navigation"
 import { routing } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
 
-const factKeys = ["client", "platform", "role", "timeline"] as const
+const factKeys = ["client", "domain", "platform", "role", "timeline"] as const
 
 // Only slugs with a written case study exist; everything else 404s
 export const dynamicParams = false
@@ -50,8 +50,10 @@ export default async function CaseStudyPage({
   const t = await getTranslations("CaseStudy")
   const tTestimonials = await getTranslations("Testimonials")
 
-  const index = projects.findIndex((p) => p.slug === study.slug)
-  const next = projects[(index + 1) % projects.length]
+  // Next project that has its own case study, wrapping around the list
+  const withStudies = projects.filter((p) => p.hasCaseStudy)
+  const index = withStudies.findIndex((p) => p.slug === study.slug)
+  const next = withStudies[(index + 1) % withStudies.length]
 
   return (
     <>
@@ -73,7 +75,21 @@ export default async function CaseStudyPage({
           <p className="max-w-[40em] text-[19px] leading-[1.55] text-on-dark-muted">
             {study.lead[locale]}
           </p>
-          <div className="relative mt-8 h-[clamp(280px,40vw,560px)] overflow-hidden rounded-t-[28px] bg-dark-raised">
+          <div
+            className={cn(
+              "relative mt-8 h-[clamp(280px,40vw,560px)] overflow-hidden rounded-t-[28px] bg-dark-raised",
+              // A finished composition is shown whole from tablet up, cropped only on phones
+              study.hero.fit === "whole" &&
+                "md:aspect-(--hero-ratio) md:h-auto",
+              study.hero.fit === "always-whole" &&
+                "aspect-(--hero-ratio) h-auto"
+            )}
+            style={
+              {
+                "--hero-ratio": `${study.hero.src.width} / ${study.hero.src.height}`,
+              } as React.CSSProperties
+            }
+          >
             <Image
               src={study.hero.src}
               alt={study.hero.alt[locale]}
@@ -81,7 +97,8 @@ export default async function CaseStudyPage({
               preload
               placeholder="blur"
               sizes="(min-width: 1240px) 1176px, 100vw"
-              className="object-cover object-top"
+              className="object-cover"
+              style={{ objectPosition: study.hero.position ?? "50% 0%" }}
             />
           </div>
         </section>
@@ -96,16 +113,18 @@ export default async function CaseStudyPage({
             "grid gap-8 border-b py-14 sm:grid-cols-2 lg:grid-cols-4"
           )}
         >
-          {factKeys.map((key) => (
-            <div key={key} className="flex flex-col gap-1.5">
-              <span className="font-mono text-xs tracking-[0.05em] text-muted-foreground uppercase">
-                {t(`facts.${key}`)}
-              </span>
-              <span className="text-lg font-semibold">
-                {study.facts[key][locale]}
-              </span>
-            </div>
-          ))}
+          {factKeys.map((key) => {
+            const value = study.facts[key]
+            if (!value) return null
+            return (
+              <div key={key} className="flex flex-col gap-1.5">
+                <span className="font-mono text-xs tracking-[0.05em] text-muted-foreground uppercase">
+                  {t(`facts.${key}`)}
+                </span>
+                <span className="text-lg font-semibold">{value[locale]}</span>
+              </div>
+            )
+          })}
         </section>
 
         {/* The challenge */}
@@ -157,33 +176,11 @@ export default async function CaseStudyPage({
           </ol>
         </section>
 
-        {/* Screens */}
-        <Reveal
-          aria-label={t("screensLabel")}
-          className={cn(
-            container,
-            "grid grid-cols-2 gap-5 pt-16 pb-10 lg:grid-cols-4"
-          )}
-        >
-          {study.screens.map((screen) => (
-            <RevealItem
-              key={screen.alt.en}
-              className="flex justify-center rounded-[28px] bg-accent px-[12%] pt-[14%] pb-[10%]"
-            >
-              {/* Phone frame drawn in CSS around the raw screenshot */}
-              <div className="w-full overflow-hidden rounded-[clamp(18px,3vw,30px)] border-[clamp(4px,0.6vw,7px)] border-foreground bg-card shadow-[0_24px_40px_-24px_rgba(27,25,54,0.45)]">
-                <Image
-                  src={screen.src}
-                  alt={screen.alt[locale]}
-                  placeholder="blur"
-                  quality={90}
-                  sizes="(min-width: 1240px) 220px, (min-width: 1024px) 18vw, 40vw"
-                  className="block h-auto w-full"
-                />
-              </div>
-            </RevealItem>
-          ))}
-        </Reveal>
+        <CaseStudyScreens
+          study={study}
+          locale={locale}
+          label={t("screensLabel")}
+        />
 
         {/* Results */}
         <section className={cn(container, "pt-16 pb-10")}>
