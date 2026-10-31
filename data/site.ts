@@ -1,6 +1,9 @@
 export const site = {
+  url: "https://teosit.com",
   email: "office@teosit.com",
   linkedin: "https://www.linkedin.com/company/teos-it/",
+  /** Free 30-min intro call */
+  bookingUrl: "https://calendly.com/contact-teosit/30min",
   /** Serbian tax ID (PIB) and company registration number (matični broj) */
   pib: "115256321",
   mb: "68222052",

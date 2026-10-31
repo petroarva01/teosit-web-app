@@ -385,6 +385,64 @@
       "button": "Besplatan poziv od 30 min"
     }
   },
+  "Contact": {
+    "metaTitle": "TEOS IT — Kontakt",
+    "metaDescription": "Recite nam šta pravite. Pošaljite par rečenica ili zakažite besplatan poziv od 30 minuta.",
+    "eyebrow": "Kontakt",
+    "title": "Recite nam šta pravite.",
+    "lead": "Pošaljite par rečenica ili odmah zakažite poziv. Odgovoriće vam Petro, ne prodajni tim.",
+    "call": {
+      "label": "Najbrže",
+      "title": "Zakažite besplatan poziv od 30 min",
+      "body": "Izaberite termin koji vam odgovara. Video poziv, na srpskom ili engleskom."
+    },
+    "facts": {
+      "email": "Email",
+      "responseTime": "Vreme odgovora",
+      "responseTimeValue": "U roku od 1–2 radna dana",
+      "linkedin": "LinkedIn"
+    },
+    "form": {
+      "services": "Šta vam treba?",
+      "serviceOptions": {
+        "mobile": "Mobilna aplikacija",
+        "web": "Sajt / web aplikacija",
+        "backend": "Backend",
+        "ai": "AI funkcionalnosti",
+        "design": "UI/UX dizajn",
+        "team": "Programeri za moj tim"
+      },
+      "name": "Ime",
+      "email": "Email",
+      "company": "Firma",
+      "optional": "(opciono)",
+      "budget": "Budžet",
+      "budgetOptions": {
+        "unsure": "Još nisam siguran/na",
+        "under10": "Do €10k",
+        "10to30": "€10k – €30k",
+        "30to60": "€30k – €60k",
+        "over60": "€60k+",
+        "monthly": "Mesečni tim"
+      },
+      "message": "O projektu",
+      "messagePlaceholder": "Šta pravite, za koga i do kada?",
+      "consent": "Slanjem prihvatate našu <link>Politiku privatnosti</link>.",
+      "submit": "Pošalji poruku",
+      "sending": "Šalje se…",
+      "errors": {
+        "name": "Unesite ime.",
+        "email": "Unesite ispravnu email adresu.",
+        "message": "Napišite nam nešto o projektu.",
+        "send": "Nešto nije u redu i poruka nije poslata. Pokušajte ponovo ili nam pišite na {email}."
+      }
+    },
+    "sent": {
+      "title": "Hvala — poruka je poslata.",
+      "body": "Javićemo se u roku od 1–2 radna dana. Ne možete da čekate? Zakažite poziv i čujemo se ove nedelje.",
+      "again": "Pošalji novu poruku"
+    }
+  },
   "Testimonials": {
     "amplitude": {
       "quote": "„TEOS IT je našu aplikaciju od grube ideje doveo do uglađenog proizvoda u prodavnicama brže nego što smo mislili da je moguće. Nisu samo rešavali zadatke — rekli su ‚ne‘ kad je trebalo, preuzeli arhitekturu i svaki ekran tretirali kao sopstveni proizvod.”",

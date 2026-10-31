@@ -385,6 +385,64 @@
       "button": "Book a free 30-min call"
     }
   },
+  "Contact": {
+    "metaTitle": "TEOS IT — Contact",
+    "metaDescription": "Tell us what you're building. Send a few lines or book a free 30-minute call.",
+    "eyebrow": "Contact",
+    "title": "Tell us what you're building.",
+    "lead": "Send a few lines or book a call directly. You'll hear back from Petro, not a sales team.",
+    "call": {
+      "label": "Fastest way",
+      "title": "Book a free 30-min call",
+      "body": "Pick a time that suits you. Video call, English or Serbian."
+    },
+    "facts": {
+      "email": "Email",
+      "responseTime": "Response time",
+      "responseTimeValue": "Within 1–2 business days",
+      "linkedin": "LinkedIn"
+    },
+    "form": {
+      "services": "What do you need?",
+      "serviceOptions": {
+        "mobile": "Mobile app",
+        "web": "Website / web app",
+        "backend": "Backend",
+        "ai": "AI features",
+        "design": "UI/UX design",
+        "team": "Developers for my team"
+      },
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "optional": "(optional)",
+      "budget": "Budget",
+      "budgetOptions": {
+        "unsure": "Not sure yet",
+        "under10": "Under €10k",
+        "10to30": "€10k – €30k",
+        "30to60": "€30k – €60k",
+        "over60": "€60k+",
+        "monthly": "Monthly team"
+      },
+      "message": "About the project",
+      "messagePlaceholder": "What are you building, for whom, and by when?",
+      "consent": "By sending, you agree to our <link>Privacy Policy</link>.",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "errors": {
+        "name": "Please enter your name.",
+        "email": "Please enter a valid email address.",
+        "message": "Please tell us a little about the project.",
+        "send": "Something went wrong and the message wasn't sent. Please try again, or email us at {email}."
+      }
+    },
+    "sent": {
+      "title": "Thanks — message sent.",
+      "body": "We'll reply within 1–2 business days. Can't wait? Book a call and we'll talk this week.",
+      "again": "Send another message"
+    }
+  },
   "Testimonials": {
     "amplitude": {
       "quote": "“TEOS IT took our app from a rough concept to a polished product in the stores faster than we thought possible. They didn’t just execute tickets — they pushed back on the right things, owned the architecture and treated every screen like their own product.”",
