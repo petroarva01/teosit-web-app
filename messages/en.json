@@ -302,6 +302,69 @@
     "results": "Results",
     "next": "Next case study"
   },
+  "About": {
+    "metaTitle": "TEOS IT — About",
+    "eyebrow": "About TEOS IT",
+    "title": "A small studio, on purpose.",
+    "lead": "We keep the team small so the people who plan your product are the same people who build it. Fewer meetings, fewer hand-offs, better software.",
+    "founder": {
+      "photoAlt": "Petro Arva, founder of TEOS IT",
+      "role": "Founder & lead engineer",
+      "title": "Hi, I'm Petro.",
+      "bio": [
+        "I grew up in a village in Vojvodina, in the north of Serbia, and I still build software from here. I studied IT in Novi Sad, graduated in 2021, and have spent the five years since building mobile and web products across fintech, e-commerce, fitness and IoT.",
+        "I've led a React Native team for a German fintech app and a team of eight on a large e-commerce project, built a training and booking app for a Swiss fitness company, and worked with international teams at Vega IT and on IoT apps published to the App Store and Google Play. Along the way I mentored interns and junior developers and learned what makes projects go well: clear scope, honest estimates and shipping often.",
+        "I started TEOS IT to work that way with every client. Today I lead a small team with a dedicated UI/UX designer, and we also build our own apps — Kellion and Hortium — because shipping our own products keeps us sharp for yours."
+      ]
+    },
+    "values": {
+      "title": "What you can count on",
+      "items": {
+        "access": {
+          "title": "Direct access",
+          "body": "You talk to the engineers, not to an account manager."
+        },
+        "lockIn": {
+          "title": "No lock-in",
+          "body": "Code, designs and store accounts belong to you from day one."
+        },
+        "weekly": {
+          "title": "Weekly progress",
+          "body": "A new build to try every week, so surprises stay small."
+        },
+        "estimates": {
+          "title": "Honest estimates",
+          "body": "If something is a bad idea or too expensive, we say so early."
+        }
+      }
+    },
+    "location": {
+      "title": "Based in Serbia, working with Europe.",
+      "body": "Same or similar time zone as most of our clients, fluent English, and EU-friendly invoicing.",
+      "facts": {
+        "location": {
+          "label": "Location",
+          "value": "Novi Sad, Serbia"
+        },
+        "timeZone": {
+          "label": "Time zone",
+          "value": "CET (UTC+1)"
+        },
+        "clients": {
+          "label": "Clients in",
+          "value": "Germany, Switzerland, Serbia"
+        },
+        "languages": {
+          "label": "Languages",
+          "value": "English, Serbian"
+        }
+      }
+    },
+    "cta": {
+      "title": "Let's talk about your project.",
+      "button": "Book a free 30-min call"
+    }
+  },
   "Testimonials": {
     "amplitude": {
       "quote": "“TEOS IT took our app from a rough concept to a polished product in the stores faster than we thought possible. They didn’t just execute tickets — they pushed back on the right things, owned the architecture and treated every screen like their own product.”",

@@ -302,6 +302,69 @@
     "results": "Rezultati",
     "next": "Sledeća studija slučaja"
   },
+  "About": {
+    "metaTitle": "TEOS IT — O nama",
+    "eyebrow": "O TEOS IT",
+    "title": "Mali studio, namerno.",
+    "lead": "Tim držimo malim da bi ljudi koji planiraju vaš proizvod bili isti oni koji ga prave. Manje sastanaka, manje prepričavanja, bolji softver.",
+    "founder": {
+      "photoAlt": "Petro Arva, osnivač TEOS IT",
+      "role": "Osnivač i vodeći inženjer",
+      "title": "Zdravo, ja sam Petro.",
+      "bio": [
+        "Odrastao sam na selu u Vojvodini i odatle i danas pravim softver. IT sam završio u Novom Sadu 2021. godine i od tada, već pet godina, razvijam mobilne i web proizvode za fintech, e-commerce, fitness i IoT.",
+        "Vodio sam React Native tim za nemačku fintech aplikaciju i tim od osam ljudi na velikom e-commerce projektu, napravio aplikaciju za treninge i zakazivanje za švajcarsku fitness kompaniju, i sarađivao sa međunarodnim timovima u Vega IT-u i na IoT aplikacijama objavljenim na App Store-u i Google Play-u. Usput sam mentorisao praktikante i mlađe programere i naučio šta čini da projekat prođe dobro: jasan obim, iskrene procene i česte objave.",
+        "TEOS IT sam pokrenuo da bih tako radio sa svakim klijentom. Danas vodim mali tim sa posvećenim UI/UX dizajnerom, a pravimo i svoje aplikacije — Kellion i Hortium — jer nas sopstveni proizvodi drže u formi za vaše."
+      ]
+    },
+    "values": {
+      "title": "Na šta možete da računate",
+      "items": {
+        "access": {
+          "title": "Direktan kontakt",
+          "body": "Pričate sa inženjerima, ne sa account menadžerom."
+        },
+        "lockIn": {
+          "title": "Bez zaključavanja",
+          "body": "Kod, dizajn i nalozi na prodavnicama su vaši od prvog dana."
+        },
+        "weekly": {
+          "title": "Napredak svake nedelje",
+          "body": "Nova verzija za probu svake nedelje, pa iznenađenja ostaju mala."
+        },
+        "estimates": {
+          "title": "Iskrene procene",
+          "body": "Ako je nešto loša ideja ili preskupo, kažemo vam na vreme."
+        }
+      }
+    },
+    "location": {
+      "title": "Iz Srbije, za celu Evropu.",
+      "body": "Ista ili slična vremenska zona kao većina naših klijenata, tečan engleski i fakturisanje prilagođeno EU klijentima.",
+      "facts": {
+        "location": {
+          "label": "Lokacija",
+          "value": "Novi Sad, Srbija"
+        },
+        "timeZone": {
+          "label": "Vremenska zona",
+          "value": "CET (UTC+1)"
+        },
+        "clients": {
+          "label": "Klijenti iz",
+          "value": "Nemačke, Švajcarske, Srbije"
+        },
+        "languages": {
+          "label": "Jezici",
+          "value": "Engleski, srpski"
+        }
+      }
+    },
+    "cta": {
+      "title": "Hajde da popričamo o vašem projektu.",
+      "button": "Besplatan poziv od 30 min"
+    }
+  },
   "Testimonials": {
     "amplitude": {
       "quote": "„TEOS IT je našu aplikaciju od grube ideje doveo do uglađenog proizvoda u prodavnicama brže nego što smo mislili da je moguće. Nisu samo rešavali zadatke — rekli su ‚ne‘ kad je trebalo, preuzeli arhitekturu i svaki ekran tretirali kao sopstveni proizvod.”",
