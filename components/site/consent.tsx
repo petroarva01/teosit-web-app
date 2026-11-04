@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Link } from "@/i18n/navigation"
+import { trackLinkClick } from "@/lib/analytics"
 import { consentStorageKey as storageKey } from "@/lib/consent-script"
 import { cn } from "@/lib/utils"
 
@@ -92,6 +93,16 @@ function saveConsent(next: Consent, previous: Consent | null) {
   window.dispatchEvent(new Event(changeEvent))
 }
 
+/** Sends key link clicks (booking, email, contact CTAs) as events. */
+function LinkClickTracker() {
+  React.useEffect(() => {
+    // Capture phase, so links that navigate or close menus still report
+    document.addEventListener("click", trackLinkClick, true)
+    return () => document.removeEventListener("click", trackLinkClick, true)
+  }, [])
+  return null
+}
+
 /** Loads each tag only after its category is allowed. */
 function Analytics() {
   const consent = useConsent()
@@ -99,6 +110,7 @@ function Analytics() {
 
   return (
     <>
+      {(consent.analytics || consent.marketing) && <LinkClickTracker />}
       {gaId && consent.analytics && <GoogleAnalytics gaId={gaId} />}
       {linkedInId && consent.marketing && (
         <Script id="linkedin-insight" strategy="afterInteractive">

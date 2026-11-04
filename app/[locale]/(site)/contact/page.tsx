@@ -81,6 +81,7 @@ export default async function ContactPage({
         </p>
         <a
           href={site.bookingUrl}
+          data-cta="contact_page"
           target="_blank"
           rel="noopener noreferrer"
           className="group flex flex-col gap-2.5 rounded-3xl bg-secondary p-7 text-on-dark transition-transform hover:-translate-y-0.5"

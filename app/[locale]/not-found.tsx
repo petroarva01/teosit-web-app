@@ -54,7 +54,7 @@ export default function NotFound() {
               variant="outline"
               size="pill-lg"
               className="border-input bg-transparent"
-              render={<Link href="/contact" />}
+              render={<Link href="/contact" data-cta="not_found" />}
             >
               {t("contact")}
             </Button>

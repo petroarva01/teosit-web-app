@@ -91,7 +91,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             <Button
               nativeButton={false}
               size="pill-lg"
-              render={<Link href="/contact" />}
+              render={<Link href="/contact" data-cta="hero" />}
             >
               {t("hero.primary")}
             </Button>

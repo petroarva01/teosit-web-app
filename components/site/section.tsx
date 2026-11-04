@@ -151,7 +151,10 @@ function CtaBand({
   className?: string
 }) {
   return (
-    <section className={cn(container, "pt-[100px] pb-[120px]", className)}>
+    <section
+      data-cta="cta_band"
+      className={cn(container, "pt-[100px] pb-[120px]", className)}
+    >
       <div className="flex flex-wrap items-end justify-between gap-8 rounded-[32px] bg-primary p-[clamp(40px,6vw,80px)] text-primary-foreground">
         <div className="flex max-w-[660px] flex-col gap-4">
           <h2 className="max-w-[12em] text-[clamp(36px,4.6vw,60px)] leading-[1.02] font-bold tracking-[-0.035em]">

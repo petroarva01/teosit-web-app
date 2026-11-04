@@ -14,6 +14,7 @@ import {
 } from "@/data/contact"
 import { site } from "@/data/site"
 import { Link } from "@/i18n/navigation"
+import { track } from "@/lib/analytics"
 import { cn } from "@/lib/utils"
 
 const panel =
@@ -41,11 +42,33 @@ function ContactFormInner({ onReset }: { onReset: () => void }) {
   >(sendContactMessage.bind(null, locale), { status: "idle" })
   const [services, setServices] = React.useState<string[]>(["mobile"])
   const sentRef = React.useRef<HTMLDivElement>(null)
+  const submitted = React.useRef<FormData | null>(null)
 
   // The sent panel is shorter than the form, so bring it into view
   React.useEffect(() => {
     if (state.status === "sent") sentRef.current?.focus()
   }, [state.status])
+
+  // Report each outcome once; `state` is a new object per submission
+  React.useEffect(() => {
+    const data = submitted.current
+    if (!data) return
+    submitted.current = null
+    if (state.status === "sent") {
+      track("generate_lead", {
+        form: "contact",
+        services: data.getAll("services").join(","),
+        budget: String(data.get("budget") ?? ""),
+      })
+    } else if (state.status === "invalid") {
+      track("contact_form_error", {
+        reason: "invalid",
+        fields: state.fields.join(","),
+      })
+    } else if (state.status === "error") {
+      track("contact_form_error", { reason: "error" })
+    }
+  }, [state])
 
   if (state.status === "sent") {
     return (
@@ -109,6 +132,7 @@ function ContactFormInner({ onReset }: { onReset: () => void }) {
       onSubmit={(event) => {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
+        submitted.current = formData
         React.startTransition(() => formAction(formData))
       }}
       className={cn(panel, "flex flex-col gap-7")}
