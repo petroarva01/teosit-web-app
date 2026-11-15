@@ -19,6 +19,11 @@ import kellionCalendar from "@/assets/projects/kellion-screen-calendar.png"
 import kellionMap from "@/assets/projects/kellion-screen-map.png"
 import kellionPrayer from "@/assets/projects/kellion-screen-prayer.png"
 import kellionToday from "@/assets/projects/kellion-screen-today.png"
+import myrvFeature from "@/assets/projects/myrv-feature.png"
+import myrvMain from "@/assets/projects/myrv-screen-main.png"
+import myrvOffline from "@/assets/projects/myrv-screen-offline.png"
+import myrvSpot from "@/assets/projects/myrv-screen-spot.png"
+import myrvVehicle from "@/assets/projects/myrv-screen-vehicle.png"
 import type { Locale } from "@/i18n/routing"
 import type messages from "@/messages/en.json"
 
@@ -351,6 +356,154 @@ export const caseStudies: CaseStudy[] = [
       "next-intl",
       "Sentry",
       "Vercel",
+    ],
+  },
+  {
+    slug: "myrv",
+    eyebrow: {
+      en: "Case study · Travel · Europe, USA & Canada",
+      sr: "Studija slučaja · Putovanja · Evropa, SAD i Kanada",
+    },
+    title: {
+      en: "My RV: the co-pilot for your camper.",
+      sr: "My RV: kopilot za vaš kamper.",
+    },
+    lead: {
+      en: "How we built a camper app for 40 countries — campsites, water and dump stations on one map, tank levels without sensors and maps that work without signal.",
+      sr: "Kako smo napravili aplikaciju za kampere u 40 zemalja — kampovi, voda i dump stanice na jednoj mapi, rezervoari bez senzora i mape koje rade bez signala.",
+    },
+    hero: {
+      src: myrvFeature,
+      alt: {
+        en: "My RV: campsites, parking, water and dump stations, tank tracking and trip planning",
+        sr: "My RV: kampovi, parking, voda i dump stanice, praćenje rezervoara i planiranje ture",
+      },
+      fit: "always-whole",
+    },
+    facts: {
+      domain: { en: "Travel · Motorhomes", sr: "Putovanja · Kamperi" },
+      platform: { en: "Android · React Native", sr: "Android · React Native" },
+      role: {
+        en: "Product, design, development",
+        sr: "Proizvod, dizajn, razvoj",
+      },
+      timeline: { en: "2026 — ongoing", sr: "2026 — u toku" },
+    },
+    challenge: {
+      en: [
+        "On the road, a camper has three questions: where to sleep tonight, where to fill up with water, LPG and fuel, and where to empty the grey water. The answers are spread across forums, several apps and guesswork — and the tank gauges in most motorhomes are unreliable or missing.",
+        "My RV had to answer all three in one app, across Europe, the USA and Canada, keep working in the mountains with no signal, and stay free for everyday use, with a Pro subscription for travellers who want more.",
+      ],
+      sr: [
+        "Na putu kamper ima tri pitanja: gde da prenoći, gde da dopuni vodu, LPG i gorivo i gde da isprazni sive vode. Odgovori su razbacani po forumima, po nekoliko aplikacija i nagađanju — a merači rezervoara u većini kampera su nepouzdani ili ih nema.",
+        "My RV je trebalo da odgovori na sva tri u jednoj aplikaciji, širom Evrope, SAD i Kanade, da radi u planinama bez signala i da ostane besplatan za svakodnevnu upotrebu, uz Pro pretplatu za one kojima treba više.",
+      ],
+    },
+    steps: [
+      {
+        title: {
+          en: "One map for ~450,000 places",
+          sr: "Jedna mapa za ~450.000 mesta",
+        },
+        body: {
+          en: "Campsites, overnight parking, fuel, LPG, fresh water and dump stations imported from OpenStreetMap every week into PostGIS, merged with reviews, photos and new spots from campers.",
+          sr: "Kampovi, parking za noćenje, gorivo, LPG, voda i dump stanice uvoze se iz OpenStreetMap-a svake nedelje u PostGIS i spajaju sa recenzijama, fotografijama i novim mestima koje dodaju kamperi.",
+        },
+      },
+      {
+        title: {
+          en: "Tank levels without sensors",
+          sr: "Rezervoari bez senzora",
+        },
+        body: {
+          en: "Fresh water, grey water, fuel and LPG are estimated on the phone from the vehicle, the people on board, fill-ups and kilometres driven. One tap at a service point confirms the real level.",
+          sr: "Sveža i siva voda, gorivo i LPG procenjuju se na telefonu iz podataka o vozilu, broju putnika, točenjima i pređenim kilometrima. Jedan tap na servisnoj tački potvrđuje pravo stanje.",
+        },
+      },
+      {
+        title: {
+          en: "Offline maps for 182 regions",
+          sr: "Offline mape za 182 regiona",
+        },
+        body: {
+          en: "Whole countries, US states and German Länder download as vector map packs plus a local database of places, so the map, search and spot details keep working with no signal.",
+          sr: "Cele zemlje, američke savezne države i nemačke pokrajine preuzimaju se kao vektorske mape uz lokalnu bazu mesta, pa mapa, pretraga i detalji mesta rade i bez signala.",
+        },
+      },
+      {
+        title: {
+          en: "Alerts in the background, Pro by subscription",
+          sr: "Alerti u pozadini, Pro kroz pretplatu",
+        },
+        body: {
+          en: 'Battery-friendly geofences warn about fuel, water and dump stops nearby even when the app is closed. Pro adds offline maps, a "fits my camper" filter and cost statistics, with a 7-day free trial.',
+          sr: "Geofence-ovi koji štede bateriju upozoravaju na gorivo, vodu i dump stanice u blizini i kada je aplikacija zatvorena. Pro dodaje offline mape, filter „staje moj kamper“ i statistiku troškova, uz 7 dana besplatne probe.",
+        },
+      },
+    ],
+    screens: [
+      {
+        src: myrvMain,
+        alt: {
+          en: "My RV map of campsites, parking and service points",
+          sr: "My RV: mapa kampova, parkinga i servisnih tačaka",
+        },
+      },
+      {
+        src: myrvVehicle,
+        alt: {
+          en: "My RV vehicle screen: estimated tank levels",
+          sr: "My RV: vozilo i procena rezervoara",
+        },
+      },
+      {
+        src: myrvSpot,
+        alt: {
+          en: "My RV campsite detail with amenities",
+          sr: "My RV: detalj kampa sa sadržajima",
+        },
+      },
+      {
+        src: myrvOffline,
+        alt: {
+          en: "My RV offline maps by country and region",
+          sr: "My RV: offline mape po zemljama i regionima",
+        },
+      },
+    ],
+    screenFrame: "none",
+    results: [
+      {
+        value: { en: "~450k", sr: "~450k" },
+        label: {
+          en: "places on the map, updated every week",
+          sr: "mesta na mapi, ažurirano svake nedelje",
+        },
+      },
+      {
+        value: { en: "40", sr: "40" },
+        label: {
+          en: "countries across Europe, the USA and Canada",
+          sr: "zemalja u Evropi, SAD i Kanadi",
+        },
+      },
+      {
+        value: { en: "182", sr: "182" },
+        label: {
+          en: "regions available as offline maps",
+          sr: "regiona dostupna kao offline mape",
+        },
+      },
+    ],
+    stack: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "MapLibre",
+      "Supabase",
+      "PostGIS",
+      "SQLite",
+      "RevenueCat",
     ],
   },
   {

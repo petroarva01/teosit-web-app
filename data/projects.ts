@@ -5,12 +5,13 @@ import bukirajImage from "@/assets/projects/bukiraj.png"
 import checkSolarImage from "@/assets/projects/checksolar.png"
 import hortiumImage from "@/assets/projects/hortium.png"
 import kellionImage from "@/assets/projects/kellion.png"
+import myrvImage from "@/assets/projects/myrv.png"
 import type { Locale } from "@/i18n/routing"
 
 type Localized<T = string> = Record<Locale, T>
 
 export type ProjectSlug =
-  "amplitude" | "check-solar" | "bukiraj" | "kellion" | "hortium"
+  "amplitude" | "check-solar" | "bukiraj" | "myrv" | "kellion" | "hortium"
 
 export type Project = {
   slug: ProjectSlug
@@ -236,6 +237,70 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "myrv",
+    name: "My RV",
+    title: {
+      en: "My RV – Camper & Motorhome",
+      sr: "My RV – Camper & Motorhome",
+    },
+    meta: {
+      en: "Travel · Europe, USA & Canada · Android",
+      sr: "Putovanja · Evropa, SAD i Kanada · Android",
+    },
+    body: {
+      en: "A co-pilot for motorhome, campervan and caravan travellers. Campsites, overnight parking, water and dump stations on one map, tank levels estimated without sensors, trip planning, costs and reminders — with offline maps and background alerts in Pro.",
+      sr: "Kopilot za putovanja kamperom, kombijem i kamp-prikolicom. Kampovi, parking za noćenje, voda i dump stanice na jednoj mapi, procena rezervoara bez senzora, planiranje ture, troškovi i podsetnici — uz offline mape i alerte u pozadini u Pro verziji.",
+    },
+    tags: {
+      en: ["React Native", "Expo", "Maps", "Offline", "Subscriptions"],
+      sr: ["React Native", "Expo", "Mape", "Offline", "Pretplate"],
+    },
+    categories: ["mobile"],
+    links: [
+      {
+        label: "Google Play",
+        url: {
+          en: "https://play.google.com/store/apps/details?id=com.teosit.myrv",
+          sr: "https://play.google.com/store/apps/details?id=com.teosit.myrv",
+        },
+      },
+    ],
+    hasCaseStudy: true,
+    image: {
+      src: myrvImage,
+      alt: {
+        en: "My RV app screens: vehicle tanks, map, campsite detail",
+        sr: "My RV: rezervoari vozila, mapa, detalj kampa",
+      },
+      position: "top",
+    },
+    heroMeta: {
+      en: "Mobile · Travel · Europe & USA",
+      sr: "Mobile · Putovanja · Evropa i SAD",
+    },
+    home: {
+      label: {
+        en: "React Native · Android · Travel",
+        sr: "React Native · Android · Putovanja",
+      },
+      title: {
+        en: "My RV — the co-pilot for your camper",
+        sr: "My RV — kopilot za vaš kamper",
+      },
+      body: {
+        en: "Campsites, parking, water and dump stations across Europe, the USA and Canada, plus tank estimates without sensors.",
+        sr: "Kampovi, parking, voda i dump stanice širom Evrope, SAD i Kanade, plus procena rezervoara bez senzora.",
+      },
+    },
+    colors: {
+      bg: "#10241F",
+      inner: "#1D3A32",
+      label: "#A9C2B8",
+      body: "#D3E2DC",
+      text: "#FFF8E6",
+    },
+  },
+  {
     slug: "kellion",
     name: "Kellion",
     title: {
@@ -346,15 +411,11 @@ export function getProject(slug: ProjectSlug) {
   return project
 }
 
-export const heroProjects: ProjectSlug[] = [
-  "amplitude",
-  "check-solar",
-  "bukiraj",
-]
+export const heroProjects: ProjectSlug[] = ["amplitude", "check-solar", "myrv"]
 
 export const featuredProjects: ProjectSlug[] = [
   "amplitude",
   "check-solar",
-  "kellion",
+  "myrv",
   "bukiraj",
 ]
