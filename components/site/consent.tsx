@@ -110,7 +110,7 @@ function Analytics() {
 
   return (
     <>
-      {(consent.analytics || consent.marketing) && <LinkClickTracker />}
+      {gaId && consent.analytics && <LinkClickTracker />}
       {gaId && consent.analytics && <GoogleAnalytics gaId={gaId} />}
       {linkedInId && consent.marketing && (
         <Script id="linkedin-insight" strategy="afterInteractive">

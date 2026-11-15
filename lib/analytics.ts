@@ -22,16 +22,6 @@ type EventMap = {
   social_click: { network: "linkedin"; cta_location: string }
 }
 
-declare global {
-  interface Window {
-    lintrk?: (action: "track", data: { conversion_id: number }) => void
-  }
-}
-
-const linkedInLeadConversion = Number(
-  process.env.NEXT_PUBLIC_LINKEDIN_LEAD_CONVERSION_ID
-)
-
 /**
  * Sends an event to GA4. A no-op until the visitor allows analytics cookies,
  * since GA and its dataLayer only load after consent.
@@ -40,11 +30,6 @@ export function track<E extends keyof EventMap>(event: E, params: EventMap[E]) {
   if (typeof window === "undefined") return
 
   if (window.dataLayer) sendGAEvent("event", event, params)
-
-  // LinkedIn conversion for leads, loaded only after marketing consent
-  if (event === "generate_lead" && linkedInLeadConversion && window.lintrk) {
-    window.lintrk("track", { conversion_id: linkedInLeadConversion })
-  }
 }
 
 /** Where on the page a link sits: an explicit `data-cta`, else its region. */
