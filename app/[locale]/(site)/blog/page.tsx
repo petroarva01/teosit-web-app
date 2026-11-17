@@ -56,6 +56,7 @@ export default async function BlogPage({
           reactNative: t("categories.reactNative"),
           founders: t("categories.founders"),
           ai: t("categories.ai"),
+          ourApps: t("categories.ourApps"),
         }}
         categories={postCategories.filter((category) =>
           posts.some((post) => post.category === category)

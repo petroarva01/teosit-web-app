@@ -2,7 +2,12 @@ import type { Locale } from "@/i18n/routing"
 
 type Localized<T = string> = Record<Locale, T>
 
-export const postCategories = ["reactNative", "founders", "ai"] as const
+export const postCategories = [
+  "reactNative",
+  "founders",
+  "ai",
+  "ourApps",
+] as const
 
 export type PostCategory = (typeof postCategories)[number]
 
@@ -21,6 +26,36 @@ export type Post = {
 
 /** Newest first; the first post is featured at the top of the blog. */
 export const posts: Post[] = [
+  {
+    slug: "myrv-camper-app",
+    category: "ourApps",
+    date: "2026-11-17",
+    readingMinutes: 5,
+    title: {
+      en: "My RV: an app for motorhome and campervan travel",
+      sr: "My RV: aplikacija za putovanja kamperom",
+    },
+    excerpt: {
+      en: "Campsites, overnight parking, water and dump stations on one map, tank levels without sensors, trip planning, costs and reminders — across Europe, the USA and Canada.",
+      sr: "Kampovi, parking za noćenje, voda i dump stanice na jednoj mapi, rezervoari bez senzora, planiranje ture, troškovi i podsetnici — širom Evrope, SAD i Kanade.",
+    },
+    cover: { bg: "#10241F", fg: "#A9C2B8" },
+  },
+  {
+    slug: "hortium-garden-planner-app",
+    category: "ourApps",
+    date: "2026-11-17",
+    readingMinutes: 5,
+    title: {
+      en: "Hortium: a garden planner that knows your frost dates",
+      sr: "Hortium: planer bašte koji zna kada kod vas pada mraz",
+    },
+    excerpt: {
+      en: "A sowing and harvest calendar for your location, 150 plants, a square-by-square bed planner, watering reminders that skip rainy days and frost alerts. No account, works offline.",
+      sr: "Kalendar setve i berbe za vašu lokaciju, 150 biljaka, planer leja kvadrat po kvadrat, podsetnici za zalivanje koji preskaču kišne dane i upozorenja na mraz. Bez naloga, radi bez interneta.",
+    },
+    cover: { bg: "#DCEFE0", fg: "#1F5A2E" },
+  },
   {
     slug: "react-native-or-native",
     category: "founders",
