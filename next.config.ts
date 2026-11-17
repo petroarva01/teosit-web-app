@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
   experimental: {
     // URLs outside /[locale] (e.g. /wp-login.php) never reach a layout
     globalNotFound: true,
+    agentUpgrade: "security",
   },
 }
 
